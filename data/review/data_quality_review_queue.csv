@@ -1,0 +1,3 @@
+record_id,source_dataset,source_row_id,text_raw,source_label,data_quality_status,data_quality_flags,exclusion_reason
+DS3_001134,DS3_yaemico,1133,,0,invalid,empty_or_whitespace_text,empty_or_whitespace_text
+DS3_000678,DS3_yaemico,677,,0,invalid,empty_or_whitespace_text,empty_or_whitespace_text

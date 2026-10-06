@@ -1,0 +1,7 @@
+source_dataset,raw_rows,invalid_rows,exact_duplicate_rows,cross_dataset_duplicate_rows,conflict_rows,review_rows,accepted_rows,excluded_rows,final_unique_rows
+DS1_fahruu,8440,0,2443,112,1,0,8440,0,6602
+DS2_kyyyy8_all,45592,0,13473,19549,87,3,45589,0,23894
+DS3_yaemico,6350,2,3746,57,0,0,6348,2,2718
+DS4_kyyyy8_platform,18902,0,9889,18902,81,3,18899,0,10656
+DS5_ferdiansakti,4720,0,797,31,12,0,4720,0,4181
+TOTAL_POOL,84004,2,48405,38651,181,6,83996,2,48051

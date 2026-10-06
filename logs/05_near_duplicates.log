@@ -1,0 +1,18 @@
+2026-10-06 11:41:46,950 [INFO] Memulai Phase 5: Near-Duplicate Clustering with MinHash & LSH
+2026-10-06 11:41:47,126 [INFO] Unique Normalized Groups to cluster: 47,646
+2026-10-06 11:41:48,495 [INFO] Calculated MinHash signatures.
+2026-10-06 11:41:50,368 [INFO] Evaluated 14,881 candidate pairs from LSH.
+2026-10-06 11:41:50,412 [INFO] Verified and unioned 2,744 near-duplicate edges.
+2026-10-06 11:42:05,959 [INFO] Memulai Phase 5: Near-Duplicate Clustering with MinHash & LSH
+2026-10-06 11:42:06,160 [INFO] Unique Normalized Groups to cluster: 47,646
+2026-10-06 11:42:07,621 [INFO] Calculated MinHash signatures.
+2026-10-06 11:42:09,552 [INFO] Evaluated 14,881 candidate pairs from LSH.
+2026-10-06 11:42:09,597 [INFO] Verified and unioned 2,744 near-duplicate edges.
+2026-10-06 11:52:02,155 [INFO] Memulai Phase 5: Near-Duplicate Clustering with MinHash, LSH & SciPy Graph
+2026-10-06 11:52:02,397 [INFO] Unique Normalized Groups to cluster: 47,646
+2026-10-06 11:52:03,838 [INFO] Calculated MinHash signatures.
+2026-10-06 11:52:05,742 [INFO] Evaluated 14,881 candidate pairs from LSH.
+2026-10-06 11:52:05,782 [INFO] Verified 2,744 near-duplicate edges.
+2026-10-06 11:52:05,784 [INFO] Connected components computed: 46,469 distinct template families.
+2026-10-06 11:52:05,838 [INFO] Total Near-Duplicate Groups generated: 46,469
+2026-10-06 11:52:06,126 [INFO] Saved data/interim/full_pool_clustered.pkl
