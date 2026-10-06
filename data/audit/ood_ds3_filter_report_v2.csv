@@ -1,0 +1,2 @@
+initial_ds3_unique_records,invalid_records_quarantined,exact_overlap_removed,whitespace_overlap_removed,normalized_overlap_removed,near_duplicate_overlap_removed,total_overlap_removed,remaining_isolated_ood_records,promotion_count,non_promotion_count
+2728,2,10,0,29,0,39,2689,36,2653

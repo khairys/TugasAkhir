@@ -1,0 +1,9 @@
+2026-10-06 19:52:32,808 [INFO] Memulai Phase: Rebuild Near-Duplicate Clustering with Recursive Blocking & Validation (v2)
+2026-10-06 19:52:33,009 [INFO] Unique Normalized Groups to cluster: 47,646
+2026-10-06 19:52:35,159 [INFO] Calculated MinHash signatures.
+2026-10-06 19:52:37,921 [INFO] Evaluated 14,881 candidate pairs (large buckets processed: 0).
+2026-10-06 19:52:37,975 [INFO] Verified 2,744 near-duplicate edges (Jaccard >= 0.65).
+2026-10-06 19:52:37,989 [INFO] Connected components computed: 46,469 distinct template families.
+2026-10-06 19:52:38,139 [INFO] Generating near_duplicate_validation_v2.csv...
+2026-10-06 19:52:38,191 [INFO] Saved data/audit/near_duplicate_validation_v2.csv (300 inspection pairs).
+2026-10-06 19:52:38,633 [INFO] Saved data/interim/full_pool_v2_clustered.pkl

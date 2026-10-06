@@ -1,0 +1,11 @@
+dataset_a,dataset_b,shared_exact_groups,shared_whitespace_groups,shared_normalized_groups,shared_alnum_groups,unique_ws_hashes_shared,unique_norm_hashes_shared,unique_alnum_hashes_shared,pair_label_conflicts,monotonicity_status,notes
+DS1_fahruu,DS2_kyyyy8_all,51,51,83,173,51,57,64,0,PASS,Shared 51 teks persis
+DS1_fahruu,DS3_yaemico,6,6,16,26,6,9,12,0,PASS,Shared 6 teks persis
+DS1_fahruu,DS4_kyyyy8_platform,25,25,46,105,25,31,42,0,PASS,Shared 25 teks persis
+DS1_fahruu,DS5_ferdiansakti,14,14,18,44,14,15,25,0,PASS,Shared 14 teks persis
+DS2_kyyyy8_all,DS3_yaemico,25,25,77,130,25,41,47,0,PASS,Shared 25 teks persis
+DS2_kyyyy8_all,DS4_kyyyy8_platform,10659,10660,10716,10721,10658,10539,10046,45,PASS,"Kyyyy8 Lineage (overlap masif 10,659 teks, 45 konflik label)"
+DS2_kyyyy8_all,DS5_ferdiansakti,9,9,18,363,9,9,126,0,PASS,Shared 9 teks persis
+DS3_yaemico,DS4_kyyyy8_platform,10,10,28,51,10,16,20,0,PASS,Shared 10 teks persis
+DS3_yaemico,DS5_ferdiansakti,0,0,4,5,0,2,2,0,PASS,Tidak ada irisan teks persis
+DS4_kyyyy8_platform,DS5_ferdiansakti,6,6,12,324,6,6,120,0,PASS,Shared 6 teks persis
