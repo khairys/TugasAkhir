@@ -438,13 +438,28 @@ def main():
     logging.info("Constructing external DS5 candidate and auditing overlap...")
     ds5_all_valid = df[(df["source_dataset"] == "DS5_ferdiansakti") & (df["data_quality_status"] != "invalid")].drop_duplicates("exact_duplicate_group").copy()
     
-    ds5_exact_ov = ds5_all_valid[ds5_all_valid["exact_duplicate_group"].isin(main_exact)]
+    ds5_exact_ov = ds5_all_valid[ds5_all_valid["exact_duplicate_group"].isin(main_exact)].copy()
+    ds5_exact_ov["overlap_level"] = "exact"
     ds5_rem1 = ds5_all_valid[~ds5_all_valid["exact_duplicate_group"].isin(main_exact)]
-    ds5_ws_ov = ds5_rem1[ds5_rem1["whitespace_duplicate_group"].isin(main_ws)]
+    
+    ds5_ws_ov = ds5_rem1[ds5_rem1["whitespace_duplicate_group"].isin(main_ws)].copy()
+    ds5_ws_ov["overlap_level"] = "whitespace"
     ds5_rem2 = ds5_rem1[~ds5_rem1["whitespace_duplicate_group"].isin(main_ws)]
-    ds5_norm_ov = ds5_rem2[ds5_rem2["normalized_variant_group"].isin(main_norm)]
+    
+    ds5_norm_ov = ds5_rem2[ds5_rem2["normalized_variant_group"].isin(main_norm)].copy()
+    ds5_norm_ov["overlap_level"] = "normalized"
     ds5_rem3 = ds5_rem2[~ds5_rem2["normalized_variant_group"].isin(main_norm)]
-    ds5_ndg_ov = ds5_rem3[ds5_rem3["near_duplicate_group"].isin(main_ndg)]
+    
+    ds5_ndg_ov = ds5_rem3[ds5_rem3["near_duplicate_group"].isin(main_ndg)].copy()
+    ds5_ndg_ov["overlap_level"] = "near_duplicate"
+    
+    ds5_isolated = ds5_rem3[~ds5_rem3["near_duplicate_group"].isin(main_ndg)].copy()
+    
+    ds5_overlap_examples = pd.concat([ds5_exact_ov, ds5_ws_ov, ds5_norm_ov, ds5_ndg_ov], ignore_index=True)
+    if len(ds5_overlap_examples) > 0:
+        ds5_ov_exp_cols = ["record_id", "text_raw", "canonical_label", "overlap_level", "exact_duplicate_group", "normalized_variant_group", "near_duplicate_group"]
+        ds5_overlap_examples[[c for c in ds5_ov_exp_cols if c in ds5_overlap_examples.columns]].to_csv("data/audit/ds5_overlap_examples_v2.csv", index=False, encoding="utf-8")
+        logging.info(f"Saved data/audit/ds5_overlap_examples_v2.csv ({len(ds5_overlap_examples)} records).")
     
     ds5_overlap_report = pd.DataFrame([{
         "initial_ds5_unique_records": len(ds5_all_valid),
@@ -452,15 +467,20 @@ def main():
         "whitespace_overlap_with_main_pool": len(ds5_ws_ov),
         "normalized_overlap_with_main_pool": len(ds5_norm_ov),
         "near_duplicate_overlap_with_main_pool": len(ds5_ndg_ov),
-        "total_overlapping_records": len(ds5_exact_ov) + len(ds5_ws_ov) + len(ds5_norm_ov) + len(ds5_ndg_ov),
-        "strictly_non_overlapping_records": len(ds5_rem3[~ds5_rem3["near_duplicate_group"].isin(main_ndg)]),
+        "total_overlapping_records": len(ds5_overlap_examples),
+        "strictly_non_overlapping_records": len(ds5_isolated),
         "campaign_focus": "ambil4d"
     }])
     ds5_overlap_report.to_csv("data/audit/ds5_overlap_with_main_pool_v2.csv", index=False, encoding="utf-8")
     logging.info("Saved data/audit/ds5_overlap_with_main_pool_v2.csv")
     
-    ds5_all_valid[output_cols].to_csv("data/processed/external_ds5_candidate_v2.csv", index=False, encoding="utf-8")
-    logging.info(f"Saved data/processed/external_ds5_candidate_v2.csv ({len(ds5_all_valid):,} records).")
+    # Save all valid DS5 (audit & auxiliary usage, not isolated)
+    ds5_all_valid[output_cols].to_csv("data/processed/ds5_all_candidate_v2.csv", index=False, encoding="utf-8")
+    logging.info(f"Saved data/processed/ds5_all_candidate_v2.csv ({len(ds5_all_valid):,} records).")
+    
+    # Save strictly isolated external DS5 candidate (0 leakage with main pool)
+    ds5_isolated[output_cols].to_csv("data/processed/external_ds5_candidate_v2.csv", index=False, encoding="utf-8")
+    logging.info(f"Saved data/processed/external_ds5_candidate_v2.csv ({len(ds5_isolated):,} strictly isolated records).")
     
     # Save master checkpoint
     df.to_pickle("data/processed/full_pool_master_v2.pkl")

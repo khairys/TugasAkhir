@@ -79,7 +79,7 @@ def main():
         
     logging.info("Calculated MinHash signatures.")
     
-    # 2. LSH Banding with Recursive Sub-blocking for large buckets
+    # 2. LSH Banding with Secondary Deterministic Sub-blocking for oversized buckets
     b_count = 16
     r_count = 4
     buckets = defaultdict(list)
@@ -102,11 +102,11 @@ def main():
                     if d1 > d2: d1, d2 = d2, d1
                     candidate_pairs.add((d1, d2))
         else:
-            # Recursive sub-blocking for buckets >= 200 (no silent skip!)
+            # Secondary deterministic sub-blocking for oversized LSH buckets (>= 200)
+            # Partitioning by character length bucket and alnum hash prefix (one-level deterministic)
             large_bucket_count += 1
             sub_buckets = defaultdict(list)
             for doc_id in doc_list:
-                # Sub-block by length bucket (tens of characters) and first 2 chars of alnum_hash
                 t_len = len(texts[doc_id]) // 20
                 al_prefix = alnums[doc_id][:2]
                 sub_buckets[(t_len, al_prefix)].append(doc_id)
@@ -119,7 +119,7 @@ def main():
                             if d1 > d2: d1, d2 = d2, d1
                             candidate_pairs.add((d1, d2))
                             
-    logging.info(f"Evaluated {len(candidate_pairs):,} candidate pairs (large buckets processed: {large_bucket_count}).")
+    logging.info(f"Evaluated {len(candidate_pairs):,} candidate pairs (oversized buckets sub-blocked: {large_bucket_count}).")
     
     # 3. Verify Candidate Pairs with Jaccard >= 0.65
     verified_edges = []

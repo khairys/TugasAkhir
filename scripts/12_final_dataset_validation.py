@@ -77,7 +77,8 @@ def main():
     clean_pool_df = pd.read_csv("data/processed/clean_pool_v2.csv")
     main_pool_df = pd.read_csv("data/processed/main_pool_candidate_v2.csv")
     ood_df = pd.read_csv("data/processed/ood_ds3_candidate_v2.csv")
-    ds5_df = pd.read_csv("data/processed/external_ds5_candidate_v2.csv")
+    ds5_all_df = pd.read_csv("data/processed/ds5_all_candidate_v2.csv")
+    external_ds5_df = pd.read_csv("data/processed/external_ds5_candidate_v2.csv")
     label_review_df = pd.read_csv("data/review/label_review_queue_v2.csv")
     dq_review_df = pd.read_csv("data/review/data_quality_review_queue_v2.csv")
     master_df = pd.read_pickle("data/processed/full_pool_master_v2.pkl")
@@ -88,25 +89,46 @@ def main():
     checks["canonical_uniqueness"] = "PASS" if not has_dup_exact else "FAIL"
     assert not has_dup_exact, "Duplicate exact group found in canonical_dataset_v2!"
     
-    # 4. Canonical Raw Text matches Source Raw Text
-    logging.info("[ASSERT 4] Verifying Canonical Raw Text Byte-for-Byte against Source...")
-    text_match_pass = True
-    # sample 500 records across all datasets
-    sample_indices = np.random.choice(len(canonical_df), size=min(1000, len(canonical_df)), replace=False)
-    for idx in sample_indices:
-        r = canonical_df.iloc[idx]
-        ds_id = r["source_dataset"]
-        row_id = int(r["source_row_id"])
-        c_txt = str(r["text_raw"])
-        rdf, tcol = raw_dfs[ds_id]
-        orig_val = rdf.iloc[row_id][tcol]
-        s_txt = orig_val if isinstance(orig_val, str) else ("" if pd.isna(orig_val) else str(orig_val))
+    # 4. Canonical Raw Text matches Source Raw Text (100% FULL CHECK: All 48,051 records)
+    logging.info("[ASSERT 4] Verifying 100% Full Canonical Raw Text Byte-for-Byte against Source (all 48,051 records)...")
+    raw_text_cache = {}
+    for ds_id, (rdf, tcol) in raw_dfs.items():
+        raw_text_cache[ds_id] = [
+            val if isinstance(val, str) else ("" if pd.isna(val) else str(val))
+            for val in rdf[tcol]
+        ]
+        
+    canonical_rows_checked = len(canonical_df)
+    raw_text_mismatch = 0
+    missing_source_row = 0
+    source_dataset_mismatch = 0
+    
+    for r in canonical_df.itertuples(index=False):
+        ds_id = getattr(r, "source_dataset")
+        row_id = int(getattr(r, "source_row_id"))
+        c_txt = getattr(r, "text_raw")
+        if not isinstance(c_txt, str):
+            c_txt = "" if pd.isna(c_txt) else str(c_txt)
+            
+        if ds_id not in raw_text_cache:
+            source_dataset_mismatch += 1
+            continue
+            
+        cache = raw_text_cache[ds_id]
+        if row_id < 0 or row_id >= len(cache):
+            missing_source_row += 1
+            continue
+            
+        s_txt = cache[row_id]
         if c_txt != s_txt:
-            text_match_pass = False
-            logging.error(f"Mismatch at {r['record_id']}: canonical='{c_txt}' vs source='{s_txt}'")
-            break
+            raw_text_mismatch += 1
+            if raw_text_mismatch <= 5:
+                logging.error(f"Mismatch at {getattr(r, 'record_id')}: canonical='{c_txt}' vs source='{s_txt}'")
+                
+    text_match_pass = (canonical_rows_checked == 48051 and raw_text_mismatch == 0 and missing_source_row == 0 and source_dataset_mismatch == 0)
     checks["raw_text_match"] = "PASS" if text_match_pass else "FAIL"
-    assert text_match_pass, "Canonical raw text does not match source raw text!"
+    assert text_match_pass, f"Raw text verification failed! checked={canonical_rows_checked}, mismatch={raw_text_mismatch}, missing={missing_source_row}, ds_mismatch={source_dataset_mismatch}"
+    logging.info(f"[ASSERT 4 PASSED] Checked {canonical_rows_checked:,} records, 0 mismatches, 0 missing rows.")
     
     # 5. Label Integrity
     logging.info("[ASSERT 5] Checking Canonical Label Integrity (only 0 or 1 allowed)...")
@@ -159,11 +181,32 @@ def main():
     checks["ood_isolation"] = "PASS" if ood_pass else "FAIL"
     assert ood_pass, f"OOD DS3 leakage detected! exact={ood_leak_exact}, ws={ood_leak_ws}, norm={ood_leak_norm}, ndg={ood_leak_ndg}"
     
-    # 9. DS5 External Isolation
-    logging.info("[ASSERT 9] Verifying DS5 External Candidate Audit...")
+    # 9. DS5 External Candidate Strict Isolation against Main Pool
+    logging.info("[ASSERT 9] Verifying DS5 External Candidate Strict Isolation against Main Pool...")
     ds5_overlap_file = Path("data/audit/ds5_overlap_with_main_pool_v2.csv")
-    checks["ds5_isolation"] = "PASS" if ds5_overlap_file.exists() else "FAIL"
+    ds5_ex_file = Path("data/processed/external_ds5_candidate_v2.csv")
+    ds5_all_file = Path("data/processed/ds5_all_candidate_v2.csv")
+    
     assert ds5_overlap_file.exists(), "DS5 overlap audit file missing!"
+    assert ds5_ex_file.exists(), "external_ds5_candidate_v2.csv missing!"
+    assert ds5_all_file.exists(), "ds5_all_candidate_v2.csv missing!"
+    
+    ds5_ex_exact = set(external_ds5_df["exact_duplicate_group"].dropna())
+    ds5_ex_ws = set(external_ds5_df["whitespace_duplicate_group"].dropna())
+    ds5_ex_norm = set(external_ds5_df["normalized_variant_group"].dropna())
+    ds5_ex_ndg = set(external_ds5_df["near_duplicate_group"].dropna())
+    
+    ds5_leak_exact = len(ds5_ex_exact.intersection(main_exact))
+    ds5_leak_ws = len(ds5_ex_ws.intersection(main_ws))
+    ds5_leak_norm = len(ds5_ex_norm.intersection(main_norm))
+    ds5_leak_ndg = len(ds5_ex_ndg.intersection(main_ndg))
+    
+    ds5_counts_pass = (len(ds5_all_df) == 4202 and len(external_ds5_df) == 3999)
+    ds5_leak_pass = (ds5_leak_exact == 0 and ds5_leak_ws == 0 and ds5_leak_norm == 0 and ds5_leak_ndg == 0)
+    ds5_pass = ds5_counts_pass and ds5_leak_pass
+    checks["ds5_isolation"] = "PASS" if ds5_pass else "FAIL"
+    assert ds5_pass, f"DS5 strict isolation failed! counts: all={len(ds5_all_df)}/4202, isolated={len(external_ds5_df)}/3999; leakage: exact={ds5_leak_exact}, ws={ds5_leak_ws}, norm={ds5_leak_norm}, ndg={ds5_leak_ndg}"
+    logging.info(f"[ASSERT 9 PASSED] DS5 all={len(ds5_all_df):,}, isolated={len(external_ds5_df):,}, zero leakage across all 4 levels.")
     
     # 10. Reconciliation Count Consistency
     logging.info("[ASSERT 10] Checking Complete Reconciliation Consistency...")
@@ -177,17 +220,34 @@ def main():
     
     logging.info("ALL 10 HARD ASSERTIONS PASSED WITH FLYING COLORS!")
     
-    # Generate data/audit/final_dataset_validation_v2.md
-    logging.info("Writing final_dataset_validation_v2.md...")
+    # Generate data/audit/final_dataset_validation_v3.md
+    logging.info("Writing final_dataset_validation_v3.md...")
     md = []
-    md.append("# FINAL DATASET VALIDATION REPORT v2")
+    md.append("# FINAL DATASET VALIDATION REPORT v3 (Pipeline Hardening)")
     md.append("\n**Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Text Obfuscation pada Komentar YouTube Bahasa Indonesia**\n")
-    md.append(f"- **Pipeline Version**: `dataset_finalization_v2`")
+    md.append(f"- **Pipeline Version**: `dataset_finalization_v3`")
     md.append(f"- **Random Seed**: 42")
     md.append(f"- **Python Version**: `{sys.version.split()[0]}`")
     md.append(f"- **Pandas Version**: `{pd.__version__}`")
     md.append(f"- **NumPy Version**: `{np.__version__}`\n")
     md.append("---\n")
+    
+    # Summary of 10 Automated Hard Assertions
+    md.append("## Automated Hard Assertions Summary (10/10 PASS)")
+    assert_summary = [
+        {"Assertion #": "ASSERT 1", "Check Description": "Raw Files Integrity (SHA-256 Checksum on 5 source files)", "Status": checks["raw_integrity"]},
+        {"Assertion #": "ASSERT 2", "Check Description": "Source Row Counts Exactness (84,004 raw records)", "Status": checks["source_counts"]},
+        {"Assertion #": "ASSERT 3", "Check Description": "Canonical Exact Group Uniqueness (48,051 unique accepted)", "Status": checks["canonical_uniqueness"]},
+        {"Assertion #": "ASSERT 4", "Check Description": "100% Full Canonical Raw Text Byte-for-Byte Check (48,051 records)", "Status": checks["raw_text_match"]},
+        {"Assertion #": "ASSERT 5", "Check Description": "Canonical Label Integrity (Strictly binary 0 or 1)", "Status": checks["label_integrity"]},
+        {"Assertion #": "ASSERT 6", "Check Description": "Review Records Isolation (Quarantined from accepted pool)", "Status": checks["review_isolation"]},
+        {"Assertion #": "ASSERT 7", "Check Description": "Pairwise Overlap Monotonicity (E <= W <= N <= A across 10 pairs)", "Status": checks["overlap_monotonicity"]},
+        {"Assertion #": "ASSERT 8", "Check Description": "Strict Isolation of OOD DS3 Candidate (0 leakage into main pool)", "Status": checks["ood_isolation"]},
+        {"Assertion #": "ASSERT 9", "Check Description": "Strict Isolation of External DS5 Candidate (0 leakage into main pool)", "Status": checks["ds5_isolation"]},
+        {"Assertion #": "ASSERT 10", "Check Description": "Complete Pool Reconciliation Consistency (48,051 + 3 = 48,054)", "Status": checks["reconciliation_consistency"]}
+    ]
+    md.append(df_to_markdown(pd.DataFrame(assert_summary)))
+    md.append("\n\n---\n")
     
     # A. Raw Integrity
     md.append("## A. Raw Integrity")
@@ -216,7 +276,7 @@ def main():
         {"metric": "Near-Duplicate Groups / Template Families (NDG)", "value": master_df["near_duplicate_group"].nunique()},
         {"metric": "Consolidated Leakage Groups (LG)", "value": master_df["leakage_group_id"].nunique()},
         {"metric": "Inspection Sample Pairs Verified", "value": 300},
-        {"metric": "Recursive Sub-blocking Large Buckets (>=200)", "value": "HANDLED (No silent skips)"}
+        {"metric": "Large Bucket Handling", "value": "Secondary deterministic sub-blocking (one-level deterministic partition)"}
     ]
     md.append(df_to_markdown(pd.DataFrame(nd_summary)))
     
@@ -252,23 +312,36 @@ def main():
     md.append("\n\n## I. DS5 External Candidate (Layer 3: Ambil4d Focused)")
     ds5_rep = pd.read_csv("data/audit/ds5_overlap_with_main_pool_v2.csv")
     md.append(df_to_markdown(ds5_rep))
+    md.append(f"\n- **All Valid DS5 Records (`ds5_all_candidate_v2.csv`)**: {len(ds5_all_df):,} records (Audit & auxiliary provenance).")
+    md.append(f"- **Strictly Isolated External DS5 (`external_ds5_candidate_v2.csv`)**: {len(external_ds5_df):,} records (0 leakage with main training pool across exact, whitespace, normalized, and near-duplicate).")
+    md.append(f"- **Quarantined Overlap Records (`ds5_overlap_examples_v2.csv`)**: 203 records (21 exact, 0 ws, 3 normalized, 179 near-duplicate).")
     
-    # J. Heuristic Metadata Clarification
-    md.append("\n\n## J. Heuristic Metadata Clarification")
+    # J. 100% Full Raw-Text Byte-for-Byte Verification
+    md.append("\n\n## J. 100% Full Raw-Text Byte-for-Byte Verification")
+    md.append(f"- **Canonical Records Checked**: {canonical_rows_checked:,} / {len(canonical_df):,} (100% full coverage)")
+    md.append(f"- **Raw Text Mismatch Count**: {raw_text_mismatch}")
+    md.append(f"- **Missing Source Rows**: {missing_source_row}")
+    md.append(f"- **Source Dataset Mismatch**: {source_dataset_mismatch}")
+    md.append("- **Verification Status**: **PASS (Byte-for-byte exact against raw source CSVs)**")
+    
+    # K. Heuristic Metadata Clarification
+    md.append("\n\n## K. Heuristic Metadata Clarification")
     md.append("- `promotion_type_heuristic`: Metadata turunan berbasis aturan (rule-based) untuk audit dan analisis, **BUKAN** anotasi gold manusia (`promotion_type_is_gold = False`).")
     md.append("- `known_brand_entity`: Entitas nama situs/platform perjudian resmi yang teridentifikasi.")
     md.append("- `gambling_signal_terms`: Istilah leksikal perjudian generik (misal `slot`, `gacor`, `maxwin`, `zeus`) yang sengaja dipisahkan agar tidak membingungkan pelaporan entitas kampanye.")
     md.append("- `obfuscation_candidate`: Flag keberadaan karakter font matematika unicode, pemisahan spasi, atau karakter pemblokir filter.")
     
-    # K. Final Decision
+    # L. Final Decision
     all_pass = all(v == "PASS" for v in checks.values())
-    final_status = "READY_FOR_SPLIT" if all_pass else "NOT_READY"
-    md.append(f"\n\n## K. Final Decision")
+    final_status = "READY_FOR_SPLIT" if all_pass else "NOT_READY_FOR_SPLIT"
+    md.append(f"\n\n## L. Final Decision")
     md.append(f"### FINAL STATUS: `{final_status}`\n")
-    md.append("Seluruh 10 kriteria evaluasi telah tuntas terverifikasi dan memenuhi seluruh batasan metodologis.")
+    md.append("Seluruh 10 automated hard assertions telah tuntas terverifikasi dan memenuhi seluruh batasan metodologis.")
     
+    # Save v3 report and update v2 report
+    Path("data/audit/final_dataset_validation_v3.md").write_text("\n".join(md), encoding="utf-8")
     Path("data/audit/final_dataset_validation_v2.md").write_text("\n".join(md), encoding="utf-8")
-    logging.info("Saved data/audit/final_dataset_validation_v2.md")
+    logging.info("Saved data/audit/final_dataset_validation_v3.md & final_dataset_validation_v2.md")
     print(f"Validation completed. FINAL STATUS: {final_status}")
 
 if __name__ == "__main__":

@@ -22,7 +22,8 @@ Non-Promotion (0): 40,052 (83.35%)
 Layer 1: Canonical Master (canonical_dataset_v2): 48,051 records
 Layer 2: Main Model Candidate (main_pool_candidate_v2): 41,152 records (DS1 + Unified Kyyyy8)
 Layer 3: Isolated OOD Candidate (ood_ds3_candidate_v2): 2,689 records (Zero overlap with main pool)
-Layer 3: External Candidate (external_ds5_candidate_v2): 4,202 records (Audited against main pool)
+Layer 3: Strictly Isolated External Candidate (external_ds5_candidate_v2): 3,999 records (Zero leakage with main pool)
+Layer 3: Auxiliary All Valid DS5 Candidate (ds5_all_candidate_v2): 4,202 records (Includes 203 overlap records for audit)
 ```
 
 ### 4. Leakage Risk Groups
@@ -37,10 +38,12 @@ Cross-source duplicate records: 0
 Adjudicated label conflicts: 0 records across 51 unique text groups
 ```
 
-### 5. Major Methodological Corrections in v2
+### 5. Major Methodological Corrections in v2 & v3
 1. **Resolved Monotonicity Inconsistency (Issue A)**: Recomputed overlap metrics strictly ensuring `exact_shared <= whitespace_shared <= normalized_shared <= alnum_shared` for all 10 pairs.
 2. **Disentangled Conflict Types (Issue B)**: Clearly separated cross-dataset conflicts (48 groups) from within-dataset conflicts (6 groups) totaling 51 unique text groups (181 rows).
-3. **Non-Skipping Near-Duplicate Clustering (Issue C)**: Removed silent bucket skips using recursive sub-blocking and generated 300 validation samples.
+3. **Non-Skipping Near-Duplicate Clustering (Issue C)**: Removed silent bucket skips using secondary deterministic sub-blocking for oversized LSH buckets (one-level deterministic) and generated 300 validation samples.
 4. **Promotion Type Demoted to Heuristic (Issue D)**: Explicitly renamed to `promotion_type_heuristic_version = 'v2'` and `promotion_type_is_gold = False`, fixing float casting.
 5. **Strict Brand vs Lexical Term Separation (Issue E)**: Disentangled site entities (`ambil4d`, `gunungwin`) from lexical gambling terms (`slot`, `maxwin`, `zeus`).
 6. **Strictly Isolated OOD DS3 (Issue F)**: Purged all exact, whitespace, normalized, and near-duplicate overlapping records from DS3 relative to the main training pool.
+7. **Strictly Isolated External DS5 Candidate (v3 Hardening)**: Formally separated `ds5_all_candidate_v2.csv` (4,202) from `external_ds5_candidate_v2.csv` (3,999) ensuring zero leakage across exact, whitespace, normalized, and near-duplicate levels.
+8. **100% Full Raw-Text Byte-for-Byte Verification (v3 Hardening)**: Verified all 48,051 canonical records against source raw files with 0 mismatch.
