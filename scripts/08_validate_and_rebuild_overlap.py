@@ -189,18 +189,21 @@ def main():
     
     conflict_audit_rows = []
     
-    # Load previously established adjudication decisions from data/audit/label_conflicts.csv
-    prev_adj_df = pd.read_csv("data/audit/label_conflicts.csv")
+    # Load previously established adjudication decisions
+    adj_file = Path("data/audit/label_conflicts_v2.csv") if Path("data/audit/label_conflicts_v2.csv").exists() else Path("data/audit/label_conflicts.csv")
+    prev_adj_df = pd.read_csv(adj_file)
+    dec_col = "adjudication_decision" if "adjudication_decision" in prev_adj_df.columns else "decision"
+    reason_col = "adjudication_reason" if "adjudication_reason" in prev_adj_df.columns else "reason"
     prev_adj = {}
     for _, r in prev_adj_df.drop_duplicates("exact_hash").iterrows():
         prev_adj[r["exact_hash"]] = {
-            "canonical_label": r["canonical_label"],
+            "canonical_label": str(r["canonical_label"]) if pd.notna(r["canonical_label"]) else None,
             "label_status": r["label_status"],
-            "decision": r["decision"],
-            "reason": r["reason"],
+            "decision": r[dec_col],
+            "reason": r[reason_col],
             "note": r["adjudication_note"]
         }
-    logging.info(f"Loaded {len(prev_adj)} previously adjudicated conflict decisions.")
+    logging.info(f"Loaded {len(prev_adj)} previously adjudicated conflict decisions from {adj_file}.")
     
     conflicting_text_groups = 0
     conflicting_record_rows = 0

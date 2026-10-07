@@ -12,3 +12,17 @@
 2026-10-06 19:51:11,623 [INFO] Saved data/audit/label_conflicts_v2.csv (51 groups).
 2026-10-06 19:51:11,629 [INFO] Saved data/audit/conflict_summary_v2.csv
 2026-10-06 19:51:11,988 [INFO] Saved data/interim/full_pool_v2_hashed.pkl
+2026-10-06 22:38:14,536 [INFO] Memulai Phase: Validate & Rebuild Overlap and Conflicts (v2)
+2026-10-06 22:38:14,537 [INFO] Memeriksa integritas SHA-256 raw dataset...
+2026-10-06 22:38:14,579 [INFO] Saved data/audit/raw_integrity_check_v2.csv
+2026-10-06 22:38:14,581 [INFO] Raw integrity check: 100% PASS.
+2026-10-06 22:38:14,581 [INFO] Loading 5 interim harmonized datasets...
+2026-10-06 22:38:15,417 [INFO] Loaded 84,004 total records.
+2026-10-06 22:38:15,418 [INFO] Computing exact, whitespace, normalized, and alnum hashes...
+2026-10-06 22:38:17,858 [INFO] Computing pairwise overlap for all 10 dataset pairs...
+2026-10-06 22:38:19,278 [INFO] Saved data/audit/cross_dataset_overlap_v2.csv (All 10 pairs PASS monotonicity assertion).
+2026-10-06 22:38:19,279 [INFO] Analyzing conflicts across full pool...
+2026-10-06 22:38:19,286 [INFO] Loaded 51 previously adjudicated conflict decisions from data\audit\label_conflicts_v2.csv.
+2026-10-06 22:38:35,741 [INFO] Saved data/audit/label_conflicts_v2.csv (51 groups).
+2026-10-06 22:38:35,747 [INFO] Saved data/audit/conflict_summary_v2.csv
+2026-10-06 22:38:36,326 [INFO] Saved data/interim/full_pool_v2_hashed.pkl
