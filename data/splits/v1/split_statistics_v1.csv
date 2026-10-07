@@ -1,0 +1,4 @@
+split,total_records,percentage_of_pool,promotion_count,non_promotion_count,promotion_percentage,unique_leakage_groups
+train,32920,79.9961,3960,28960,12.0292,32087
+validation,4116,10.0019,495,3621,12.0262,4004
+test,4116,10.0019,495,3621,12.0262,4000

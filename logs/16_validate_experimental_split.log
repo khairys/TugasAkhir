@@ -1,0 +1,26 @@
+2026-10-07 15:43:25,130 [INFO] Starting Phase 16: Validate Experimental Split (Stage 8)...
+2026-10-07 15:43:25,154 [INFO] [ASSERT 7 PASSED] Source main pool hash matches manifest.
+2026-10-07 15:43:25,800 [INFO] [ASSERT 1 PASSED] Row counts: Train=32,920, Val=4,116, Test=4,116 (Total = 41,152).
+2026-10-07 15:43:25,823 [INFO] [ASSERT 2 PASSED] record_id is 100% strictly disjoint across partitions.
+2026-10-07 15:43:25,840 [INFO] [ASSERT 3 & 4 PASSED] leakage_group_id is 100% strictly disjoint across all partitions.
+2026-10-07 15:43:25,843 [INFO] [ASSERT 5 PASSED] Train label distribution: Promotion=3,960, Non-Promotion=28,960
+2026-10-07 15:43:25,844 [INFO] [ASSERT 5 PASSED] Val label distribution: Promotion=495, Non-Promotion=3,621
+2026-10-07 15:43:25,845 [INFO] [ASSERT 5 PASSED] Test label distribution: Promotion=495, Non-Promotion=3,621
+2026-10-07 15:43:25,882 [INFO] [ASSERT 6 PASSED] Zero review records leaked into any partition.
+2026-10-07 15:43:25,901 [INFO] [ASSERT 8 PASSED] Every (source_dataset, source_row_id) is unique and consistent.
+2026-10-07 15:43:25,905 [INFO] [SOURCE ISOLATION PASSED] Allowed sources verified: {'DS2_kyyyy8_all', 'DS1_fahruu', 'DS4_kyyyy8_platform'}
+2026-10-07 15:43:25,944 [INFO] Source distribution:
+partition      source_dataset  count  pct_of_partition  promotion_count  non_promotion_count  promotion_rate_pct
+    Train      DS2_kyyyy8_all  19148             58.17              664                18484                3.47
+    Train DS4_kyyyy8_platform   8492             25.80             1964                 6528               23.13
+    Train          DS1_fahruu   5280             16.04             1332                 3948               25.23
+      Val      DS2_kyyyy8_all   2355             57.22               96                 2259                4.08
+      Val DS4_kyyyy8_platform   1068             25.95              238                  830               22.28
+      Val          DS1_fahruu    693             16.84              161                  532               23.23
+     Test      DS2_kyyyy8_all   2391             58.09               85                 2306                3.55
+     Test DS4_kyyyy8_platform   1096             26.63              268                  828               24.45
+     Test          DS1_fahruu    629             15.28              142                  487               22.58
+2026-10-07 15:43:25,960 [INFO] Saved author overlap diagnostic to D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\audit\author_overlap_diagnostic_v1.md
+2026-10-07 15:43:26,068 [INFO] Created Frozen Normal Test Snapshot: D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\processed\test_normal_v1.csv (4,116 rows)
+2026-10-07 15:43:26,069 [INFO] Frozen Normal Test SHA-256: 6d5a2c8b386193147013fb7a6002e4fa0375969f00d46a0cc86eea674e8c3780
+2026-10-07 15:43:26,081 [INFO] Saved split validation report to D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\splits\v1\split_validation_report_v1.md

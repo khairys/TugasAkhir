@@ -1,0 +1,76 @@
+{
+  "experiment_version": "v1",
+  "git_commit_sha": "4b78b36e6d3d4d42fa21b32c9d3b4782e5858522",
+  "freeze_timestamp": "2026-10-07T15:49:46.089542",
+  "dataset": {
+    "main_pool": "main_pool_candidate_v2",
+    "main_pool_rows": 41152,
+    "promotion_count": 4950,
+    "non_promotion_count": 36202,
+    "sources": [
+      "DS1_fahruu",
+      "DS2_kyyyy8_all",
+      "DS4_kyyyy8_platform"
+    ]
+  },
+  "split": {
+    "method": "StratifiedGroupKFold",
+    "n_splits": 10,
+    "seed": 42,
+    "train_folds": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "validation_fold": 1,
+    "test_fold": 0,
+    "group_column": "leakage_group_id",
+    "stratification_column": "canonical_label",
+    "partitions": {
+      "train_rows": 32920,
+      "validation_rows": 4116,
+      "test_rows": 4116
+    }
+  },
+  "obfuscation": {
+    "specification": "OBFUSCATION_SPECIFICATION_V1",
+    "specification_status": "FROZEN_V1",
+    "seed": 42,
+    "families": [
+      "O1_CHAR_SUBSTITUTION",
+      "O2_CHAR_INSERT_DELETE",
+      "O3_WHITESPACE",
+      "O4_UNICODE_ORTHOGRAPHIC"
+    ],
+    "severities": [
+      "MILD",
+      "STRONG"
+    ],
+    "decision_threshold": ">=90.0% success rate",
+    "obfuscated_test_status": "READY"
+  },
+  "hashes_sha256": {
+    "main_pool": "0f07bc2e11a61804d5b46b2e6eb1e80c2f1ce3de4ce50cffaf5b67bfc1fde6ec",
+    "train": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+    "validation": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+    "test": "4e544147a29cdcdc8523d058cc9fb9790b44c38388e92bdf60a72fb7feff684f",
+    "test_normal": "6d5a2c8b386193147013fb7a6002e4fa0375969f00d46a0cc86eea674e8c3780",
+    "split_manifest": "dda63d77aaa45ae3ec1e4005e3e32e3e03ae80400a5bbb915b07c496247f4965",
+    "obfuscation_specification": "421f9f087dbd2df75e576cd64a27274c93f9ee29431c16b33bdc2f83b7164ee8",
+    "obfuscated_conditions": {
+      "O1_MILD": "a455e6224a37c826cefe3c19a7aa1966feb11fa93eca266ae14479a8fea1fb6e",
+      "O1_STRONG": "79dff505fe3d121dbe187cce2e41bdcc228b959767e7e9b2556c76ed83a8dd98",
+      "O2_MILD": "5357596408b1d5fc3354a53fee1fd957808bd517e4055966d2c4ab59d3886584",
+      "O2_STRONG": "b6eb5c853777094f850a9b1ac112ea19f9e71a27d5a66e58c6444dcf07456174",
+      "O3_MILD": "75b70109d5c33308f48146e5ad5e21e693086d8c004c724705737e8aa16386cc",
+      "O3_STRONG": "6a0016fb564e65ac0443ac28232f9bc5012eaade2a6d76863a8e00cbd1191764",
+      "O4_MILD": "89e5402a5050252ca555c49266cd92f2cffa1f0e027b0e2d8ccec326139e264c",
+      "O4_STRONG": "466c428ef5f1515823ccfaf53c4911c599d1f6dc36ee7a596a67685ac84a1607"
+    }
+  }
+}

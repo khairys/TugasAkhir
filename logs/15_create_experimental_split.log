@@ -1,0 +1,10 @@
+2026-10-07 15:42:06,440 [INFO] Starting Phase 15: Create Experimental Split (Stage 8)...
+2026-10-07 15:42:06,465 [INFO] Source Main Pool SHA-256: 0f07bc2e11a61804d5b46b2e6eb1e80c2f1ce3de4ce50cffaf5b67bfc1fde6ec
+2026-10-07 15:42:06,953 [INFO] Loaded Main Pool: 41,152 records
+2026-10-07 15:42:06,969 [INFO] Running StratifiedGroupKFold (n_splits=10, shuffle=True, random_state=42)...
+2026-10-07 15:43:12,385 [INFO] TRAIN: 32,920 rows (Groups: 32,087)
+2026-10-07 15:43:12,386 [INFO] VALIDATION: 4,116 rows (Groups: 4,004)
+2026-10-07 15:43:12,387 [INFO] TEST: 4,116 rows (Groups: 4,000)
+2026-10-07 15:43:14,786 [INFO] Saved split files to D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\splits\v1
+2026-10-07 15:43:14,864 [INFO] Saved split statistics to D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\splits\v1\split_statistics_v1.csv
+2026-10-07 15:43:15,027 [INFO] Saved split manifest to D:\Gathan\Kuliah\TUGAS AKHIR\Code\data\splits\v1\split_manifest_v1.json
