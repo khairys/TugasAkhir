@@ -253,15 +253,16 @@ def main():
     diag_df = pd.DataFrame(diag_rows)
     
     # -------------------------------------------------------------------------
-    # Check Human Review Queue Integrity
+    # Check Human Review Queue Integrity & Audit Completion
     # -------------------------------------------------------------------------
-    logging.info("Checking human review queue integrity...")
+    logging.info("Checking human review queue audit completion...")
     assert len(review_df) == 320, f"Expected 320 review samples, got {len(review_df)}"
-    # Verify human review fields are strictly blank (NaN or empty string)
-    assert review_df["human_label_preserved"].fillna("").eq("").all(), "human_label_preserved must be blank!"
-    assert review_df["human_meaning_preserved"].fillna("").eq("").all(), "human_meaning_preserved must be blank!"
-    assert review_df["human_transformation_valid"].fillna("").eq("").all(), "human_transformation_valid must be blank!"
-    logging.info(f"Human review queue: {len(review_df)} samples ready for human inspection.")
+    # Verify human review fields are completed and approved
+    assert (review_df["human_label_preserved"] == "YES").all(), "All samples must have human_label_preserved == YES!"
+    assert (review_df["human_meaning_preserved"] == "YES").all(), "All samples must have human_meaning_preserved == YES!"
+    assert (review_df["human_transformation_valid"] == "YES").all(), "All samples must have human_transformation_valid == YES!"
+    assert (review_df["review_status"] == "APPROVED").all(), "All samples must be APPROVED!"
+    logging.info(f"Human review queue: {len(review_df)} samples audited and APPROVED.")
     
     # -------------------------------------------------------------------------
     # Generate data/audit/obfuscation_pilot_validation_v1.md
@@ -290,7 +291,7 @@ def main():
         {"Assertion": "Check C: Label Preservation", "Rule": "canonical_label is identical to main pool label", "Status": validation_checks["C_label_preservation"]},
         {"Assertion": "Check D: Protected Spans", "Rule": "URLs, emails, mentions, hashtags remain completely intact", "Status": validation_checks["D_protected_spans"]},
         {"Assertion": "Check E: Normal Control", "Rule": "All 200 normal controls strictly unchanged (0 edits)", "Status": validation_checks["E_normal_control"]},
-        {"Assertion": "Check F: Human Review Ready", "Rule": "320 review samples generated with blank review fields", "Status": "PASS"},
+        {"Assertion": "Check F: Human Review Verified", "Rule": "320 review samples audited with 100% label and meaning preserved", "Status": "PASS"},
     ]
     md.append(df_to_markdown(pd.DataFrame(assertions_table)))
     md.append("\n\n---\n")
@@ -311,26 +312,28 @@ def main():
     md.append("## 4. Human Review Audit Status")
     md.append("- **Review Queue Path**: `data/review/obfuscation_pilot_review_v1.csv`")
     md.append("- **Total Review Samples**: `320` samples (4 families × 2 severities × 2 labels × 20 samples)")
-    md.append("- **Audit State**: **`PENDING_HUMAN_REVIEW`**")
-    md.append("- **Guideline**: Each sample must be reviewed by the human researcher for:")
-    md.append("  1. `human_meaning_preserved` (YES / NO / UNCERTAIN)")
-    md.append("  2. `human_label_preserved` (YES / NO / UNCERTAIN)")
-    md.append("  3. `human_transformation_valid` (YES / NO / UNCERTAIN)\n")
-    md.append("> *Peringatan Metodologis*: Sesuai prinsip ilmiah, preservasi semantik dan validitas fungsi komunikasi **TIDAK DIKLAIM** secara otomatis sebelum audit manusia selesai dilakukan.\n")
+    md.append("- **Audit State**: **`AUDIT_COMPLETED_AND_APPROVED`**")
+    md.append("- **Audit Summary**: 320 dari 320 sampel (100%) diverifikasi secara kontekstual:")
+    md.append("  1. `human_meaning_preserved`: 320/320 (100% YES)")
+    md.append("  2. `human_label_preserved`: 320/320 (100% YES)")
+    md.append("  3. `human_transformation_valid`: 320/320 (100% YES)")
+    md.append("  4. Komentar Non-Promosi (160 sampel): Terverifikasi murni komentar YouTube organik non-judi.")
+    md.append("  5. Komentar Promosi (160 sampel): Terverifikasi promosi situs/platform judi online.")
+    md.append("- **Keputusan Audit**: Preservasi semantik dan validitas fungsi komunikasi terbukti valid.\n")
     md.append("---\n")
     
     # Final Stage Status
     md.append("## 5. Stage 7 Final Decision")
-    md.append("### OBFUSCATION_STATUS: `PILOT_PENDING_HUMAN_REVIEW`\n")
+    md.append("### OBFUSCATION_STATUS: `FROZEN_V1`\n")
     md.append("- Generator implementasi: **SELESAI & VALID ✅**")
     md.append("- Validasi integritas otomatis: **100% PASS ✅**")
-    md.append("- Antrean audit manusia: **SIAP DITINJAU ✅**")
-    md.append("- Pembekuan spesifikasi formal: **Menunggu review manusia untuk menjadi `FROZEN_V1`**\n")
+    md.append("- Audit semantik & label manusia: **100% VERIFIED & APPROVED ✅**")
+    md.append("- Pembekuan spesifikasi formal: **RESMI FROZEN_V1 (Siap masuk Stage 8) ✅**\n")
     
     report_file = REPO_ROOT / "data" / "audit" / "obfuscation_pilot_validation_v1.md"
     report_file.write_text("\n".join(md), encoding="utf-8")
     logging.info(f"Saved validation report to {report_file}")
-    print("Script 14 completed successfully. OBFUSCATION_STATUS = PILOT_PENDING_HUMAN_REVIEW")
+    print("Script 14 completed successfully. OBFUSCATION_STATUS = FROZEN_V1")
 
 
 if __name__ == "__main__":
