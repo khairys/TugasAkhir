@@ -1,0 +1,65 @@
+{
+  "experiment_name": "linear_svm_baseline_v1",
+  "stage": "stage9",
+  "seed": 42,
+  "data": {
+    "train_path": "data/splits/v1/train_v1.csv",
+    "validation_path": "data/splits/v1/validation_v1.csv",
+    "text_column": "text_raw",
+    "label_column": "canonical_label",
+    "id_column": "record_id"
+  },
+  "base_model": {
+    "vectorizer": {
+      "analyzer": "word",
+      "lowercase": true,
+      "min_df": 1
+    },
+    "classifier": {
+      "class_weight": "balanced",
+      "random_state": 42,
+      "max_iter": 5000
+    }
+  },
+  "candidate_grid": [
+    {
+      "config_id": "cfg_1_ngram11_c01",
+      "ngram_range": [1, 1],
+      "C": 0.1
+    },
+    {
+      "config_id": "cfg_2_ngram11_c10",
+      "ngram_range": [1, 1],
+      "C": 1.0
+    },
+    {
+      "config_id": "cfg_3_ngram11_c100",
+      "ngram_range": [1, 1],
+      "C": 10.0
+    },
+    {
+      "config_id": "cfg_4_ngram12_c01",
+      "ngram_range": [1, 2],
+      "C": 0.1
+    },
+    {
+      "config_id": "cfg_5_ngram12_c10",
+      "ngram_range": [1, 2],
+      "C": 1.0
+    },
+    {
+      "config_id": "cfg_6_ngram12_c100",
+      "ngram_range": [1, 2],
+      "C": 10.0
+    }
+  ],
+  "selection_criteria": {
+    "primary_metric": "f1_promotion",
+    "tie_breaker_order": [
+      "precision_promotion",
+      "recall_promotion",
+      "macro_f1",
+      "simpler_model"
+    ]
+  }
+}

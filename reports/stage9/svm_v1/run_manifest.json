@@ -1,0 +1,195 @@
+{
+  "experiment_name": "linear_svm_baseline_v1",
+  "stage": "stage9",
+  "mode": "official",
+  "run_timestamp": "2026-10-09T14:09:22.498882",
+  "git": {
+    "commit_sha": "6a7d71f54d44b82a2878776c3c78d561fe11f293",
+    "working_tree_clean": false
+  },
+  "environment": {
+    "python_version": "3.13.0",
+    "scikit_learn_version": "1.9.1",
+    "joblib_version": "1.6.0",
+    "pandas_version": "3.0.5",
+    "numpy_version": "2.5.3"
+  },
+  "hashes_sha256": {
+    "train_data": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+    "validation_data": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+    "config_file": "efbbc5ba219658c67ffd5b15f2cc6ca6ec1ecebfbb6406d546bb06d632d77300",
+    "training_script": "8ea4b7ff337c91a439a0d5e00f8ed8c3d0209d716b121cfbb30061fc46c51400",
+    "saved_model": "d1708afd513c7f276aa9df75a13ecef92a2204587f8365c0d93fb249bb13d0d9"
+  },
+  "data_split_counts": {
+    "train_records": 32920,
+    "validation_records": 4116,
+    "train_promotion_count": 3960,
+    "val_promotion_count": 495
+  },
+  "seed": 42,
+  "selected_configuration": {
+    "config_id": "cfg_6_ngram12_c100",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "C": 10.0,
+    "vocab_size": 243152,
+    "train_duration_sec": 8.266,
+    "eval_duration_sec": 0.2913,
+    "total_duration_sec": 8.5573,
+    "f1_promotion": 0.948875,
+    "precision_promotion": 0.960663,
+    "recall_promotion": 0.937374,
+    "accuracy": 0.987852,
+    "macro_f1": 0.970991,
+    "confusion_matrix": {
+      "TN": 3602,
+      "FP": 19,
+      "FN": 31,
+      "TP": 464
+    }
+  },
+  "all_candidate_results": [
+    {
+      "config_id": "cfg_1_ngram11_c01",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "C": 0.1,
+      "vocab_size": 34836,
+      "train_duration_sec": 0.9444,
+      "eval_duration_sec": 0.1047,
+      "total_duration_sec": 1.0491,
+      "f1_promotion": 0.898077,
+      "precision_promotion": 0.856881,
+      "recall_promotion": 0.943434,
+      "accuracy": 0.974247,
+      "macro_f1": 0.941669,
+      "confusion_matrix": {
+        "TN": 3543,
+        "FP": 78,
+        "FN": 28,
+        "TP": 467
+      }
+    },
+    {
+      "config_id": "cfg_2_ngram11_c10",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "C": 1.0,
+      "vocab_size": 34836,
+      "train_duration_sec": 1.2046,
+      "eval_duration_sec": 0.1694,
+      "total_duration_sec": 1.374,
+      "f1_promotion": 0.918387,
+      "precision_promotion": 0.894636,
+      "recall_promotion": 0.943434,
+      "accuracy": 0.979835,
+      "macro_f1": 0.953442,
+      "confusion_matrix": {
+        "TN": 3566,
+        "FP": 55,
+        "FN": 28,
+        "TP": 467
+      }
+    },
+    {
+      "config_id": "cfg_3_ngram11_c100",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "C": 10.0,
+      "vocab_size": 34836,
+      "train_duration_sec": 2.5849,
+      "eval_duration_sec": 0.2085,
+      "total_duration_sec": 2.7934,
+      "f1_promotion": 0.906188,
+      "precision_promotion": 0.895464,
+      "recall_promotion": 0.917172,
+      "accuracy": 0.977162,
+      "macro_f1": 0.946593,
+      "confusion_matrix": {
+        "TN": 3568,
+        "FP": 53,
+        "FN": 41,
+        "TP": 454
+      }
+    },
+    {
+      "config_id": "cfg_4_ngram12_c01",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 0.1,
+      "vocab_size": 243152,
+      "train_duration_sec": 3.0301,
+      "eval_duration_sec": 0.3083,
+      "total_duration_sec": 3.3384,
+      "f1_promotion": 0.890372,
+      "precision_promotion": 0.84296,
+      "recall_promotion": 0.943434,
+      "accuracy": 0.97206,
+      "macro_f1": 0.937181,
+      "confusion_matrix": {
+        "TN": 3534,
+        "FP": 87,
+        "FN": 28,
+        "TP": 467
+      }
+    },
+    {
+      "config_id": "cfg_5_ngram12_c10",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 1.0,
+      "vocab_size": 243152,
+      "train_duration_sec": 3.163,
+      "eval_duration_sec": 0.2223,
+      "total_duration_sec": 3.3853,
+      "f1_promotion": 0.93681,
+      "precision_promotion": 0.930279,
+      "recall_promotion": 0.943434,
+      "accuracy": 0.984694,
+      "macro_f1": 0.964051,
+      "confusion_matrix": {
+        "TN": 3586,
+        "FP": 35,
+        "FN": 28,
+        "TP": 467
+      }
+    },
+    {
+      "config_id": "cfg_6_ngram12_c100",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "C": 10.0,
+      "vocab_size": 243152,
+      "train_duration_sec": 8.266,
+      "eval_duration_sec": 0.2913,
+      "total_duration_sec": 8.5573,
+      "f1_promotion": 0.948875,
+      "precision_promotion": 0.960663,
+      "recall_promotion": 0.937374,
+      "accuracy": 0.987852,
+      "macro_f1": 0.970991,
+      "confusion_matrix": {
+        "TN": 3602,
+        "FP": 19,
+        "FN": 31,
+        "TP": 464
+      }
+    }
+  ],
+  "status": "SUCCESS"
+}

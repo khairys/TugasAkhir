@@ -1,0 +1,69 @@
+2026-10-09 14:06:53,640 [INFO] === Starting Stage 9 Linear SVM v1 in [SMOKE] mode ===
+2026-10-09 14:06:53,666 [INFO] Pre-run Train SHA-256: 65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3
+2026-10-09 14:06:53,666 [INFO] Pre-run Validation SHA-256: 7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038
+2026-10-09 14:06:54,381 [INFO] [Train Full Validated] Rows: 32,920 | Promotion: 3,960 | Non-Promotion: 28,960
+2026-10-09 14:06:54,383 [INFO] [Validation Full Validated] Rows: 4,116 | Promotion: 495 | Non-Promotion: 3,621
+2026-10-09 14:06:54,383 [INFO] Sampling smoke subsets (Train=2000, Val=500) with seed=42...
+2026-10-09 14:06:54,750 [INFO] [Train Smoke Validated] Rows: 2,000 | Promotion: 241 | Non-Promotion: 1,759
+2026-10-09 14:06:54,751 [INFO] [Validation Smoke Validated] Rows: 500 | Promotion: 60 | Non-Promotion: 440
+2026-10-09 14:06:54,755 [INFO] Evaluating 6 candidate configurations...
+2026-10-09 14:06:54,755 [INFO] --- Training cfg_1_ngram11_c01: ngram_range=(1, 1), C=0.1 ---
+2026-10-09 14:06:54,875 [INFO] [cfg_1_ngram11_c01] Trained in 0.12s | Vocabulary size: 6,252
+2026-10-09 14:06:54,901 [INFO] [cfg_1_ngram11_c01] Val F1 (Prom): 0.6667 | Prec: 0.6111 | Rec: 0.7333 | Acc: 0.9120 | Macro-F1: 0.8080
+2026-10-09 14:06:54,901 [INFO] --- Training cfg_2_ngram11_c10: ngram_range=(1, 1), C=1.0 ---
+2026-10-09 14:06:54,946 [INFO] [cfg_2_ngram11_c10] Trained in 0.04s | Vocabulary size: 6,252
+2026-10-09 14:06:54,969 [INFO] [cfg_2_ngram11_c10] Val F1 (Prom): 0.7258 | Prec: 0.7031 | Rec: 0.7500 | Acc: 0.9320 | Macro-F1: 0.8435
+2026-10-09 14:06:54,969 [INFO] --- Training cfg_3_ngram11_c100: ngram_range=(1, 1), C=10.0 ---
+2026-10-09 14:06:55,007 [INFO] [cfg_3_ngram11_c100] Trained in 0.04s | Vocabulary size: 6,252
+2026-10-09 14:06:55,035 [INFO] [cfg_3_ngram11_c100] Val F1 (Prom): 0.7119 | Prec: 0.7241 | Rec: 0.7000 | Acc: 0.9320 | Macro-F1: 0.8367
+2026-10-09 14:06:55,035 [INFO] --- Training cfg_4_ngram12_c01: ngram_range=(1, 2), C=0.1 ---
+2026-10-09 14:06:55,206 [INFO] [cfg_4_ngram12_c01] Trained in 0.17s | Vocabulary size: 23,161
+2026-10-09 14:06:55,263 [INFO] [cfg_4_ngram12_c01] Val F1 (Prom): 0.6769 | Prec: 0.6286 | Rec: 0.7333 | Acc: 0.9160 | Macro-F1: 0.8143
+2026-10-09 14:06:55,264 [INFO] --- Training cfg_5_ngram12_c10: ngram_range=(1, 2), C=1.0 ---
+2026-10-09 14:06:55,398 [INFO] [cfg_5_ngram12_c10] Trained in 0.13s | Vocabulary size: 23,161
+2026-10-09 14:06:55,431 [INFO] [cfg_5_ngram12_c10] Val F1 (Prom): 0.7009 | Prec: 0.7193 | Rec: 0.6833 | Acc: 0.9300 | Macro-F1: 0.8306
+2026-10-09 14:06:55,431 [INFO] --- Training cfg_6_ngram12_c100: ngram_range=(1, 2), C=10.0 ---
+2026-10-09 14:06:55,525 [INFO] [cfg_6_ngram12_c100] Trained in 0.09s | Vocabulary size: 23,161
+2026-10-09 14:06:55,556 [INFO] [cfg_6_ngram12_c100] Val F1 (Prom): 0.6789 | Prec: 0.7551 | Rec: 0.6167 | Acc: 0.9300 | Macro-F1: 0.8198
+2026-10-09 14:06:55,556 [INFO] === Selected Best Configuration: cfg_2_ngram11_c10 ===
+2026-10-09 14:06:55,557 [INFO] Validation F1 Promotion: 0.7258 | Precision: 0.7031 | Recall: 0.7500
+2026-10-09 14:06:55,594 [INFO] Saved trained pipeline to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\artifacts\stage9\svm_v1_smoke\linear_svm_pipeline.joblib
+2026-10-09 14:06:55,614 [INFO] [Reload Integrity Confirmed] Reloaded model predictions 100% match original.
+2026-10-09 14:06:55,628 [INFO] Saved tuning results to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1_smoke\tuning_results.csv
+2026-10-09 14:06:55,646 [INFO] Saved validation predictions to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1_smoke\validation_predictions.csv
+2026-10-09 14:06:55,651 [INFO] Saved validation metrics to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1_smoke\validation_metrics.json
+2026-10-09 14:06:55,675 [INFO] [Data Immutability Confirmed] Train and Validation SHA-256 strictly unchanged.
+2026-10-09 14:06:55,836 [INFO] Saved run manifest to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1_smoke\run_manifest.json
+2026-10-09 14:08:57,720 [INFO] === Starting Stage 9 Linear SVM v1 in [OFFICIAL] mode ===
+2026-10-09 14:08:57,789 [INFO] Pre-run Train SHA-256: 65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3
+2026-10-09 14:08:57,790 [INFO] Pre-run Validation SHA-256: 7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038
+2026-10-09 14:08:58,430 [INFO] [Train Full Validated] Rows: 32,920 | Promotion: 3,960 | Non-Promotion: 28,960
+2026-10-09 14:08:58,433 [INFO] [Validation Full Validated] Rows: 4,116 | Promotion: 495 | Non-Promotion: 3,621
+2026-10-09 14:08:58,438 [INFO] Evaluating 6 candidate configurations...
+2026-10-09 14:08:58,438 [INFO] --- Training cfg_1_ngram11_c01: ngram_range=(1, 1), C=0.1 ---
+2026-10-09 14:08:59,383 [INFO] [cfg_1_ngram11_c01] Trained in 0.94s | Vocabulary size: 34,836
+2026-10-09 14:08:59,509 [INFO] [cfg_1_ngram11_c01] Val F1 (Prom): 0.8981 | Prec: 0.8569 | Rec: 0.9434 | Acc: 0.9742 | Macro-F1: 0.9417
+2026-10-09 14:08:59,509 [INFO] --- Training cfg_2_ngram11_c10: ngram_range=(1, 1), C=1.0 ---
+2026-10-09 14:09:00,714 [INFO] [cfg_2_ngram11_c10] Trained in 1.20s | Vocabulary size: 34,836
+2026-10-09 14:09:00,915 [INFO] [cfg_2_ngram11_c10] Val F1 (Prom): 0.9184 | Prec: 0.8946 | Rec: 0.9434 | Acc: 0.9798 | Macro-F1: 0.9534
+2026-10-09 14:09:00,915 [INFO] --- Training cfg_3_ngram11_c100: ngram_range=(1, 1), C=10.0 ---
+2026-10-09 14:09:03,501 [INFO] [cfg_3_ngram11_c100] Trained in 2.58s | Vocabulary size: 34,836
+2026-10-09 14:09:03,745 [INFO] [cfg_3_ngram11_c100] Val F1 (Prom): 0.9062 | Prec: 0.8955 | Rec: 0.9172 | Acc: 0.9772 | Macro-F1: 0.9466
+2026-10-09 14:09:03,746 [INFO] --- Training cfg_4_ngram12_c01: ngram_range=(1, 2), C=0.1 ---
+2026-10-09 14:09:06,776 [INFO] [cfg_4_ngram12_c01] Trained in 3.03s | Vocabulary size: 243,152
+2026-10-09 14:09:07,103 [INFO] [cfg_4_ngram12_c01] Val F1 (Prom): 0.8904 | Prec: 0.8430 | Rec: 0.9434 | Acc: 0.9721 | Macro-F1: 0.9372
+2026-10-09 14:09:07,103 [INFO] --- Training cfg_5_ngram12_c10: ngram_range=(1, 2), C=1.0 ---
+2026-10-09 14:09:10,266 [INFO] [cfg_5_ngram12_c10] Trained in 3.16s | Vocabulary size: 243,152
+2026-10-09 14:09:10,509 [INFO] [cfg_5_ngram12_c10] Val F1 (Prom): 0.9368 | Prec: 0.9303 | Rec: 0.9434 | Acc: 0.9847 | Macro-F1: 0.9641
+2026-10-09 14:09:10,509 [INFO] --- Training cfg_6_ngram12_c100: ngram_range=(1, 2), C=10.0 ---
+2026-10-09 14:09:18,776 [INFO] [cfg_6_ngram12_c100] Trained in 8.27s | Vocabulary size: 243,152
+2026-10-09 14:09:19,100 [INFO] [cfg_6_ngram12_c100] Val F1 (Prom): 0.9489 | Prec: 0.9607 | Rec: 0.9374 | Acc: 0.9879 | Macro-F1: 0.9710
+2026-10-09 14:09:19,101 [INFO] === Selected Best Configuration: cfg_6_ngram12_c100 ===
+2026-10-09 14:09:19,101 [INFO] Validation F1 Promotion: 0.9489 | Precision: 0.9607 | Recall: 0.9374
+2026-10-09 14:09:20,946 [INFO] Saved trained pipeline to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\artifacts\stage9\svm_v1\linear_svm_pipeline.joblib
+2026-10-09 14:09:22,257 [INFO] [Reload Integrity Confirmed] Reloaded model predictions 100% match original.
+2026-10-09 14:09:22,267 [INFO] Saved tuning results to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1\tuning_results.csv
+2026-10-09 14:09:22,324 [INFO] Saved validation predictions to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1\validation_predictions.csv
+2026-10-09 14:09:22,329 [INFO] Saved validation metrics to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1\validation_metrics.json
+2026-10-09 14:09:22,356 [INFO] [Data Immutability Confirmed] Train and Validation SHA-256 strictly unchanged.
+2026-10-09 14:09:22,507 [INFO] Saved run manifest to: D:\Gathan\Kuliah\TUGAS AKHIR\Code\reports\stage9\svm_v1\run_manifest.json

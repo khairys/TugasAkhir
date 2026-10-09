@@ -1,0 +1,23 @@
+{
+  "config_id": "cfg_2_ngram11_c10",
+  "ngram_range": [
+    1,
+    1
+  ],
+  "C": 1.0,
+  "vocab_size": 6252,
+  "train_duration_sec": 0.0444,
+  "eval_duration_sec": 0.0117,
+  "total_duration_sec": 0.0561,
+  "f1_promotion": 0.725806,
+  "precision_promotion": 0.703125,
+  "recall_promotion": 0.75,
+  "accuracy": 0.932,
+  "macro_f1": 0.843497,
+  "confusion_matrix": {
+    "TN": 421,
+    "FP": 19,
+    "FN": 15,
+    "TP": 45
+  }
+}
