@@ -54,7 +54,7 @@ Ketiga artefak model yang dievaluasi merupakan artefak beku hasil Stage 9 tanpa 
    - Bobot Model: `charcnn_v1_results/artifacts/final_model/charcnn_model.pt`
    - SHA-256 Bobot: `9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8`
    - Kosakata: `charcnn_v1_results/artifacts/final_model/vocab.json` (SHA-256: `d156b5a5...`, ukuran: 1.727 karakter).
-   - Arsitektur: Embedding(1727, 32), Conv1D(kernel 3, 5, 7, channel 64 each, total 192 filters), Masked Global Max Pooling, Dense(192 → 128, ReLU, Dropout 0.3), Output Dense(128 → 2).
+   - Arsitektur: Embedding(1727, 32), Conv1D(kernel 3, 5, 7, channel 64 each, total 192 filters), Masked Global Max Pooling, Dense(192 → 128, ReLU, Dropout 0.5 pada kandidat B terpilih), Output Dense(128 → 2).
 3. **IndoBERT (Fine-tuned)**:
    - Bobot Model: `indobert_v1_results/artifacts/final_model/model.safetensors`
    - SHA-256 Bobot: `890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd`
