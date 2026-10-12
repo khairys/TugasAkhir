@@ -1,0 +1,23 @@
+{
+  "selected_candidate": "B_lr1e-3_drop0.5",
+  "candidate": {
+    "candidate_id": "B_lr1e-3_drop0.5",
+    "learning_rate": 0.001,
+    "dropout": 0.5
+  },
+  "best_epoch": 5,
+  "f1_promotion": 0.9857723577235772,
+  "precision_promotion": 0.9918200408997955,
+  "recall_promotion": 0.9797979797979798,
+  "accuracy": 0.9965986394557823,
+  "macro_f1": 0.9919203951973294,
+  "confusion_matrix": {
+    "TN": 3617,
+    "FP": 4,
+    "FN": 10,
+    "TP": 485
+  },
+  "validation_loss": 0.0761128903001597,
+  "selection_source": "validation only",
+  "test_set_used": false
+}

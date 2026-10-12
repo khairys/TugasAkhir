@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "validated_at_utc": "2026-10-10T07:00:11.665283+00:00",
+  "gpu_name": "Tesla T4",
+  "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+  "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+  "model_weights_sha256": "890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd",
+  "metrics_from_reloaded_final_model": {
+    "f1_promotion": 0.9604863221884499,
+    "precision_promotion": 0.9634146341463414,
+    "recall_promotion": 0.9575757575757575,
+    "accuracy": 0.9905247813411079,
+    "macro_f1": 0.9775516497070613,
+    "TN": 3603,
+    "FP": 18,
+    "FN": 21,
+    "TP": 474
+  },
+  "comparison_to_saved_candidate_predictions": {
+    "prediction_agreement_pct": 100.0,
+    "rows": 4116
+  },
+  "test_set_used": false
+}

@@ -1,0 +1,14 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Large model binaries (>100MB, cannot be pushed to GitHub without Git LFS)
+*.safetensors
+indobert_v1_results.zip
+
+# Virtual environments
+.venv/
+venv/
+env/

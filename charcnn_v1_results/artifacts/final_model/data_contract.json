@@ -1,0 +1,27 @@
+{
+  "experiment": "Stage 9 Character-level CNN for Indonesian YouTube gambling-promotion comment detection",
+  "label_mapping": {
+    "0": "Non-Promotion",
+    "1": "Promotion"
+  },
+  "input_column": "text_raw",
+  "label_column": "canonical_label",
+  "id_column": "record_id",
+  "primary_metric": "F1 Promotion",
+  "secondary_metrics": [
+    "precision_promotion",
+    "recall_promotion",
+    "accuracy",
+    "macro_f1",
+    "confusion_matrix"
+  ],
+  "train_validation": "normal text only; fixed Stage 8 split; no resplitting",
+  "character_vocabulary": "built from training text only",
+  "unknown_character": "mapped to UNK",
+  "preprocessing": "no lowercasing or Unicode normalization; preserve original code points and whitespace",
+  "truncation": "keep first max_length code points; max_length uses train P99.5 rounded up to multiple of 32",
+  "selection": "validation F1 Promotion; test set must not be used for training or tuning",
+  "seed": 42,
+  "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+  "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038"
+}

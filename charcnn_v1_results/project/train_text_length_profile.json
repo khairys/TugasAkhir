@@ -1,0 +1,19 @@
+{
+  "computed_from": "train_v1.csv text_raw only",
+  "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+  "n_samples": 32920,
+  "length_definition": "Python Unicode code points via len(str(text_raw)); no normalization",
+  "min": 1,
+  "median": 44.0,
+  "mean": 66.61576549210207,
+  "max": 6804,
+  "percentiles": {
+    "50": 44,
+    "90": 129,
+    "95": 190,
+    "99": 420,
+    "99.5": 572
+  },
+  "max_length_selected": 576,
+  "selection_rule": "P99.5 rounded upward to a multiple of 32; training data only"
+}

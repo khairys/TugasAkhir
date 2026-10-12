@@ -1,0 +1,61 @@
+{
+  "split_version": "v1",
+  "dataset_version": "canonical_dataset_v2",
+  "main_pool_version": "main_pool_candidate_v2",
+  "seed": 42,
+  "method": "StratifiedGroupKFold",
+  "n_splits": 10,
+  "fold_assignment": {
+    "train": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "validation": [
+      1
+    ],
+    "test": [
+      0
+    ]
+  },
+  "group_column": "leakage_group_id",
+  "stratification_column": "canonical_label",
+  "git_commit_sha": "4b78b36e6d3d4d42fa21b32c9d3b4782e5858522",
+  "generation_timestamp": "2026-10-07T15:43:15.015373",
+  "environment": {
+    "python_version": "3.13.0",
+    "scikit_learn_version": "1.9.1",
+    "pandas_version": "3.0.5"
+  },
+  "hashes_sha256": {
+    "source_main_pool": "0f07bc2e11a61804d5b46b2e6eb1e80c2f1ce3de4ce50cffaf5b67bfc1fde6ec",
+    "train_v1": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+    "validation_v1": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+    "test_v1": "4e544147a29cdcdc8523d058cc9fb9790b44c38388e92bdf60a72fb7feff684f"
+  },
+  "partitions": {
+    "train": {
+      "rows": 32920,
+      "promotion_count": 3960,
+      "non_promotion_count": 28960,
+      "unique_groups": 32087
+    },
+    "validation": {
+      "rows": 4116,
+      "promotion_count": 495,
+      "non_promotion_count": 3621,
+      "unique_groups": 4004
+    },
+    "test": {
+      "rows": 4116,
+      "promotion_count": 495,
+      "non_promotion_count": 3621,
+      "unique_groups": 4000
+    }
+  }
+}

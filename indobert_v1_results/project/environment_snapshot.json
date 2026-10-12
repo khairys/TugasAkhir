@@ -1,0 +1,13 @@
+{
+  "python": "3.13.15",
+  "torch": "2.11.0+cu130",
+  "cuda": "13.0",
+  "transformers": "4.57.1",
+  "accelerate": "1.10.1",
+  "numpy": "2.1.3",
+  "pandas": "2.2.3",
+  "scikit_learn": "1.6.1",
+  "gpu_name": "Tesla T4",
+  "gpu_memory_gib": 14.563,
+  "captured_at": "2026-10-10T04:56:39+0000"
+}

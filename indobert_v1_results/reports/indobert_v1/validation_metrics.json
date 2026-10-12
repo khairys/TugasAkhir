@@ -1,0 +1,42 @@
+{
+  "candidate_id": "C_lr3e-5_wd0",
+  "status": "SUCCESS",
+  "hyperparameters": {
+    "candidate_id": "C_lr3e-5_wd0",
+    "learning_rate": 3e-05,
+    "weight_decay": 0.0
+  },
+  "metrics": {
+    "loss": 0.11192592233419418,
+    "f1_promotion": 0.9604863221884499,
+    "precision_promotion": 0.9634146341463414,
+    "recall_promotion": 0.9575757575757575,
+    "accuracy": 0.9905247813411079,
+    "macro_f1": 0.9775516497070613,
+    "TN": 3603.0,
+    "FP": 18.0,
+    "FN": 21.0,
+    "TP": 474.0,
+    "runtime": 8.0813,
+    "samples_per_second": 509.327,
+    "steps_per_second": 31.926
+  },
+  "train_runtime_seconds": 1275.743,
+  "global_step": 3087,
+  "final_epoch": 3.0,
+  "best_epoch": 3.0,
+  "best_checkpoint_step": 3087,
+  "best_metric": 0.9604863221884499,
+  "best_checkpoint": "/content/indobert_stage9_work/local_runs/indobert_v1/C_lr3e-5_wd0/checkpoint-3087",
+  "training_samples": 32920,
+  "validation_samples": 4116,
+  "class_weights": {
+    "Non-Promotion": 0.5683701657458563,
+    "Promotion": 4.156565656565657
+  },
+  "best_model_path": "/content/drive/MyDrive/TA_Research/Stage9_IndoBERT_v1/runs/indobert_v1/candidates/C_lr3e-5_wd0/best_model",
+  "best_model_config_sha256": "706958f661c48d9d9c033f0113671102ca3c62592cc01ad85fc63d7a5b6ddb7d",
+  "validation_predictions_path": "/content/drive/MyDrive/TA_Research/Stage9_IndoBERT_v1/reports/indobert_v1/C_lr3e-5_wd0_validation_predictions.csv",
+  "training_history_path": "/content/drive/MyDrive/TA_Research/Stage9_IndoBERT_v1/reports/indobert_v1/C_lr3e-5_wd0_training_history.json",
+  "completed_at_utc": "2026-10-10T06:32:04.741409+00:00"
+}

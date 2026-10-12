@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "final_model_sha256": "9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8",
+  "vocabulary_sha256": "8411ece95b67513f612305bc82f036b726c63d1f590c205b7f2565b292104aa8",
+  "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+  "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+  "rows_validation": 4116,
+  "predictions_match_saved_validation": true,
+  "zip_integrity": "TO_BE_CHECKED",
+  "test_set_used": false,
+  "validated_at_utc": "2026-10-10T04:29:42.434718+00:00",
+  "note": "Archive hash is recorded in the on-Drive copy to avoid a circular self-hash."
+}
