@@ -1,0 +1,52 @@
+{
+  "evaluation_plan_version": "1.0.0",
+  "stage": "stage10",
+  "frozen_at": "2026-10-12T14:35:00+07:00",
+  "status": "FROZEN_PRIOR_TO_TEST_INFERENCE",
+  "objective": "Official robustness evaluation of Linear SVM, Character-level CNN, and IndoBERT against four text obfuscation families (O1, O2, O3, O4) at MILD and STRONG severity levels.",
+  "research_context": "Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Penyamaran Teks pada Komentar YouTube",
+  "test_sets": {
+    "normal": {
+      "path": "data/processed/test_normal_v1.csv",
+      "sha256": "6d5a2c8b386193147013fb7a6002e4fa0375969f00d46a0cc86eea674e8c3780",
+      "rows": 4116
+    },
+    "obfuscation_conditions": {
+      "O1_MILD": "a455e6224a37c826cefe3c19a7aa1966feb11fa93eca266ae14479a8fea1fb6e",
+      "O1_STRONG": "79dff505fe3d121dbe187cce2e41bdcc228b959767e7e9b2556c76ed83a8dd98",
+      "O2_MILD": "5357596408b1d5fc3354a53fee1fd957808bd517e4055966d2c4ab59d3886584",
+      "O2_STRONG": "b6eb5c853777094f850a9b1ac112ea19f9e71a27d5a66e58c6444dcf07456174",
+      "O3_MILD": "75b70109d5c33308f48146e5ad5e21e693086d8c004c724705737e8aa16386cc",
+      "O3_STRONG": "6a0016fb564e65ac0443ac28232f9bc5012eaade2a6d76863a8e00cbd1191764",
+      "O4_MILD": "89e5402a5050252ca555c49266cd92f2cffa1f0e027b0e2d8ccec326139e264c",
+      "O4_STRONG": "466c428ef5f1515823ccfaf53c4911c599d1f6dc36ee7a596a67685ac84a1607"
+    }
+  },
+  "models_to_evaluate": {
+    "svm": {
+      "name": "Linear SVM (TF-IDF word unigram + bigram, C=10)",
+      "path": "artifacts/stage9/svm_v1/linear_svm_pipeline.joblib",
+      "sha256": "d1708afd513c7f276aa9df75a13ecef92a2204587f8365c0d93fb249bb13d0d9"
+    },
+    "char_cnn": {
+      "name": "Character-level CNN (Multi-scale kernels 3,5,7, Candidate B, lr=1e-3, drop=0.5)",
+      "path": "charcnn_v1_results/artifacts/final_model/charcnn_model.pt",
+      "sha256": "9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8",
+      "vocab_sha256": "d156b5a51481d8503fbdb467428c6e177c861ad91e80df66156835f32297fc03"
+    },
+    "indobert": {
+      "name": "IndoBERT Base p2 Fine-Tuned (Candidate C, lr=3e-5, wd=0)",
+      "path": "indobert_v1_results/artifacts/final_model/model.safetensors",
+      "sha256": "890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd"
+    }
+  },
+  "methodological_rules": [
+    "No retraining under any circumstances.",
+    "No threshold adjustment: default decision boundaries from Stage 9 are locked.",
+    "Full-set metrics use all 4,116 records.",
+    "Paired robustness metrics use only successfully transformed records (changed == True).",
+    "F1 Drop is defined as F1_normal_paired - F1_obfuscated_paired.",
+    "Evasion flip rate denominator is normal true-positive count in the paired subset.",
+    "95% bootstrap CI uses 10,000 stratified paired resamples with fixed seed 42."
+  ]
+}
