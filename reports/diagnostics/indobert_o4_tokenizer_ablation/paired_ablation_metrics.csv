@@ -1,0 +1,11 @@
+variant,description,n_changed_pairs,paired_clean_f1,paired_pert_f1,paired_f1_drop,paired_rel_drop_pct,paired_clean_precision,paired_pert_precision,paired_clean_recall,paired_pert_recall,paired_clean_accuracy,paired_pert_accuracy,paired_clean_fp,paired_pert_fp,fp_flips,evasion_flips
+CLEAN_ORIGINAL,Original Clean Validation Text,0,0.9605,0.9605,0.0,0.0,0.9634,0.9634,0.9576,0.9576,0.9905,0.9905,18,18,0,0
+CLEAN_NORMALIZED,Normalized Clean Validation Text (Control for Side Effects),0,0.9605,0.9605,0.0,0.0,0.9634,0.9634,0.9576,0.9576,0.9905,0.9905,18,18,0,0
+O4_STANDARD_MILD_RAW,Standard O4 MILD (Homoglyphs + Elongation Fallback),4006,0.9624,0.7778,0.1846,19.18,0.9673,0.6529,0.9576,0.9616,0.9908,0.9321,16,253,241,4
+O4_STANDARD_MILD_NORMALIZED,"Standard O4 MILD Normalized (Homoglyphs Reversed, Elongation Remains)",4006,0.9624,0.9624,0.0,0.0,0.9673,0.9673,0.9576,0.9576,0.9908,0.9908,16,16,1,0
+O4_STANDARD_STRONG_RAW,Standard O4 STRONG (Homoglyphs + Elongation Fallback),4006,0.9624,0.6325,0.3299,34.28,0.9673,0.4688,0.9576,0.9717,0.9908,0.8605,16,545,531,2
+O4_STANDARD_STRONG_NORMALIZED,"Standard O4 STRONG Normalized (Homoglyphs Reversed, Elongation Remains)",4006,0.9624,0.9614,0.001,0.1,0.9673,0.9673,0.9576,0.9556,0.9908,0.9905,16,16,0,1
+O4_HOMOGLYPH_ONLY_MILD_RAW,"Controlled O4 MILD (Homoglyphs ONLY, No Elongation)",3685,0.9651,0.7533,0.2118,21.95,0.9686,0.6172,0.9616,0.9664,0.9921,0.9284,13,250,240,4
+O4_HOMOGLYPH_ONLY_MILD_NORMALIZED,Controlled O4 MILD Normalized (100% Exact Restoration to Clean),3685,0.9651,0.9651,0.0,0.0,0.9686,0.9686,0.9616,0.9616,0.9921,0.9921,13,13,0,0
+O4_HOMOGLYPH_ONLY_STRONG_RAW,"Controlled O4 STRONG (Homoglyphs ONLY, No Elongation)",3946,0.9656,0.6288,0.3368,34.88,0.9706,0.4636,0.9606,0.9772,0.9916,0.8591,14,545,533,1
+O4_HOMOGLYPH_ONLY_STRONG_NORMALIZED,Controlled O4 STRONG Normalized (100% Exact Restoration to Clean),3946,0.9656,0.9656,0.0,0.0,0.9706,0.9706,0.9606,0.9606,0.9916,0.9916,14,14,0,0
