@@ -4,9 +4,10 @@ __pycache__/
 *$py.class
 .pytest_cache/
 
-# Large model binaries (>100MB, cannot be pushed to GitHub without Git LFS)
+# Large model binaries and archives (>100MB, cannot be pushed to GitHub without Git LFS)
 *.safetensors
 indobert_v1_results.zip
+IndoBERT_v2_Local_Model_and_Training_Report.zip
 
 # Virtual environments
 .venv/

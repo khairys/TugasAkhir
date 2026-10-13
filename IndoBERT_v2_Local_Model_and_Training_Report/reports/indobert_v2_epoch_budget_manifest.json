@@ -1,0 +1,158 @@
+{
+  "experiment_name": "indobert_v2_epoch_budget",
+  "status": "SUCCESS",
+  "completed_at_utc": "2026-10-13T11:27:50.234697+00:00",
+  "selected_candidate": "D_lr3e-5_wd0.01",
+  "selected_validation_metrics": {
+    "f1_promotion": 0.11776649746192894,
+    "precision_promotion": 0.11836734693877551,
+    "recall_promotion": 0.11717171717171718,
+    "accuracy": 0.7888726919339164,
+    "macro_f1": 0.49892740493353105,
+    "TN": 3189,
+    "FP": 432,
+    "FN": 437,
+    "TP": 58
+  },
+  "candidate_results": [
+    {
+      "candidate_id": "D_lr3e-5_wd0.01",
+      "f1_promotion": 0.11776649746192894,
+      "precision_promotion": 0.11836734693877551,
+      "recall_promotion": 0.11717171717171718,
+      "accuracy": 0.7888726919339164,
+      "macro_f1": 0.49892740493353105,
+      "TN": 3189,
+      "FP": 432,
+      "FN": 437,
+      "TP": 58,
+      "best_epoch": 6.0,
+      "runtime_minutes": 26.32
+    },
+    {
+      "candidate_id": "C_lr3e-5_wd0",
+      "f1_promotion": 0.11515151515151516,
+      "precision_promotion": 0.11515151515151516,
+      "recall_promotion": 0.11515151515151516,
+      "accuracy": 0.7871720116618076,
+      "macro_f1": 0.49709522733549244,
+      "TN": 3183,
+      "FP": 438,
+      "FN": 438,
+      "TP": 57,
+      "best_epoch": 2.0,
+      "runtime_minutes": 17.54
+    },
+    {
+      "candidate_id": "A_lr2e-5_wd0",
+      "f1_promotion": 0.11503531786074672,
+      "precision_promotion": 0.11491935483870967,
+      "recall_promotion": 0.11515151515151516,
+      "accuracy": 0.7869290573372206,
+      "macro_f1": 0.496959724943355,
+      "TN": 3182,
+      "FP": 439,
+      "FN": 438,
+      "TP": 57,
+      "best_epoch": 3.0,
+      "runtime_minutes": 22.44
+    },
+    {
+      "candidate_id": "B_lr2e-5_wd0.01",
+      "f1_promotion": 0.11440245148110317,
+      "precision_promotion": 0.11570247933884298,
+      "recall_promotion": 0.11313131313131314,
+      "accuracy": 0.7893586005830904,
+      "macro_f1": 0.4974328540322929,
+      "TN": 3193,
+      "FP": 428,
+      "FN": 439,
+      "TP": 56,
+      "best_epoch": 2.0,
+      "runtime_minutes": 17.49
+    }
+  ],
+  "model": {
+    "id": "indobenchmark/indobert-base-p2",
+    "initial_snapshot_sha256": "0a7bf7a7f1ef346c741a55839f272058674c1c4bd29c19222cac6fcc23d0283b",
+    "resolved_revision": "94b4e0a82081fa57f227fcc2024d1ea89b57ac1f"
+  },
+  "encoding": {
+    "add_special_tokens": true,
+    "id2label": {
+      "0": "Non-Promotion",
+      "1": "Promotion"
+    },
+    "label2id": {
+      "Non-Promotion": 0,
+      "Promotion": 1
+    },
+    "max_length": 128,
+    "padding": "dynamic per batch, pad_to_multiple_of_8",
+    "truncation": "longest_first"
+  },
+  "training_config": {
+    "attention": "SDPA where supported; otherwise eager attention",
+    "class_weighting": "inverse-frequency weights computed using train labels only",
+    "drive_checkpoint_every_n_epochs": 2,
+    "dynamic_padding": true,
+    "early_stopping_patience": 2,
+    "effective_batch_size": 32,
+    "evaluation_strategy": "epoch",
+    "gradient_checkpointing": "disabled when memory permits; enabled only if the preflight benchmark requires it",
+    "group_by_length": true,
+    "logging_steps": 50,
+    "max_epochs": 6,
+    "max_grad_norm": 1.0,
+    "mixed_precision": "bf16 when supported; otherwise fp16",
+    "optimizer": "fused AdamW where CUDA preflight confirms support; otherwise AdamW",
+    "per_device_batch_size": "auto-benchmarked CUDA microbatch; effective batch held at 32",
+    "per_device_eval_batch_size": 64,
+    "save_strategy": "epoch; sync to Drive every 2 epochs and whenever new best is selected",
+    "warmup_ratio": 0.1
+  },
+  "runtime_profile": {
+    "profile_version": 1,
+    "first_gpu_name": "Tesla T4",
+    "compute_capability": "7.5",
+    "gpu_total_memory_gib": 14.563,
+    "amp": "bf16",
+    "attention_backend": "sdpa",
+    "optimizer": "adamw_torch_fused",
+    "gradient_checkpointing": false,
+    "micro_batch_size": 16,
+    "gradient_accumulation_steps": 2,
+    "effective_batch_size": 32,
+    "target_effective_batch_size": 32,
+    "calibration_peak_memory_gib": 1.922,
+    "calibration_attempts": [
+      {
+        "batch_size": 16,
+        "gradient_checkpointing": false,
+        "attention_backend": "sdpa",
+        "optimizer": "adamw_torch_fused",
+        "ok": true,
+        "oom": false,
+        "peak_memory_gib": 1.922
+      }
+    ],
+    "created_at_utc": "2026-10-13T09:24:50.618992+00:00",
+    "tf32": false,
+    "last_verified_gpu_name": "Tesla T4",
+    "last_verified_at_utc": "2026-10-13T10:01:55.601796+00:00"
+  },
+  "class_weights_from_train_only": {
+    "Non-Promotion": 0.5683701657458563,
+    "Promotion": 4.156565656565657
+  },
+  "data": {
+    "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+    "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+    "train_rows": 32920,
+    "validation_rows": 4116
+  },
+  "config_sha256": "3b940b6d7ebd8f26b20332356461ecdae9642b18be6fe7520c3a7e70615ecc06",
+  "script_sha256": "063fd628f00a3c6b20b56bb78a2319348ee62bba7a8f2cfe1f6fef4c439899c7",
+  "test_set_used": false,
+  "selection_source": "normal validation F1 Promotion with documented tie-breakers; no test/obfuscated test used"
+}

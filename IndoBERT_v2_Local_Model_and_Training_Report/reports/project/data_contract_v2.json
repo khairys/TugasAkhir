@@ -1,0 +1,14 @@
+{
+  "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+  "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038",
+  "source_archive": "colab_handoff_stage9_charcnn_v1.zip",
+  "source_archive_sha256": "cd7e62f93211acf42441b139b1f7ddfc1f96f829c27a5459e6799b454edec7c0",
+  "handoff_source_commit": "fb2ede7f74777354ffaeb00c371ac190d001d7e8",
+  "split_generation_commit": "4b78b36e6d3d4d42fa21b32c9d3b4782e5858522",
+  "train_rows": 32920,
+  "validation_rows": 4116,
+  "test_set_used": false,
+  "model_revision": "94b4e0a82081fa57f227fcc2024d1ea89b57ac1f",
+  "max_length": 128,
+  "selection_metric": "validation F1 Promotion"
+}
