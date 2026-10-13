@@ -4,10 +4,11 @@
   "decision_date": "2026-10-13",
   "status": "locked_for_main_comparison",
   "display_policy": "Only Linear SVM, Char-CNN, and IndoBERT are canonical model names in the main analysis. Training versions are provenance metadata, not separate comparison models.",
-  "official_evaluation_entrypoints": ["scripts/22_run_stage10_robustness.py", "scripts/23_validate_stage10_results.py"],
+  "official_evaluation_entrypoints": ["scripts/evaluation/robustness.py", "scripts/evaluation/validate_results.py"],
+  "training_entrypoints": ["scripts/training/linear_svm.py", "scripts/training/char_cnn.py", "scripts/training/indobert.py"],
   "models": [
-    {"id":"linear_svm","display_name":"Linear SVM","representation":"word-level TF-IDF","training_entrypoint":"scripts/19_train_linear_svm.py","config":"models/linear_svm/config.json","artifact":"models/linear_svm/model/model.joblib"},
-    {"id":"char_cnn","display_name":"Char-CNN","representation":"character-level CNN","training_entrypoint":"models/char_cnn/project/charcnn_train.py","config":"models/char_cnn/config.json","artifact":"models/char_cnn/artifacts/final_model/charcnn_model.pt"},
-    {"id":"indobert","display_name":"IndoBERT","representation":"indobenchmark/indobert-base-p2","training_entrypoint":"models/indobert/project/indobert_train.py","config":"models/indobert/config.json","artifact_directory":"models/indobert/artifacts/final_model/"}
+    {"id":"linear_svm","display_name":"Linear SVM","representation":"word-level TF-IDF","training_entrypoint":"scripts/training/linear_svm.py","config":"models/linear_svm/config.json","artifact":"models/linear_svm/model/model.joblib"},
+    {"id":"char_cnn","display_name":"Char-CNN","representation":"character-level CNN","training_entrypoint":"scripts/training/char_cnn.py","config":"models/char_cnn/config.json","artifact":"models/char_cnn/artifacts/final_model/charcnn_model.pt"},
+    {"id":"indobert","display_name":"IndoBERT","representation":"indobenchmark/indobert-base-p2","training_entrypoint":"scripts/training/indobert.py","config":"models/indobert/config.json","artifact_directory":"models/indobert/artifacts/final_model/"}
   ]
 }
