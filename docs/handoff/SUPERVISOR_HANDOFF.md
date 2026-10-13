@@ -7,12 +7,13 @@ The main comparison is locked to three models: **Linear SVM, Char-CNN, and IndoB
 ## Start here
 
 1. [Canonical model-selection decision](../research/MODEL_SELECTION_DECISION.md) — the selected model lineup and rationale.
-2. [Final research conclusions](../research/STAGE10_FINAL_CONCLUSIONS.md) — main results, research questions, and limitations.
-3. [Repository audit](REPOSITORY_AUDIT.md) — project structure, what was retained/removed, and remaining issues.
-4. [Reproducibility guide](REPRODUCIBILITY_GUIDE.md) — input hashes, canonical artifacts, standard evaluation path, and checks.
-5. [Stage 10 closure checklist](STAGE10_CLOSURE_CHECKLIST.md) — remaining release blockers.
-6. [Formal obfuscation specification](../research/OBFUSCATION_SPECIFICATION_V1.md) — frozen O1–O4 transformation protocol.
-7. [Dataset audit report](../data/DATASET_AUDIT_REPORT.md) and [labeling guideline](../data/LABELING_GUIDELINE.md) — source and label provenance.
+2. [Final research results](../research/FINAL_RESULTS.md) — main results, research questions, and limitations.
+3. [Future analysis plan](../research/FUTURE_ANALYSIS_PLAN.md) — the default next analysis sequence and explicit out-of-scope items.
+4. [Repository audit](REPOSITORY_AUDIT.md) — project structure, what was retained/removed, and remaining issues.
+5. [Reproducibility guide](REPRODUCIBILITY_GUIDE.md) — input hashes, canonical artifacts, standard evaluation path, and checks.
+6. [Stage 10 closure checklist](STAGE10_CLOSURE_CHECKLIST.md) — remaining release blockers.
+7. [Formal obfuscation specification](../research/OBFUSCATION_SPECIFICATION_V1.md) — frozen O1–O4 transformation protocol.
+8. [Dataset audit report](../data/DATASET_AUDIT_REPORT.md) and [labeling guideline](../data/LABELING_GUIDELINE.md) — source and label provenance.
 
 ## Main findings
 
