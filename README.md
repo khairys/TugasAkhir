@@ -45,10 +45,9 @@ models/
   char_cnn/               Selected Char-CNN artifact, configuration and reports
   indobert/               Selected IndoBERT baseline artifact, configuration and reports
 scripts/
-  19_train_linear_svm.py  Linear SVM training entry point
-  22_run_stage10_robustness.py
-  23_validate_stage10_results.py
-  24_unicode_obfuscation_diagnostic.py
+  training/               Stable model-training entrypoints
+  evaluation/             Stable official evaluation entrypoints
+  diagnostics/            Stable diagnostic entrypoints
 src/obfuscation/          Controlled text-transformation implementation
 tests/                    Obfuscation and Stage 10 integrity checks
 reports/stage10/          Official three-model robustness results
@@ -76,22 +75,24 @@ Unweighted mean paired F1 across the eight obfuscation conditions:
 
 These are descriptive results from one frozen test split. No multi-seed evaluation or formal significance test was run.
 
-## Standard evaluation commands
+## Standard commands
 
 Run commands from the repository root:
 
 ```bash
-python scripts/22_run_stage10_robustness.py --mode preflight
-python scripts/22_run_stage10_robustness.py --mode official
-python scripts/23_validate_stage10_results.py
+python scripts/evaluation/robustness.py --mode preflight
+python scripts/evaluation/robustness.py --mode official
+python scripts/evaluation/validate_results.py
 pytest tests/
 ```
 
 The Unicode/tokenizer diagnostic is separate from the official test evaluation:
 
 ```bash
-python scripts/24_unicode_obfuscation_diagnostic.py
+python scripts/diagnostics/unicode_obfuscation.py
 ```
+
+For retraining, use the stable entrypoints in `scripts/training/` and the model configurations in `models/*/config.json`.
 
 ## Known reproducibility blockers
 
