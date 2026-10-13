@@ -30,7 +30,6 @@ Use these display names in future result tables and figures. Do not list differe
 ```text
 configs/
   model_registry.json     Authoritative three-model registry
-  models/                 Model-specific configuration files
   evaluation/             Frozen robustness evaluation configuration
 data/
   raw/                    Original source datasets retained for provenance
@@ -41,7 +40,7 @@ data/processed/
   test_normal_v1.csv      Frozen normal test condition
   obfuscated_test_v1/     Eight frozen paired obfuscation conditions
 models/
-  linear_svm/             Selected Linear SVM artifact and training report
+  linear_svm/             Selected Linear SVM artifact and configuration
   char_cnn/               Selected Char-CNN artifact, configuration and reports
   indobert/               Selected IndoBERT baseline artifact, configuration and reports
 scripts/
