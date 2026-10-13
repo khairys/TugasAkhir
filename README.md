@@ -17,12 +17,13 @@ Use these display names in future result tables and figures. Do not list differe
 ## Start here
 
 1. [Model-selection decision](docs/research/MODEL_SELECTION_DECISION.md)
-2. [Stage 10 final conclusions](docs/research/STAGE10_FINAL_CONCLUSIONS.md)
-3. [Supervisor handoff](docs/handoff/SUPERVISOR_HANDOFF.md)
-4. [Reproducibility guide](docs/handoff/REPRODUCIBILITY_GUIDE.md)
-5. [Stage 10 closure checklist](docs/handoff/STAGE10_CLOSURE_CHECKLIST.md)
-6. [Obfuscation specification](docs/research/OBFUSCATION_SPECIFICATION_V1.md)
-7. [Dataset audit and labeling guideline](docs/data/DATASET_AUDIT_REPORT.md)
+2. [Final research results](docs/research/FINAL_RESULTS.md)
+3. [Future analysis plan](docs/research/FUTURE_ANALYSIS_PLAN.md)
+4. [Supervisor handoff](docs/handoff/SUPERVISOR_HANDOFF.md)
+5. [Reproducibility guide](docs/handoff/REPRODUCIBILITY_GUIDE.md)
+6. [Stage 10 closure checklist](docs/handoff/STAGE10_CLOSURE_CHECKLIST.md)
+7. [Obfuscation specification](docs/research/OBFUSCATION_SPECIFICATION_V1.md)
+8. [Dataset audit and labeling guideline](docs/data/DATASET_AUDIT_REPORT.md)
 
 ## Repository layout
 
@@ -43,13 +44,17 @@ models/
   linear_svm/             Selected Linear SVM artifact and training report
   char_cnn/               Selected Char-CNN artifact, configuration and reports
   indobert/               Selected IndoBERT baseline artifact, configuration and reports
-scripts/                  Dataset preparation, training, and official evaluation entrypoints
+scripts/
+  19_train_linear_svm.py  Linear SVM training entry point
+  22_run_stage10_robustness.py
+  23_validate_stage10_results.py
+  24_unicode_obfuscation_diagnostic.py
 src/obfuscation/          Controlled text-transformation implementation
 tests/                    Obfuscation and Stage 10 integrity checks
 reports/stage10/          Official three-model robustness results
 reports/diagnostics/      Supporting diagnostic analysis
 docs/data/                Dataset audit and labeling methods
-docs/research/            Research protocol and scientific conclusions
+docs/research/            Research protocol, final results, and future analysis plan
 docs/handoff/             Supervisor and reproducibility materials
 ```
 
