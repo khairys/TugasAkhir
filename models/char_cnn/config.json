@@ -1,0 +1,49 @@
+{
+  "experiment_name": "char_cnn_baseline",
+  "stage": "model_baseline",
+  "seed": 42,
+  "data": {
+    "train_path": "data_snapshot/train.csv",
+    "validation_path": "data_snapshot/validation.csv",
+    "text_column": "text_raw",
+    "label_column": "canonical_label",
+    "id_column": "record_id",
+    "train_sha256": "65a10e93713586e20ebb9a3a0c0694d860a6d9d5541e84000713f2918d595cf3",
+    "validation_sha256": "7753fb36275d36a2367e15d28de3f52f06e0f33a4f666d81d7dd95c5a9d87038"
+  },
+  "encoding": {
+    "pad_id": 0,
+    "unk_id": 1,
+    "max_length": 576,
+    "truncation": "keep_first_max_length_characters",
+    "padding": "right"
+  },
+  "architecture": {
+    "embedding_dim": 32,
+    "kernel_sizes": [3, 5, 7],
+    "conv_channels": 64,
+    "hidden_dim": 128
+  },
+  "training": {
+    "batch_size": 64,
+    "max_epochs": 12,
+    "early_stopping_patience": 3,
+    "weight_decay": 0.0001,
+    "grad_clip_norm": 1.0,
+    "checkpoint_every_steps": 100,
+    "mixed_precision": "float16",
+    "num_workers": 0
+  },
+  "candidates": [
+    {"candidate_id": "A_lr1e-3_drop0.3", "learning_rate": 0.001, "dropout": 0.3},
+    {"candidate_id": "B_lr1e-3_drop0.5", "learning_rate": 0.001, "dropout": 0.5},
+    {"candidate_id": "C_lr3e-4_drop0.3", "learning_rate": 0.0003, "dropout": 0.3},
+    {"candidate_id": "D_lr3e-4_drop0.5", "learning_rate": 0.0003, "dropout": 0.5}
+  ],
+  "smoke": {"train_rows": 2000, "validation_rows": 500, "max_epochs": 1, "candidate_limit": 1, "batch_size": 32},
+  "selection": {
+    "primary_metric": "f1_promotion",
+    "tie_breakers": ["precision_promotion", "recall_promotion", "macro_f1", "fixed_candidate_order"]
+  },
+  "vocabulary_sha256": "8411ece95b67513f612305bc82f036b726c63d1f590c205b7f2565b292104aa8"
+}
