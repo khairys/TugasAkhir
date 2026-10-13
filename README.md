@@ -28,31 +28,32 @@ Use these display names in future result tables and figures. Do not list differe
 
 ```text
 configs/
-  models/                 Linear SVM config used by its training entry point
-  evaluation/             Frozen Stage 10 evaluation configuration
   model_registry.json     Authoritative three-model registry
+  models/                 Model-specific configuration files
+  evaluation/             Frozen robustness evaluation configuration
 data/
-  raw/                    Original source datasets (immutable)
-  source_variants/        Additional source snapshots retained for provenance
-  interim/                Harmonized datasets and auditable intermediates
+  raw/                    Original source datasets retained for provenance
   audit/                  Dataset quality, overlap, and integrity evidence
-  review/                 Human-review queues
   manifests/              Record and source manifests
   splits/v1/              Frozen train/validation/test split and manifest
-  processed/              Frozen normal test and paired obfuscation conditions
+data/processed/
+  test_normal_v1.csv      Frozen normal test condition
+  obfuscated_test_v1/     Eight frozen paired obfuscation conditions
 models/
-  linear_svm/             Selected SVM artifact and training report
-  char_cnn/               Selected Char-CNN artifact, source config and reports
-  indobert/               Selected IndoBERT baseline artifact, source config and reports
-scripts/                  Ordered dataset preparation and official evaluation
+  linear_svm/             Selected Linear SVM artifact and training report
+  char_cnn/               Selected Char-CNN artifact, configuration and reports
+  indobert/               Selected IndoBERT baseline artifact, configuration and reports
+scripts/                  Dataset preparation, training, and official evaluation entrypoints
 src/obfuscation/          Controlled text-transformation implementation
-tests/                    Dataset, obfuscation, and Stage 10 integrity checks
+tests/                    Obfuscation and Stage 10 integrity checks
 reports/stage10/          Official three-model robustness results
 reports/diagnostics/      Supporting diagnostic analysis
 docs/data/                Dataset audit and labeling methods
 docs/research/            Research protocol and scientific conclusions
 docs/handoff/             Supervisor and reproducibility materials
 ```
+
+The active research repository intentionally excludes superseded candidate pools, duplicate source snapshots, pilot review queues, smoke-only outputs, and the unused later IndoBERT experiment. Those artifacts remain recoverable through Git history when provenance is required.
 
 ## Main results
 
@@ -70,7 +71,7 @@ Unweighted mean paired F1 across the eight obfuscation conditions:
 
 These are descriptive results from one frozen test split. No multi-seed evaluation or formal significance test was run.
 
-## Standard commands
+## Standard evaluation commands
 
 Run commands from the repository root:
 
@@ -93,4 +94,4 @@ python scripts/24_unicode_obfuscation_diagnostic.py
 - The selected IndoBERT `model.safetensors` file is not present in Git although its expected hash is recorded in the evaluation configuration. Obtain the verified model bundle before running full inference.
 - A full Stage 10 runtime and test run has not been executed as part of this cleanup.
 
-Original raw data, final frozen test conditions, and dataset-audit evidence are retained. Generated logs, smoke-only artifacts, the duplicate Char-CNN ZIP, bulky full-pool pickle intermediates, and the unused later IndoBERT experiment bundle have been removed from this working branch.
+The active branch retains the frozen raw sources, final split/test assets, model artifacts, audit evidence, research protocol, and official three-model results. Superseded candidate/intermediate data and the unused IndoBERT experiment are deliberately excluded from the active research layout.
