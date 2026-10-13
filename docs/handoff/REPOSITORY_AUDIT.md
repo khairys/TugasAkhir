@@ -10,11 +10,11 @@ The cleaned working branch reorganizes the research artifacts around the three c
 |---|---|---|
 | Model registry | `configs/model_registry.json` | Source of truth for the three display names and artifact paths |
 | Evaluation config | `configs/evaluation/stage10_robustness.json` | Frozen inputs, model artifacts, metrics, and paired protocol |
-| Linear SVM | `scripts/19_train_linear_svm.py`, `configs/models/linear_svm.json`, `models/linear_svm/` | TF-IDF baseline and selected pipeline |
-| Char-CNN | `models/char_cnn/project/`, `models/char_cnn/artifacts/final_model/` | Character-level model, vocabulary, and training configuration |
-| IndoBERT | `models/indobert/project/`, `models/indobert/artifacts/final_model/` | Selected baseline model/tokenizer/config; weights need verified handoff |
-| Official Stage 10 | `scripts/22_run_stage10_robustness.py`, `scripts/23_validate_stage10_results.py`, `reports/stage10/` | Official three-model evaluation, predictions, metrics, manifests, and error audit |
-| O4 diagnostic | `scripts/24_unicode_obfuscation_diagnostic.py`, `reports/diagnostics/unicode_obfuscation/` | Validation-only diagnostic; not part of official test evaluation |
+| Linear SVM | `scripts/training/linear_svm.py`, `models/linear_svm/config.json`, `models/linear_svm/` | Stable training interface and selected pipeline |
+| Char-CNN | `scripts/training/char_cnn.py`, `models/char_cnn/config.json`, `models/char_cnn/artifacts/final_model/` | Stable training interface, selected character-level model, and vocabulary |
+| IndoBERT | `scripts/training/indobert.py`, `models/indobert/config.json`, `models/indobert/artifacts/final_model/` | Stable training interface and selected baseline model/tokenizer/config; weights need verified handoff |
+| Official robustness evaluation | `scripts/evaluation/robustness.py`, `scripts/evaluation/validate_results.py`, `reports/stage10/` | Official three-model evaluation, predictions, metrics, manifests, and error audit |
+| O4 diagnostic | `scripts/diagnostics/unicode_obfuscation.py`, `reports/diagnostics/unicode_obfuscation/` | Validation-only diagnostic; not part of official test evaluation |
 | Obfuscation engine | `src/obfuscation/` | Controlled transformation implementation used by the frozen protocol |
 | Frozen data protocol | `data/splits/v1/`, `data/processed/test_normal_v1.csv`, `data/processed/obfuscated_test_v1/` | Fixed split and paired test conditions |
 | Dataset lineage and review | `data/raw/`, `data/source_variants/`, `data/interim/`, `data/audit/`, `data/review/`, `data/manifests/` | Source preservation, derived datasets, provenance, and quality-control evidence |
@@ -41,6 +41,10 @@ models/
   char_cnn/
   indobert/
 scripts/
+  training/
+  evaluation/
+  diagnostics/
+  utils/
 src/obfuscation/
 tests/
 reports/stage10/
