@@ -32,7 +32,7 @@ The F1 values below use the successfully transformed pairs (`changed == True`). 
 | O1 strong — character substitution | 0.8749 | **0.9608** | 0.8617 |
 | O2 mild — character insertion/deletion | 0.9154 | **0.9792** | 0.9558 |
 | O2 strong — character insertion/deletion | 0.8734 | **0.9785** | 0.9424 |
-| O3 mild — whitespace manipulation | 0.9099 | **0.9782** | 0.9396 |
+| O3 mild — whitespace manipulation | 0.9099 | **0.9782** | 0.9588 |
 | O3 strong — whitespace manipulation | 0.8498 | **0.9806** | 0.9396 |
 | O4 mild — Unicode homoglyphs | 0.9039 | **0.9776** | 0.7878 |
 | O4 strong — Unicode homoglyphs | 0.8596 | **0.9786** | 0.6323 |
