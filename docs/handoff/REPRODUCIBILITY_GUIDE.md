@@ -16,30 +16,30 @@ Experiment anchors:
 
 ## 2. Dataset preparation lineage
 
-The active repository keeps the resulting frozen data, manifests, audits, and provenance needed to understand the dataset. The superseded numbered generation scripts are intentionally no longer part of the active working tree. Do not regenerate frozen files during ordinary reproduction.
+The active repository keeps the resulting frozen data, manifests, audits, and provenance needed to understand the dataset. Superseded candidate/intermediate datasets and pilot queues are intentionally excluded from the active working tree. Do not regenerate frozen files during ordinary reproduction.
 
 If regeneration is necessary for a future methodological experiment, write to a separate versioned destination and compare hashes before considering the result equivalent to the frozen protocol. The controlled transformation implementation used by the official protocol is under `src/obfuscation/`.
 
 ## 3. Canonical models and artifacts
 
-| Model | Training script/config | Final artifact |
-|---|---|---|
-| Linear SVM | `scripts/19_train_linear_svm.py`; `configs/models/linear_svm.json` | `models/linear_svm/model/model.joblib` |
-| Char-CNN | `models/char_cnn/project/charcnn_train.py`; `models/char_cnn/project/charcnn_v1.json` | `models/char_cnn/artifacts/final_model/charcnn_model.pt`, plus `vocab.json` |
-| IndoBERT | `models/indobert/project/indobert_train.py`; `models/indobert/project/indobert_v1.json` | `models/indobert/artifacts/final_model/` |
+| Model | Stable training entrypoint | Configuration | Final artifact |
+|---|---|---|---|
+| Linear SVM | `scripts/training/linear_svm.py` | `models/linear_svm/config.json` | `models/linear_svm/model/model.joblib` |
+| Char-CNN | `scripts/training/char_cnn.py` | `models/char_cnn/config.json` | `models/char_cnn/artifacts/final_model/charcnn_model.pt`, plus `vocab.json` |
+| IndoBERT | `scripts/training/indobert.py` | `models/indobert/config.json` | `models/indobert/artifacts/final_model/` |
 
-The `v1` suffixes in dataset/model artifact paths identify frozen provenance and are not separate model choices. In the thesis and primary result tables, use only the canonical display names **Linear SVM**, **Char-CNN**, and **IndoBERT**.
+The model names above are the canonical comparison labels. Dataset and frozen-artifact suffixes such as `v1` are provenance identifiers for frozen data; they are not separate model choices. In the thesis and primary result tables, use only **Linear SVM**, **Char-CNN**, and **IndoBERT**.
 
 Model selection is based on the normal validation Promotion F1 and the tie-breakers recorded in each configuration/run manifest. Do not use the frozen test sets to tune learning rates, epochs, thresholds, or preprocessing.
 
-## 4. Standard Stage 10 evaluation
+## 4. Standard robustness evaluation
 
 Run all commands from the repository root, after the dataset and model artifact blockers have been resolved:
 
 ```bash
-python scripts/22_run_stage10_robustness.py --mode preflight
-python scripts/22_run_stage10_robustness.py --mode official
-python scripts/23_validate_stage10_results.py
+python scripts/evaluation/robustness.py --mode preflight
+python scripts/evaluation/robustness.py --mode official
+python scripts/evaluation/validate_results.py
 pytest tests/
 ```
 
@@ -59,7 +59,7 @@ Use `--mode preflight` before a full inference run. Preserve existing frozen rep
 
 ## 5. Supporting Unicode diagnostic
 
-`scripts/24_unicode_obfuscation_diagnostic.py` is a validation-only diagnostic using the selected IndoBERT baseline. It writes to `reports/diagnostics/unicode_obfuscation/` and should not modify official Stage 10 outputs. It is supplemental evidence, not a replacement for the frozen test results.
+`scripts/diagnostics/unicode_obfuscation.py` is a validation-only diagnostic using the selected IndoBERT baseline. It writes to `reports/diagnostics/unicode_obfuscation/` and should not modify official robustness outputs. It is supplemental evidence, not a replacement for the frozen test results.
 
 ## 6. Selected IndoBERT weight handoff
 
@@ -69,6 +69,6 @@ The expected `models/indobert/artifacts/final_model/model.safetensors` is not in
 
 - Recover and verify train/validation files against the frozen manifest.
 - Verify all model artifacts, especially the IndoBERT weights, against the configured hashes.
-- Run the official Stage 10 input/output validation and relevant tests on the exact branch being handed over.
+- Run the official robustness input/output validation and relevant tests on the exact branch being handed over.
 - Record actual commands and outcomes; do not describe unexecuted checks as passing.
 - Keep the test conditions frozen and do not tune on the final test results.
