@@ -31,9 +31,9 @@ This did not justify replacing the original checkpoint as the third, stable comp
 
 | Stable ID | Display label | Training/configuration | Selected artifact |
 |---|---|---|---|
-| `linear_svm` | Linear SVM | `scripts/19_train_linear_svm.py`; `configs/models/linear_svm.json` | `models/linear_svm/model/model.joblib` |
-| `char_cnn` | Char-CNN | `models/char_cnn/project/charcnn_train.py`; `models/char_cnn/project/charcnn_v1.json` | `models/char_cnn/artifacts/final_model/charcnn_model.pt` |
-| `indobert` | IndoBERT | `models/indobert/project/indobert_train.py`; `models/indobert/project/indobert_v1.json` | `models/indobert/artifacts/final_model/` |
+| `linear_svm` | Linear SVM | `scripts/training/linear_svm.py`; `models/linear_svm/config.json` | `models/linear_svm/model/model.joblib` |
+| `char_cnn` | Char-CNN | `scripts/training/char_cnn.py`; `models/char_cnn/config.json` | `models/char_cnn/artifacts/final_model/charcnn_model.pt` |
+| `indobert` | IndoBERT | `scripts/training/indobert.py`; `models/indobert/config.json` | `models/indobert/artifacts/final_model/` |
 
 The single source of truth for this lineup is `configs/model_registry.json`. The Stage 10 evaluation configuration is `configs/evaluation/stage10_robustness.json`.
 
@@ -43,6 +43,6 @@ The model choice is fixed, but the complete handoff is not yet fully reproducibl
 
 - The train and validation CSVs tracked in `data/splits/v1/` were observed not to match the SHA-256 values in `data/splits/v1/split_manifest_v1.json`. Recover the original frozen split snapshot and verify its hashes. Do not silently change the manifest.
 - The selected IndoBERT weight file, `models/indobert/artifacts/final_model/model.safetensors`, is not present in Git. Obtain the approved, verified artifact bundle and check it against the expected SHA-256 before running inference.
-- Run the data-integrity checks, Stage 10 validator, and applicable tests from the cleaned branch before describing the new tree as runtime-verified.
+- Run the data-integrity checks, robustness validator, and applicable tests from the cleaned branch before describing the new tree as runtime-verified.
 
 Any future model substitution must be declared as a separate experiment before the frozen test set is examined. Do not silently switch a selected checkpoint after viewing test results.
