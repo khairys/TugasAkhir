@@ -16,20 +16,9 @@ Experiment anchors:
 
 ## 2. Dataset preparation lineage
 
-For data lineage and the frozen paired test protocol, inspect scripts in this order:
+The active repository keeps the resulting frozen data, manifests, audits, and provenance needed to understand the dataset. The superseded numbered generation scripts are intentionally no longer part of the active working tree. Do not regenerate frozen files during ordinary reproduction.
 
-1. `scripts/01_raw_manifest_and_inventory.py`
-2. `scripts/02_harmonize_interim.py`
-3. `scripts/04_adjudicate_conflicts.py`
-4. `scripts/08_validate_and_rebuild_overlap.py`
-5. `scripts/09_rebuild_near_duplicates.py`
-6. `scripts/10_build_leakage_safe_pools.py`
-7. `scripts/11_rebuild_audit_reports.py`
-8. `scripts/12_final_dataset_validation.py`
-9. `scripts/15_create_experimental_split.py` and `scripts/16_validate_experimental_split.py`
-10. `scripts/17_generate_official_obfuscated_test.py` and `scripts/18_validate_official_obfuscated_test.py`
-
-Do not rerun dataset generation over frozen files during ordinary reproduction. If regeneration is necessary, write to a separate versioned destination and compare hashes before considering it equivalent.
+If regeneration is necessary for a future methodological experiment, write to a separate versioned destination and compare hashes before considering the result equivalent to the frozen protocol. The controlled transformation implementation used by the official protocol is under `src/obfuscation/`.
 
 ## 3. Canonical models and artifacts
 
@@ -38,6 +27,8 @@ Do not rerun dataset generation over frozen files during ordinary reproduction. 
 | Linear SVM | `scripts/19_train_linear_svm.py`; `configs/models/linear_svm.json` | `models/linear_svm/model/model.joblib` |
 | Char-CNN | `models/char_cnn/project/charcnn_train.py`; `models/char_cnn/project/charcnn_v1.json` | `models/char_cnn/artifacts/final_model/charcnn_model.pt`, plus `vocab.json` |
 | IndoBERT | `models/indobert/project/indobert_train.py`; `models/indobert/project/indobert_v1.json` | `models/indobert/artifacts/final_model/` |
+
+The `v1` suffixes in dataset/model artifact paths identify frozen provenance and are not separate model choices. In the thesis and primary result tables, use only the canonical display names **Linear SVM**, **Char-CNN**, and **IndoBERT**.
 
 Model selection is based on the normal validation Promotion F1 and the tie-breakers recorded in each configuration/run manifest. Do not use the frozen test sets to tune learning rates, epochs, thresholds, or preprocessing.
 
