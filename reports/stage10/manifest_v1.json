@@ -18,16 +18,16 @@
   },
   "model_artifacts": {
     "linear_svm": {
-      "path": "artifacts/stage9/svm_v1/linear_svm_pipeline.joblib",
+      "path": "models/linear_svm/model/model.joblib",
       "sha256": "d1708afd513c7f276aa9df75a13ecef92a2204587f8365c0d93fb249bb13d0d9"
     },
     "char_cnn": {
-      "path": "charcnn_v1_results/artifacts/final_model/charcnn_model.pt",
+      "path": "models/char_cnn/artifacts/final_model/charcnn_model.pt",
       "sha256": "9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8",
       "vocab_sha256": "d156b5a51481d8503fbdb467428c6e177c861ad91e80df66156835f32297fc03"
     },
     "indobert": {
-      "path": "indobert_v1_results/artifacts/final_model/model.safetensors",
+      "path": "models/indobert/artifacts/final_model/model.safetensors",
       "sha256": "890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd"
     }
   },

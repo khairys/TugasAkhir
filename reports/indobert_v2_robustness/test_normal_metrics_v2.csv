@@ -1,2 +1,0 @@
-precision_promotion,recall_promotion,f1_promotion,accuracy,macro_f1,precision_non_promotion,recall_non_promotion,f1_non_promotion,support_non_promotion,support_promotion,TN,FP,FN,TP,total_samples,model,condition
-0.9691991786447639,0.9535353535353536,0.9613034623217923,0.9907677356656949,0.9780310415057237,0.9936621658859189,0.995857497928749,0.9947586206896551,3621,495,3606,15,23,472,4116,indobert_v2,NORMAL

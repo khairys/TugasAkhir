@@ -47,16 +47,16 @@ Invarian integritas:
 Ketiga artefak model yang dievaluasi merupakan artefak beku hasil Stage 9 tanpa modifikasi bobot atau arsitektur:
 
 1. **Linear SVM Pipeline**:
-   - Berkas: `artifacts/stage9/svm_v1/linear_svm_pipeline.joblib`
+   - Berkas: `models/linear_svm/model/model.joblib`
    - SHA-256: `d1708afd513c7f276aa9df75a13ecef92a2204587f8365c0d93fb249bb13d0d9`
    - Komponen: Word TfidfVectorizer (ngram_range=(1,2), sublinear_tf=True, min_df=2) + LinearSVC (C=10.0, loss='squared_hinge').
 2. **Character-level CNN (Char-CNN)**:
-   - Bobot Model: `charcnn_v1_results/artifacts/final_model/charcnn_model.pt`
+   - Bobot Model: `models/char_cnn/artifacts/final_model/charcnn_model.pt`
    - SHA-256 Bobot: `9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8`
-   - Kosakata: `charcnn_v1_results/artifacts/final_model/vocab.json` (SHA-256: `d156b5a5...`, ukuran: 1.727 karakter).
+   - Kosakata: `models/char_cnn/artifacts/final_model/vocab.json` (SHA-256: `d156b5a5...`, ukuran: 1.727 karakter).
    - Arsitektur: Embedding(1727, 32), Conv1D(kernel 3, 5, 7, channel 64 each, total 192 filters), Masked Global Max Pooling, Dense(192 → 128, ReLU, Dropout 0.5 pada kandidat B terpilih), Output Dense(128 → 2).
 3. **IndoBERT (Fine-tuned)**:
-   - Bobot Model: `indobert_v1_results/artifacts/final_model/model.safetensors`
+   - Bobot Model: `models/indobert/artifacts/final_model/model.safetensors`
    - SHA-256 Bobot: `890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd`
    - Tokenizer: WordPiece (`vocab.txt`, 30.521 subwords), konfigurasi arsitektur bert-base (12 layers, 768 hidden, 12 heads).
    - Mapping Label: index 0 = Non-Promotion, index 1 = Promotion.
@@ -295,7 +295,7 @@ Seluruh artefak hasil evaluasi resmi Stage 10 telah diproduksi dan divalidasi:
 
 | Berkas | Deskripsi |
 |---|---|
-| `configs/stage10/robustness_evaluation_v1.json` | Konfigurasi evaluasi beku Stage 10 |
+| `configs/evaluation/stage10_robustness.json` | Konfigurasi evaluasi beku Stage 10 |
 | `reports/stage10/evaluation_plan_v1.json` | Rencana dan protokol evaluasi resmi |
 | `reports/stage10/artifact_validation_report.md` | Laporan audit integritas artefak Stage 8 & 9 |
 | `reports/stage10/test_normal_metrics.csv` | Hasil evaluasi baseline normal (3 model) |

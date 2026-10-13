@@ -47,17 +47,17 @@ Uji pairing membuktikan:
 Ketiga model final yang dipilih berdasarkan performa validasi Stage 9 hadir lengkap:
 
 1. **Linear SVM Baseline v1:**
-   - Path: `artifacts/stage9/svm_v1/linear_svm_pipeline.joblib`
+   - Path: `models/linear_svm/model/model.joblib`
    - Ukuran: 8.393.329 bytes (~8,39 MB)
    - SHA-256: `d1708afd513c7f276aa9df75a13ecef92a2204587f8365c0d93fb249bb13d0d9`
    - Konfigurasi: TF-IDF word unigram + bigram, C = 10, balanced class weight.
 2. **Character-level CNN v1:**
-   - Bobot Model: `charcnn_v1_results/artifacts/final_model/charcnn_model.pt` (450.342 bytes)
+   - Bobot Model: `models/char_cnn/artifacts/final_model/charcnn_model.pt` (450.342 bytes)
    - SHA-256: `9d0c5caaa3b2e316ab9131df09e2377467966c3d3a3f6fcc6a1c46d9ff8236b8`
-   - Kamus Karakter: `charcnn_v1_results/artifacts/final_model/vocab.json` (1.727 karakter, SHA-256: `d156b5a5...`)
+   - Kamus Karakter: `models/char_cnn/artifacts/final_model/vocab.json` (1.727 karakter, SHA-256: `d156b5a5...`)
    - Konfigurasi: Multi-scale kernel [3, 5, 7], 64 channels, hidden dim 128, max_length 576.
 3. **IndoBERT v1:**
-   - Direktori Model: `indobert_v1_results/artifacts/final_model/`
+   - Direktori Model: `models/indobert/artifacts/final_model/`
    - Bobot Safetensors: `model.safetensors` (497.795.072 bytes, SHA-256: `890dd84c...`)
    - Tokenizer & Config: `tokenizer.json`, `config.json`, `vocab.txt`
    - Konfigurasi: `indobenchmark/indobert-base-p2`, max_length 128, class weights (0,568 : 4,157).

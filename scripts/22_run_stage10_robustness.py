@@ -19,6 +19,7 @@ Computes:
 import os
 import sys
 import argparse
+import importlib.util
 import hashlib
 import json
 import time
@@ -30,7 +31,7 @@ import pandas as pd
 from sklearn.metrics import precision_recall_fscore_support, accuracy_score, confusion_matrix
 
 # Global configuration defaults
-CONFIG_PATH = "configs/stage10/robustness_evaluation_v1.json"
+CONFIG_PATH = "configs/evaluation/stage10_robustness.json"
 
 
 def sha256_file(filepath):
@@ -1070,8 +1071,13 @@ def main():
     elif args.mode == "validate":
         print("Running Stage 10 output validation...")
         # Will call validator script
-        from scripts.validate_stage10_results import validate_all_outputs
-        res = validate_all_outputs(config)
+        validator_path = Path(__file__).resolve().with_name("23_validate_stage10_results.py")
+        validator_spec = importlib.util.spec_from_file_location("stage10_validator", validator_path)
+        if validator_spec is None or validator_spec.loader is None:
+            raise RuntimeError(f"Unable to load Stage 10 validator: {validator_path}")
+        validator = importlib.util.module_from_spec(validator_spec)
+        validator_spec.loader.exec_module(validator)
+        res = validator.validate_all_outputs(args.config)
         sys.exit(0 if res else 1)
 
 

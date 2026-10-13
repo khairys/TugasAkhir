@@ -6,10 +6,16 @@ __pycache__/
 
 # Large model binaries and archives (>100MB, cannot be pushed to GitHub without Git LFS)
 *.safetensors
-indobert_v1_results.zip
-IndoBERT_v2_Local_Model_and_Training_Report.zip
 
 # Virtual environments
 .venv/
 venv/
 env/
+
+# Generated files
+logs/
+models/*/runs/
+models/*/model_bundle.zip
+models/*/reports/*smoke*/
+models/char_cnn/charcnn_v1_results.zip
+models/indobert/indobert_v1_results.zip

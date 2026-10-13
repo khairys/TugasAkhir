@@ -1,9 +1,0 @@
-{
-  "model_id": "indobenchmark/indobert-base-p2",
-  "resolved_revision": "94b4e0a82081fa57f227fcc2024d1ea89b57ac1f",
-  "seed_for_initial_classifier_head": 42,
-  "weights_file": "model.safetensors",
-  "weights_sha256": "0a7bf7a7f1ef346c741a55839f272058674c1c4bd29c19222cac6fcc23d0283b",
-  "created_at_utc": "2026-10-13T09:24:20Z",
-  "note": "Pinned pretrained encoder plus a single fixed 2-class classifier initialization shared by every v2 candidate."
-}

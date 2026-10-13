@@ -1,5 +1,0 @@
-# Python 3.10+ recommended; CPU inference works, CUDA is optional.
-transformers==4.57.1
-safetensors>=0.4.5
-pandas>=2.2.0,<3.1
-torch>=2.2.0

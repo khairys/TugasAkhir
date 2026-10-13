@@ -32,7 +32,7 @@ def sha256_file(filepath):
     return h.hexdigest()
 
 
-def validate_all_outputs(config_path="configs/stage10/robustness_evaluation_v1.json"):
+def validate_all_outputs(config_path="configs/evaluation/stage10_robustness.json"):
     print("=" * 76)
     print("  STAGE 10 COMPREHENSIVE OUTPUT & ARTIFACT VALIDATOR")
     print("=" * 76)
@@ -224,7 +224,7 @@ def validate_all_outputs(config_path="configs/stage10/robustness_evaluation_v1.j
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Validate Stage 10 Results")
-    parser.add_argument("--config", default="configs/stage10/robustness_evaluation_v1.json")
+    parser.add_argument("--config", default="configs/evaluation/stage10_robustness.json")
     args = parser.parse_args()
     success = validate_all_outputs(args.config)
     sys.exit(0 if success else 1)
