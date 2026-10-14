@@ -1,0 +1,61 @@
+{
+  "manifest_version": "1.0.0",
+  "stage": "stage11_domain_shift",
+  "status": "PREPARED_NOT_EVALUATED",
+  "label_mapping": {
+    "0": "Non-Promotion",
+    "1": "Promotion"
+  },
+  "text_contract": "Use text_raw verbatim; do not lowercase, normalize Unicode, or clean text during inference.",
+  "reconstruction_method": "Use one-based raw CSV row IDs; keep first exact raw text occurrence; exclude missing/blank text and non-binary labels; remove the IDs in the saved frozen overlap-exclusion audits.",
+  "sources": {
+    "ds3_raw_path": "data/raw/ds3_yaemico/youtube_chat_jogja_clean.csv",
+    "ds3_raw_sha256": "b78e53a421d22a8221c40e76124edff5d27707b6620f81d86ec4ad1c8f5956e4",
+    "ds3_exclusions_path": "data/audit/ood_ds3_overlap_examples_v2.csv",
+    "ds3_exclusions_sha256": "343a9a6da38608b69e4f5208ba6839e6fcf29d312bbc7a6c1d812e6829f689d1",
+    "ds5_raw_path": "data/raw/ds5_ferdiansakti/rawdata.csv",
+    "ds5_raw_sha256": "06de9f634fca8690a9dcca74b7ffe1b67abdccbc7b15cf4795a9750c07767d72",
+    "ds5_exclusions_path": "data/audit/ds5_overlap_examples_v2.csv",
+    "ds5_exclusions_sha256": "c0e41d431f9b815786aaa5f22e1a85ddd7eeee0663d0791c19c326dc0f1b890a"
+  },
+  "datasets": {
+    "ds3_ood_v1": {
+      "path": "data/processed/stage11/ds3_ood_v1.csv",
+      "sha256": "65dbc248fdeb25599b77fc66ffc70b780d95e2135a473116f0ce8c0fd6bba979",
+      "rows": 2689,
+      "non_promotion": 2653,
+      "promotion": 36,
+      "excluded_overlap_ids": 39
+    },
+    "ds5_external_v1": {
+      "path": "data/processed/stage11/ds5_external_v1.csv",
+      "sha256": "4abe85756c9573738c7430c203a60941787b8ee64445007b0ec5f4b7248638b3",
+      "rows": 3999,
+      "non_promotion": 1167,
+      "promotion": 2832,
+      "excluded_overlap_ids": 203
+    }
+  },
+  "inference_protocol": {
+    "training_pool": "Frozen selected Stage 10 models trained on Main Pool",
+    "models": [
+      "linear_svm",
+      "char_cnn",
+      "indobert"
+    ],
+    "primary_metric": "f1_promotion",
+    "secondary_metrics": [
+      "precision_promotion",
+      "recall_promotion",
+      "accuracy",
+      "macro_f1",
+      "TN",
+      "FP",
+      "FN",
+      "TP"
+    ],
+    "tuning_on_domain_sets": false,
+    "add_domain_sets_to_primary_training": false
+  },
+  "important_caveat": "The domain candidate sets are reconstructed and count-validated. Predictions have not been run by this commit. Complete IndoBERT evaluation requires restoration and SHA-256 verification of the selected model.safetensors file."
+}
