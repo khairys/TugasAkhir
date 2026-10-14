@@ -1,102 +1,51 @@
 # Online Gambling Promotion Detection — Robustness Study
 
-This repository contains the research assets for evaluating robustness of Indonesian YouTube-comment classifiers against controlled text obfuscation.
+Repositori penelitian ini mengevaluasi ketahanan model klasifikasi komentar YouTube berbahasa Indonesia terhadap penyamaran teks terkontrol.
 
-## Canonical model lineup
+## Model utama
 
-The main analysis uses exactly three model systems:
+Perbandingan utama dikunci pada tiga sistem model: Linear SVM dengan word-level TF-IDF, Char-CNN berbasis karakter, dan baseline IndoBERT fine-tuned yang terpilih. Versi pelatihan IndoBERT lain tidak dihitung sebagai model utama keempat.
 
-| Display name | Representation | Model artifact |
-|---|---|---|
-| Linear SVM | Word-level TF-IDF | `models/linear_svm/model/model.joblib` |
-| Char-CNN | Character-level CNN | `models/char_cnn/artifacts/final_model/charcnn_model.pt` |
-| IndoBERT | Fine-tuned `indobenchmark/indobert-base-p2` | `models/indobert/artifacts/final_model/` |
+## Mulai dari sini
 
-Use these display names in future result tables and figures. Do not list different IndoBERT training versions as separate main models. The model-selection rationale is retained in [the decision memo](docs/research/MODEL_SELECTION_DECISION.md).
+1. [Keputusan pemilihan model](docs/research/MODEL_SELECTION_DECISION.md)
+2. [Hasil utama Tahap 10](docs/research/FINAL_RESULTS.md)
+3. [Analisis robustness Tahap 11](docs/research/STAGE11_ROBUSTNESS_ANALYSIS.md)
+4. [Rencana analisis lanjutan](docs/research/FUTURE_ANALYSIS_PLAN.md)
+5. [Checklist eksekusi Tahap 11](docs/handoff/STAGE11_EXECUTION_CHECKLIST.md)
+6. [Handoff pembimbing](docs/handoff/SUPERVISOR_HANDOFF.md)
+7. [Panduan reproduksibilitas](docs/handoff/REPRODUCIBILITY_GUIDE.md)
+8. [Spesifikasi obfuscation](docs/research/OBFUSCATION_SPECIFICATION_V1.md)
+9. [Audit dataset dan pedoman label](docs/data/DATASET_AUDIT_REPORT.md)
 
-## Start here
+## Struktur riset
 
-1. [Model-selection decision](docs/research/MODEL_SELECTION_DECISION.md)
-2. [Final research results](docs/research/FINAL_RESULTS.md)
-3. [Future analysis plan](docs/research/FUTURE_ANALYSIS_PLAN.md)
-4. [Supervisor handoff](docs/handoff/SUPERVISOR_HANDOFF.md)
-5. [Reproducibility guide](docs/handoff/REPRODUCIBILITY_GUIDE.md)
-6. [Stage 10 closure checklist](docs/handoff/STAGE10_CLOSURE_CHECKLIST.md)
-7. [Obfuscation specification](docs/research/OBFUSCATION_SPECIFICATION_V1.md)
-8. [Dataset audit and labeling guideline](docs/data/DATASET_AUDIT_REPORT.md)
+- `configs/`: registry tiga model dan kontrak evaluasi beku.
+- `data/raw/`: sumber dataset asli untuk provenance.
+- `data/audit/`: laporan kualitas, overlap, dan integritas sumber.
+- `data/splits/v1/`: split train/validation/test dan manifest beku.
+- `data/processed/`: test normal, delapan kondisi obfuscation, dan kandidat evaluasi domain-shift Tahap 11.
+- `models/`: konfigurasi dan artefak model terpilih.
+- `scripts/training/`: entrypoint pelatihan model utama.
+- `scripts/evaluation/`: evaluasi Stage 10 dan inference-only untuk DS3 OOD / DS5 external.
+- `scripts/analysis/`: analisis robustness serta persiapan dataset domain-shift.
+- `reports/stage10/`: prediksi dan hasil evaluasi utama yang telah disimpan.
+- `reports/stage11/`: hasil analisis utama dan evaluasi domain-shift ketika skrip dijalankan.
+- `docs/`: metode, hasil riset, audit, dan handoff.
 
-## Repository layout
+## Analisis utama Tahap 11
 
-```text
-configs/
-  model_registry.json     Authoritative three-model registry
-  evaluation/             Frozen robustness evaluation configuration
-data/
-  raw/                    Original source datasets retained for provenance
-  audit/                  Dataset quality, overlap, and integrity evidence
-  manifests/              Record and source manifests
-  splits/v1/              Frozen train/validation/test split and manifest
-data/processed/
-  test_normal_v1.csv      Frozen normal test condition
-  obfuscated_test_v1/     Eight frozen paired obfuscation conditions
-models/
-  linear_svm/             Selected Linear SVM artifact and configuration
-  char_cnn/               Selected Char-CNN artifact, configuration and reports
-  indobert/               Selected IndoBERT baseline artifact, configuration and reports
-scripts/
-  training/               Stable model-training entrypoints
-  evaluation/             Stable official evaluation entrypoints
-  diagnostics/            Stable diagnostic entrypoints
-src/obfuscation/          Controlled text-transformation implementation
-tests/                    Obfuscation and Stage 10 integrity checks
-reports/stage10/          Official three-model robustness results
-reports/diagnostics/      Supporting diagnostic analysis
-docs/data/                Dataset audit and labeling methods
-docs/research/            Research protocol, final results, and future analysis plan
-docs/handoff/             Supervisor and reproducibility materials
-```
+Jalankan dari root repositori: `python scripts/analysis/stage11_robustness_analysis.py`. Skrip ini tidak melatih ulang model; skrip menggunakan prediksi Tahap 10 yang tersimpan, memasangkan baris berdasarkan ID, menghitung metrik hanya pada pasangan `changed == True`, melakukan 10.000 stratified paired bootstrap resamples, menulis matriks keluarga obfuscation dan analisis severity, serta membuat antrean contoh error yang belum direview manual.
 
-The active research repository intentionally excludes superseded candidate pools, duplicate source snapshots, pilot review queues, smoke-only outputs, and the unused later IndoBERT experiment. Those artifacts remain recoverable through Git history when provenance is required.
+Evaluasi domain-shift bersifat sekunder dan inference-only. Contoh menjalankan model yang artefaknya tersedia pada kedua dataset: `python scripts/evaluation/stage11_domain_shift.py --dataset both --models linear_svm char_cnn --device auto`. Runner menggabungkan hasil per model secara aman agar evaluasi lokal SVM tidak tertimpa ketika model neural dijalankan di GPU terpisah. Jalankan IndoBERT setelah bobot terpilih tersedia dan lolos SHA-256 verification.
 
-## Main results
+## Temuan utama saat ini
 
-Normal-test Promotion F1:
+Pada clean test, F1 Promotion adalah 0,9428 untuk Linear SVM, 0,9786 untuk Char-CNN, dan 0,9605 untuk IndoBERT. Dari delapan kondisi obfuscation, rata-rata absolute F1 drop per pasangan adalah 0,0569 untuk Linear SVM, 0,0037 untuk Char-CNN, dan 0,0839 untuk IndoBERT. Dua konsep ini dilaporkan terpisah; tidak ada satu ranking gabungan.
 
-- Linear SVM: 0.9428
-- Char-CNN: **0.9786**
-- IndoBERT: 0.9605
+## Batasan reproduksibilitas
 
-Unweighted mean paired F1 across the eight obfuscation conditions:
-
-- Char-CNN: **0.9763** (99.62% mean F1 retention)
-- Linear SVM: 0.8876 (93.98%)
-- IndoBERT: 0.8771 (91.27%)
-
-These are descriptive results from one frozen test split. No multi-seed evaluation or formal significance test was run.
-
-## Standard commands
-
-Run commands from the repository root:
-
-```bash
-python scripts/evaluation/robustness.py --mode preflight
-python scripts/evaluation/robustness.py --mode official
-python scripts/evaluation/validate_results.py
-pytest tests/
-```
-
-The Unicode/tokenizer diagnostic is separate from the official test evaluation:
-
-```bash
-python scripts/diagnostics/unicode_obfuscation.py
-```
-
-For retraining, use the stable entrypoints in `scripts/training/` and the model configurations in `models/*/config.json`.
-
-## Known reproducibility blockers
-
-- The train and validation CSVs currently in `data/splits/v1/` do not match the hashes in the official split manifest. Recover and verify the original split archive; do not alter the manifest hashes just to force a pass.
-- The selected IndoBERT `model.safetensors` file is not present in Git although its expected hash is recorded in the evaluation configuration. Obtain the verified model bundle before running full inference.
-- A full Stage 10 runtime and test run has not been executed as part of this cleanup.
-
-The active branch retains the frozen raw sources, final split/test assets, model artifacts, audit evidence, research protocol, and official three-model results. Superseded candidate/intermediate data and the unused IndoBERT experiment are deliberately excluded from the active research layout.
+- File train/validation yang sedang dilacak Git belum cocok dengan hash manifest split yang dibekukan.
+- Bobot IndoBERT `model.safetensors` yang diharapkan belum tersedia di Git.
+- Hash sumber DS5 raw yang sekarang tercatat berbeda dari hash resmi sumber DS5 pada manifest Tahap 11. Skrip rebuild sekarang berhenti sebelum menulis ulang kandidat dataset jika hash sumber tidak cocok.
+- Analisis utama dan evaluasi domain-shift belum dijalankan kembali secara lokal pada checkout setelah perubahan kode ini. Jangan menyatakan seluruh tahap selesai sebelum output, hash, dan tests diverifikasi.
