@@ -418,7 +418,7 @@ def run(n_resamples: int, seed: int, max_error_samples: int) -> dict[str, Any]:
         ],
         "scope_note": "This script analyzes saved Stage 10 predictions only. It does not include DS3 OOD or DS5 external-source inference.",
     }
-    (OUT / "analysis_manifest.json").write_text(
+    (OUT / "analysis_snapshot_manifest.json").write_text(
         json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     return {
