@@ -14,6 +14,8 @@ env/
 
 # Generated files
 logs/
+graphify-out/
+.graphify*
 models/*/runs/
 models/*/model_bundle.zip
 models/*/reports/*smoke*/
