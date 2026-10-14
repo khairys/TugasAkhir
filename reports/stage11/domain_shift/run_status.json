@@ -1,0 +1,21 @@
+{
+  "requested_datasets": [
+    "ds3_ood",
+    "ds5_external"
+  ],
+  "requested_models": [
+    "indobert"
+  ],
+  "current_run_metric_rows": 2,
+  "current_run_expected_metric_rows": 2,
+  "completed_metric_rows_total": 6,
+  "expected_metric_rows_total": 6,
+  "command_status": "SUCCESS",
+  "overall_stage11_domain_status": "COMPLETE",
+  "frozen_dataset_hash_validation": {
+    "ds3_ood": true,
+    "ds5_external": true
+  },
+  "errors_or_blockers": [],
+  "guardrail": "Secondary inference only; do not train or tune on DS3/DS5."
+}

@@ -6,6 +6,8 @@ __pycache__/
 
 # Large model binaries and archives (>100MB, cannot be pushed to GitHub without Git LFS)
 *.safetensors
+*.zip
+
 
 # Virtual environments
 .venv/

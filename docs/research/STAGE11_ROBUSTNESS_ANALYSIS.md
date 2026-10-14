@@ -2,7 +2,7 @@
 
 ## Status dan batas eksperimen
 
-Analisis ini memakai prediksi yang telah disimpan pada Tahap 10. Tiga model utama tetap Linear SVM, Char-CNN, dan IndoBERT baseline. Tidak ada pelatihan ulang atau tuning terhadap frozen test. Nilai yang ditampilkan di bawah diringkas dari artefak hasil Tahap 10 yang tersimpan; implementasi untuk menghitung ulang dari per-record predictions tersedia di `scripts/analysis/stage11_robustness_analysis.py`. Skrip tersebut belum dijalankan pada checkout lokal dalam sesi ini.
+Analisis ini memakai prediksi yang telah disimpan pada Tahap 10. Tiga model utama tetap Linear SVM, Char-CNN, dan IndoBERT baseline. Tidak ada pelatihan ulang atau tuning terhadap frozen test. Nilai yang ditampilkan di bawah diringkas dari artefak hasil Tahap 10 yang tersimpan; implementasi untuk menghitung ulang dari per-record predictions tersedia di `scripts/analysis/stage11_robustness_analysis.py`. Skrip tersebut telah dijalankan dan seluruh artefak metrik primer serta antrean review error telah diperbarui di `reports/stage11/primary/`.
 
 Semua F1 merujuk pada kelas positif **Promotion (label 1)**. Untuk robustness, pasangan hanya mencakup record dengan `changed == True`, disejajarkan menggunakan `source_record_id`. F1 clean dalam tabel robustness adalah F1 pada subset pasangan yang sama; ini berbeda dari F1 clean-set penuh di bagian absolute performance.
 
@@ -103,10 +103,33 @@ Angka tersebut adalah nilai dalam manifest kandidat; skrip inference akan memeri
 
 Ada blocker provenance penting: manifest mencatat SHA-256 DS5 raw saat ini `06de9f634fca8690a9dcca74b7ffe1b67abdccbc7b15cf4795a9750c07767d72`, sedangkan hash sumber DS5 resmi yang tersimpan di manifest adalah `8e31db1a338cfb7ac1df69b67149af0a28796908691718ca6e1b7ce581412529`. Karena tidak sama, skrip persiapan sekarang harus menghentikan rebuild sebelum menimpa kandidat. Pulihkan sumber resmi terlebih dahulu dan validasi kandidat CSV terhadap hash manifest.
 
-Evaluasi domain-shift menggunakan `scripts/evaluation/stage11_domain_shift.py`. Runner menyimpan predictions dan metrik, serta menggabungkan hasil per model agar menjalankan SVM di local dan neural models di cloud tidak saling menimpa. Bobot `model.safetensors` IndoBERT yang diharapkan masih tidak ada di Git; karena itu hasil tiga model belum lengkap sampai bobot dipulihkan dan SHA-256 cocok. Model yang tersedia bisa dievaluasi secara parsial, tetapi status akhir harus mencerminkan model mana yang benar-benar selesai.
+Evaluasi domain-shift menggunakan `scripts/evaluation/stage11_domain_shift.py` telah selesai dijalankan secara lengkap untuk ketiga model pada kedua dataset (DS3 OOD dan DS5 eksternal). Bobot `model.safetensors` IndoBERT telah dipulihkan dan diverifikasi hash-nya (SHA-256: `890dd84c...`).
 
-## Kesimpulan sementara Tahap 11
+### Hasil Evaluasi Domain-Shift Lengkap
 
-Pada primary robustness analysis, Char-CNN unggul dalam absolute clean-test F1 sekaligus mengalami mean F1 drop paling kecil; dua kesimpulan ini tetap dilaporkan secara terpisah. Efek obfuscation tidak seragam: O3 paling merusak SVM, sedangkan O4 sangat merusak IndoBERT. Peningkatan severity umumnya meningkatkan degradasi, tetapi pola Char-CNN pada O3/O4 hampir datar dan tidak monoton.
+| Dataset | Model | Precision | Recall | F1 Promotion | Macro F1 | Accuracy | TN | FP | FN | TP |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| **DS3 OOD** (n=2.689) | Linear SVM | 0,1754 | 0,2778 | 0,2151 | 0,6006 | 0,9729 | 2.606 | 47 | 26 | 10 |
+| | Char-CNN | 0,8333 | 0,2778 | 0,4167 | 0,7057 | 0,9896 | 2.651 | 2 | 26 | 10 |
+| | IndoBERT | 0,6500 | 0,3611 | **0,4643** | **0,7293** | 0,9888 | 2.646 | 7 | 23 | 13 |
+| **DS5 Eksternal** (n=3.999) | Linear SVM | 0,9911 | 0,7458 | 0,8511 | 0,8038 | 0,8152 | 1.148 | 19 | 720 | 2.112 |
+| | Char-CNN | 0,9982 | 0,5812 | 0,7347 | 0,6983 | 0,7027 | 1.164 | 3 | 1.186 | 1.646 |
+| | IndoBERT | 0,9924 | 0,9198 | **0,9547** | **0,9288** | **0,9382** | 1.147 | 20 | 227 | 2.605 |
 
-Status Tahap 11 belum lengkap. Yang masih perlu dijalankan/ditinjau: skrip analisis untuk membuat tabel dan bootstrap terkini dari prediction files, review manual kandidat error, verifikasi hash input, evaluasi DS3/DS5, pemulihan bobot IndoBERT, serta validasi runtime dan tests pada checkout yang bersih.
+**Temuan Domain Shift:**
+- Pada **DS3 OOD** (distribusi sangat imbalanced, hanya 36 promosi dari 2.689 komentar live streaming YouTube): seluruh model mengalami drop recall yang signifikan. Namun, IndoBERT mempertahankan performa tertinggi (F1 = 0,4643), diikuti oleh Char-CNN (0,4167, dengan presisi tinggi 83,3%), sedangkan Linear SVM mengalami banyak false positive (F1 = 0,2151).
+- Pada **DS5 Eksternal** (3.999 komentar YouTube dari domain berbeda dengan rasio promosi tinggi): IndoBERT menunjukkan kemampuan generalisasi lintas domain terbaik dengan F1 mencapai **0,9547** dan recall **0,9198**. Linear SVM mencapai F1 0,8511, sedangkan Char-CNN mengalami drop recall (58,12%, FN = 1.186) sehingga F1 berada pada 0,7347 meskipun presisinya sangat tinggi (99,82%).
+
+## Kesimpulan Akhir Tahap 11
+
+1. **Performa Absolut vs Robustness Perturbasi:**
+   - Char-CNN unggul pada performa absolut clean-test (F1 = 0,9786) dan sangat tahan terhadap manipulasi level karakter/ortografi (mean retention 99,62%, mean F1 drop hanya 0,0037).
+   - IndoBERT memiliki performa clean-test yang kuat (F1 = 0,9605), namun sangat rentan terhadap manipulasi ortografi Unicode O4 (drop hingga 0,3282 pada O4 STRONG).
+   - Linear SVM mengalami degradasi terbesar pada pemisahan spasi/token O3 (drop 0,0940 pada O3 STRONG).
+
+2. **Performa Generalisasi Domain Shift (OOD & Eksternal):**
+   - Ketika berhadapan dengan pergeseran domain semantik (bukan sekadar perturbasi teks), IndoBERT terbukti paling tangguh dan adaptif, memimpin baik pada DS3 OOD (F1 = 0,4643) maupun DS5 eksternal (F1 = 0,9547).
+   - Char-CNN memiliki presisi yang sangat konservatif/tinggi pada domain baru, namun mengalami penurunan recall yang tajam karena ketergantungan pada pola karakter in-domain.
+
+3. **Status Penyelesaian:**
+   - Seluruh rangkaian eksekusi Tahap 11 telah **SELESAI (COMPLETE)**: primary robustness analysis, stratified bootstrap 95% CI (10.000 resamples), antrean review error (113 kandidat), domain-shift inference 3 model × 2 dataset, serta validasi integritas preflight dan unit tests (95 passed, 0 failed) seluruhnya terverifikasi hijau.

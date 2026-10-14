@@ -4,7 +4,7 @@ linear_svm,Linear SVM,O2,Insertion/deletion (spelling),0.02939699996776146,0.070
 linear_svm,Linear SVM,O3,Whitespace manipulation,0.03638797559662987,0.09397421524663674,0.057586239650006865,Higher F1 drop under STRONG
 linear_svm,Linear SVM,O4,Unicode/orthographic manipulation,0.03984292502639908,0.0841199673558215,0.04427704232942242,Higher F1 drop under STRONG
 char_cnn,Char-CNN,O1,Character substitution,0.003950474338055954,0.019748692284349056,0.015798217946293103,Higher F1 drop under STRONG
-char_cnn,Char-CNN,O2,Insertion/deletion (spelling),0.001062261533125275,0.0010862072566999448,0.00002394572357466984,Higher F1 drop under STRONG
+char_cnn,Char-CNN,O2,Insertion/deletion (spelling),0.001062261533125275,0.0010862072566999448,2.394572357466984e-05,Higher F1 drop under STRONG
 char_cnn,Char-CNN,O3,Whitespace manipulation,0.002113260926641325,-0.0010401714202500356,-0.0031534323468913605,Lower F1 drop under STRONG; non-monotonic
 char_cnn,Char-CNN,O4,Unicode/orthographic manipulation,0.0020408163265306367,0.000998564563440052,-0.0010422517630905848,Lower F1 drop under STRONG; non-monotonic
 indobert,IndoBERT,O1,Character substitution,0.023746260689141208,0.10061769783285557,0.07687143714371436,Higher F1 drop under STRONG

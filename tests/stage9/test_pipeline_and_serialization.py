@@ -10,7 +10,7 @@ import importlib
 REPO_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(REPO_ROOT))
 
-train_svm_mod = importlib.import_module("scripts.19_train_svm")
+train_svm_mod = importlib.import_module("scripts.19_train_linear_svm")
 build_pipeline = train_svm_mod.build_pipeline
 
 

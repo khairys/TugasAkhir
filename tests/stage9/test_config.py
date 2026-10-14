@@ -9,7 +9,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 
 @pytest.fixture(scope="module")
 def config():
-    cfg_path = REPO_ROOT / "configs" / "stage9" / "svm_v1.json"
+    cfg_path = REPO_ROOT / "models" / "linear_svm" / "config.json"
     assert cfg_path.exists(), f"Configuration file missing: {cfg_path}"
     with open(cfg_path, "r", encoding="utf-8") as f:
         return json.load(f)

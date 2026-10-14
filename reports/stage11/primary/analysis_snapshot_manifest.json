@@ -1,29 +1,75 @@
 {
   "stage": "stage11_primary_robustness_analysis",
-  "status": "PRELIMINARY_DERIVED_FROM_STAGE10_SUMMARY_TABLES",
-  "note": "This snapshot is derived from the tracked Stage 10 aggregate metrics. The Stage 11 script recomputes metrics and paired bootstrap intervals from the record-level prediction CSVs; rerun it to replace these preliminary output tables.",
-  "source_files": [
-    {
-      "path": "reports/stage10/test_normal_metrics.csv",
-      "git_blob_sha": "01068489ec6833755bc903830825fa6b9069d473"
-    },
-    {
-      "path": "reports/stage10/paired_robustness_metrics.csv",
-      "git_blob_sha": "f5cbc1a66f52e27cf4147cd5006de047158d5308"
-    }
-  ],
+  "status": "GENERATED_FROM_SAVED_STAGE10_PREDICTIONS",
   "models": [
     "linear_svm",
     "char_cnn",
     "indobert"
   ],
-  "condition_rows": 24,
-  "clean_model_rows": 3,
-  "bootstrap_intervals_reused_from": "reports/stage10/paired_robustness_metrics.csv",
-  "not_completed": [
-    "record-level bootstrap recomputation in a local checkout",
-    "manual error review",
-    "DS3 OOD inference",
-    "DS5 external inference"
-  ]
+  "conditions": [
+    "O1_MILD",
+    "O1_STRONG",
+    "O2_MILD",
+    "O2_STRONG",
+    "O3_MILD",
+    "O3_STRONG",
+    "O4_MILD",
+    "O4_STRONG"
+  ],
+  "primary_metric": "Promotion F1",
+  "absolute_performance_definition": "Promotion F1 over all saved normal-test predictions",
+  "robustness_definition": "F1(normal paired subset) - F1(obfuscated paired subset), using only changed == True rows aligned by source_record_id",
+  "bootstrap": {
+    "method": "stratified paired bootstrap percentile interval",
+    "resamples": 10000,
+    "confidence_level": 0.95,
+    "seed": 42,
+    "resampling_unit": "paired record IDs",
+    "stratification": "gold label within changed == True paired subset"
+  },
+  "error_review": {
+    "max_examples_per_model_family_severity_transition": 3,
+    "semantic_categories_require_manual_review": true,
+    "initial_status": "UNREVIEWED"
+  },
+  "input_sha256": {
+    "reports/stage10/predictions/svm/test_normal_predictions.csv": "a34b4b3c47f88424415d13c0702648890f2467bc9db8cd230fe0e5d0e34e707e",
+    "reports/stage10/predictions/char_cnn/test_normal_predictions.csv": "6f0152dc4f6867172ec4d29bc8b8f964cbbedaa75b00ada6b4a4a8e4d9e3b5dc",
+    "reports/stage10/predictions/indobert/test_normal_predictions.csv": "ffe23496c9ceed03dd0b93725e397a389a3bba0c47450089689b3569d74f419d",
+    "reports/stage10/predictions/svm/O1_MILD_predictions.csv": "73ada0583099b2c3b90230ea4f10b1fd7892a0147eddad3da9deb45eaffaa946",
+    "reports/stage10/predictions/svm/O1_STRONG_predictions.csv": "f1984e0005ec158963bd8f44849247c9e3d5b83a02086c2af37f2c231860b04e",
+    "reports/stage10/predictions/svm/O2_MILD_predictions.csv": "b76159fff4b01afdea704b2c6099d6525ff6fb7bd806b524d4b8f297e1abe340",
+    "reports/stage10/predictions/svm/O2_STRONG_predictions.csv": "deb055b0a469f22983bd746e8e72e16e9b0fd359a0e9bf372490d1f13bab1001",
+    "reports/stage10/predictions/svm/O3_MILD_predictions.csv": "71bb080fdedfe51cc747a3fea29959e7daec7e2aa8fbd37c7c7b380bb207479e",
+    "reports/stage10/predictions/svm/O3_STRONG_predictions.csv": "d47e216ca42f6ea9b579ea7ff42ac71a5c329dbac967b6728ede35ae211dcfeb",
+    "reports/stage10/predictions/svm/O4_MILD_predictions.csv": "809e43712adc89dbfbb59d7dbdfe262e8acaea0f9bd10e154703b842d1f8d687",
+    "reports/stage10/predictions/svm/O4_STRONG_predictions.csv": "0200d16acdec2fb1bf657c8bcc7ccf04dd5f6322101f1dcaaaf5e584a154191b",
+    "reports/stage10/predictions/char_cnn/O1_MILD_predictions.csv": "9ebb6e9327d2766a311de11f8946e11037efb220f37b0b49e6871b9798dc0a48",
+    "reports/stage10/predictions/char_cnn/O1_STRONG_predictions.csv": "f7e948db34cdfe9e8b21cce251afafd8857ef7cd097cca7a0b170120123525e5",
+    "reports/stage10/predictions/char_cnn/O2_MILD_predictions.csv": "bbd4e9f2bfbe69b6d4f4571cd371dcd29e6ca27bb8e1517462d625327ec2d73f",
+    "reports/stage10/predictions/char_cnn/O2_STRONG_predictions.csv": "9c58d41f3dbfb83e403e54066e13862fd1a679641c2a4208aa4f508d0d0b68e2",
+    "reports/stage10/predictions/char_cnn/O3_MILD_predictions.csv": "e450d03d9026a53eed8108a52aa97f41c7a91568a0dd482ad77e900adce5b206",
+    "reports/stage10/predictions/char_cnn/O3_STRONG_predictions.csv": "ddaaa9b9a991177efbf975efa99e82b74f3bf4db5602b0c1cee88ac4b67d8163",
+    "reports/stage10/predictions/char_cnn/O4_MILD_predictions.csv": "3e3d858b68ff833836adf3ab90ed11c133fb080ac6242c8e0879442821f2afbd",
+    "reports/stage10/predictions/char_cnn/O4_STRONG_predictions.csv": "3418eb2906ded8fca9fe4072236388c47d8174168aef5d700ce201461d272083",
+    "reports/stage10/predictions/indobert/O1_MILD_predictions.csv": "235c4abc41a121d88df7ac52d8e586a8803679bec158a1057def6cf69b0093fb",
+    "reports/stage10/predictions/indobert/O1_STRONG_predictions.csv": "8cadd9cf1428e7ac3817218490febfce0fd07cd16924f5cbcbf9e13cf87d4e03",
+    "reports/stage10/predictions/indobert/O2_MILD_predictions.csv": "5f2c1d1d1b0464aba632607327db18db0158400b74d9db5615739e06d912873c",
+    "reports/stage10/predictions/indobert/O2_STRONG_predictions.csv": "e8eb369327ec67aa4d8d6528185886ba84dc5f5b882c7585ebcff01491ad5981",
+    "reports/stage10/predictions/indobert/O3_MILD_predictions.csv": "5336b81cfa766d3d72273873abba183e6f477e184cb6c66d3664f94115cbb334",
+    "reports/stage10/predictions/indobert/O3_STRONG_predictions.csv": "7a2074fc914761a38bdb30b7f5048ed12942ee2d37f4d1de3cd4534098bc6eb6",
+    "reports/stage10/predictions/indobert/O4_MILD_predictions.csv": "f7d11c983ab7ab0c7586f1464d707d8e23595d6e0e31e9488e54e04cae444eb1",
+    "reports/stage10/predictions/indobert/O4_STRONG_predictions.csv": "b66981a4bd0c60e0b45e2596c7149e12d899e83c68d0a00999bc15d89c6f8809",
+    "reports/stage10/paired_error_analysis.csv": "3455ec2c04c48536fd7d02c0a00e431a24280a5a63d0417e7cedeb7d6a44652f"
+  },
+  "outputs": [
+    "absolute_performance.csv",
+    "condition_level_metrics.csv",
+    "robustness_summary.csv",
+    "obfuscation_family_matrix.csv",
+    "severity_analysis.csv",
+    "bootstrap_intervals.csv",
+    "error_review_candidates.csv"
+  ],
+  "scope_note": "This script analyzes saved Stage 10 predictions only. It does not include DS3 OOD or DS5 external-source inference."
 }
