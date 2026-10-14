@@ -1,0 +1,13 @@
+model,model_display_name,family,family_name,mild_f1_drop,strong_f1_drop,strong_minus_mild_drop,severity_pattern
+linear_svm,Linear SVM,O1,Character substitution,0.031049887492453743,0.06986778785834169,0.03881790036588795,Higher F1 drop under STRONG
+linear_svm,Linear SVM,O2,Insertion/deletion (spelling),0.02939699996776146,0.07038755458515278,0.04099055461739132,Higher F1 drop under STRONG
+linear_svm,Linear SVM,O3,Whitespace manipulation,0.03638797559662987,0.09397421524663674,0.057586239650006865,Higher F1 drop under STRONG
+linear_svm,Linear SVM,O4,Unicode/orthographic manipulation,0.03984292502639908,0.0841199673558215,0.04427704232942242,Higher F1 drop under STRONG
+char_cnn,Char-CNN,O1,Character substitution,0.003950474338055954,0.019748692284349056,0.015798217946293103,Higher F1 drop under STRONG
+char_cnn,Char-CNN,O2,Insertion/deletion (spelling),0.001062261533125275,0.0010862072566999448,0.00002394572357466984,Higher F1 drop under STRONG
+char_cnn,Char-CNN,O3,Whitespace manipulation,0.002113260926641325,-0.0010401714202500356,-0.0031534323468913605,Lower F1 drop under STRONG; non-monotonic
+char_cnn,Char-CNN,O4,Unicode/orthographic manipulation,0.0020408163265306367,0.000998564563440052,-0.0010422517630905848,Lower F1 drop under STRONG; non-monotonic
+indobert,IndoBERT,O1,Character substitution,0.023746260689141208,0.10061769783285557,0.07687143714371436,Higher F1 drop under STRONG
+indobert,IndoBERT,O2,Insertion/deletion (spelling),0.004954327968682004,0.01807794522509909,0.013123617256417086,Higher F1 drop under STRONG
+indobert,IndoBERT,O3,Whitespace manipulation,0.002222739685429409,0.020902988855116544,0.018680249169687135,Higher F1 drop under STRONG
+indobert,IndoBERT,O4,Unicode/orthographic manipulation,0.17265737482002885,0.32821118991331755,0.1555538150932887,Higher F1 drop under STRONG

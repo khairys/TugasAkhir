@@ -1,0 +1,29 @@
+{
+  "stage": "stage11_primary_robustness_analysis",
+  "status": "PRELIMINARY_DERIVED_FROM_STAGE10_SUMMARY_TABLES",
+  "note": "This snapshot is derived from the tracked Stage 10 aggregate metrics. The Stage 11 script recomputes metrics and paired bootstrap intervals from the record-level prediction CSVs; rerun it to replace these preliminary output tables.",
+  "source_files": [
+    {
+      "path": "reports/stage10/test_normal_metrics.csv",
+      "git_blob_sha": "01068489ec6833755bc903830825fa6b9069d473"
+    },
+    {
+      "path": "reports/stage10/paired_robustness_metrics.csv",
+      "git_blob_sha": "f5cbc1a66f52e27cf4147cd5006de047158d5308"
+    }
+  ],
+  "models": [
+    "linear_svm",
+    "char_cnn",
+    "indobert"
+  ],
+  "condition_rows": 24,
+  "clean_model_rows": 3,
+  "bootstrap_intervals_reused_from": "reports/stage10/paired_robustness_metrics.csv",
+  "not_completed": [
+    "record-level bootstrap recomputation in a local checkout",
+    "manual error review",
+    "DS3 OOD inference",
+    "DS5 external inference"
+  ]
+}
