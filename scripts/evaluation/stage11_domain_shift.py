@@ -159,12 +159,31 @@ def main() -> int:
 
     metrics_path = OUT / "domain_shift_metrics.csv"
     existing = pd.read_csv(metrics_path, encoding="utf-8") if metrics_path.exists() else pd.DataFrame()
+
+    # Validate the current bytes of BOTH frozen candidates before claiming the overall
+    # Stage 11 domain stage is complete, even when this invocation evaluates only one.
+    dataset_hashes, dataset_hash_valid = {}, {}
+    for key in ALL_DATASETS:
+        path = DATASETS[key]
+        mkey = "ds3_ood_v1" if key == "ds3_ood" else "ds5_external_v1"
+        expected = manifest.get("datasets", {}).get(mkey, {}).get("sha256")
+        if path.is_file():
+            actual = sha256(path)
+            dataset_hashes[key] = actual
+            dataset_hash_valid[key] = bool(expected and actual == expected)
+        else:
+            dataset_hashes[key] = None
+            dataset_hash_valid[key] = False
+
     if not existing.empty:
-        # Drop historical rows whose candidate file hash no longer matches the current frozen input.
-        for key, df in datasets.items():
-            current_hash = sha256(DATASETS[key])
-            existing = existing.loc[~((existing["dataset"] == key) &
-                                      (existing["candidate_sha256"] != current_hash))]
+        # A prior model result stays eligible only while its candidate dataset still
+        # matches the frozen manifest. Stale results are removed from the aggregate.
+        for key in ALL_DATASETS:
+            if not dataset_hash_valid[key]:
+                existing = existing.loc[existing["dataset"] != key]
+            else:
+                existing = existing.loc[~((existing["dataset"] == key) &
+                                          (existing["candidate_sha256"] != dataset_hashes[key]))]
     combined_parts = [frame for frame in [existing, pd.DataFrame(new_metrics)] if not frame.empty]
     if combined_parts:
         combined = pd.concat(combined_parts, ignore_index=True)
@@ -181,7 +200,7 @@ def main() -> int:
     current_expected = {(d, m) for d in dataset_names for m in args.models}
     current_done = set((m["dataset"], m["model"]) for m in new_metrics)
     command_complete = current_expected.issubset(current_done) and not errors
-    overall_complete = full_expected.issubset(completed_keys)
+    overall_complete = full_expected.issubset(completed_keys) and all(dataset_hash_valid.values())
     status = {
         "requested_datasets": dataset_names,
         "requested_models": args.models,
@@ -191,6 +210,7 @@ def main() -> int:
         "expected_metric_rows_total": len(full_expected),
         "command_status": "SUCCESS" if command_complete else "INCOMPLETE",
         "overall_stage11_domain_status": "COMPLETE" if overall_complete else "PARTIAL",
+        "frozen_dataset_hash_validation": dataset_hash_valid,
         "errors_or_blockers": errors,
         "guardrail": "Secondary inference only; do not train or tune on DS3/DS5.",
     }
