@@ -36,7 +36,7 @@ def build(raw_path: Path, exclusion_path: Path, text_col: str, label_col: str,
     raw["source_dataset"] = source_name
     raw["canonical_label"] = raw["canonical_label"].astype(int)
     out = raw[["record_id", "source_dataset", "source_row_id", "text_raw", "canonical_label"]].reset_index(drop=True)
-    audit = {"raw_rows": int(len(pd.read_csv(raw_path, encoding="utf-8")),
+    audit = {"raw_rows": int(len(pd.read_csv(raw_path, encoding="utf-8"))),
               "unique_valid_before_overlap_removal": int(unique_before),
               "excluded_overlap_ids": len(excluded_ids), "rows": len(out),
               "non_promotion": int((out.canonical_label == 0).sum()),
