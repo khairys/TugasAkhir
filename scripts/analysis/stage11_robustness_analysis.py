@@ -336,7 +336,7 @@ def run(n_resamples: int, seed: int, max_error_samples: int) -> dict[str, Any]:
             "conditions_averaged": int(len(subset)),
             "mean_f1_normal_paired": float(subset["f1_normal_paired"].mean()),
             "mean_f1_obfuscated_paired": float(subset["f1_obfuscated_paired"].mean()),
-            "mean_absolute_f1_drop": float(subset["f1_drop"].mean()),
+            "mean_f1_drop": float(subset["f1_drop"].mean()),
             "mean_relative_drop_pct": float(subset["relative_drop_pct"].mean()),
             "mean_f1_retention_pct": float(subset["f1_retention_pct"].mean()),
             "worst_condition_by_f1_drop": str(worst["condition"]),
