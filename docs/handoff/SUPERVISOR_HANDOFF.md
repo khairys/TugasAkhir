@@ -14,6 +14,14 @@ The main comparison is locked to three models: **Linear SVM, Char-CNN, and IndoB
 6. [Stage 10 closure checklist](STAGE10_CLOSURE_CHECKLIST.md) — remaining release blockers.
 7. [Formal obfuscation specification](../research/OBFUSCATION_SPECIFICATION_V1.md) — frozen O1–O4 transformation protocol.
 8. [Dataset audit report](../data/DATASET_AUDIT_REPORT.md) and [labeling guideline](../data/LABELING_GUIDELINE.md) — source and label provenance.
+9. [Stage 11 robustness analysis](../research/STAGE11_ROBUSTNESS_ANALYSIS.md) — absolute performance, paired robustness, obfuscation family matrix, severity, uncertainty, and domain-shift status.
+10. [Stage 11 execution checklist](STAGE11_EXECUTION_CHECKLIST.md) — exact commands and open release gates.
+
+## Stage 11 execution status
+
+The Stage 11 branch now contains a primary-analysis script, an initial result snapshot based on the saved Stage 10 aggregate tables, and an inference-only DS3/DS5 runner. The snapshot is explicitly marked preliminary; running `scripts/analysis/stage11_robustness_analysis.py` from a clean local checkout regenerates the condition-level metrics and paired bootstrap intervals from individual prediction files.
+
+The DS3 OOD and DS5 external candidate CSVs are prepared but have not been evaluated. The DS5 raw source hash currently differs from the official hash recorded in the manifest, so the preparation script blocks rebuilding those files until the audited source snapshot is restored. IndoBERT domain evaluation also remains blocked until the selected `model.safetensors` bundle is restored and its SHA-256 verified. Do not describe Stage 11 or the repository as fully reproducible until these checks and runtime tests pass.
 
 ## Main findings
 
