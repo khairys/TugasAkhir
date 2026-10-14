@@ -32,7 +32,7 @@ Definisi: `F1_drop = F1_normal_paired - F1_obfuscated_paired`. Retention adalah 
 
 ## T. Matriks berdasarkan keluarga obfuscation
 
-Angka adalah mean absolute ΔF1 dari kondisi MILD dan STRONG di dalam setiap keluarga. Nilai positif lebih besar berarti penurunan lebih besar; nilai negatif berarti F1 obfuscated sedikit melampaui F1 clean pada subset berpasangan tersebut.
+Angka adalah mean signed ΔF1 (F1 clean berpasangan dikurangi F1 obfuscated) dari kondisi MILD dan STRONG di dalam setiap keluarga. Nilai positif lebih besar berarti penurunan lebih besar; nilai negatif berarti F1 obfuscated sedikit melampaui F1 clean pada subset berpasangan tersebut.
 
 | Model | Character substitution (O1) | Insertion/deletion (O2) | Whitespace (O3) | Unicode/orthographic (O4) |
 |---|---:|---:|---:|---:|
