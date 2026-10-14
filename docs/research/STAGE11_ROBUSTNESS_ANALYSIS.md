@@ -20,7 +20,7 @@ Semua F1 merujuk pada kelas positif **Promotion (label 1)**. Untuk robustness, p
 
 Rata-rata adalah rerata aritmetika tanpa bobot dari delapan kondisi; bukan F1 gabungan (*pooled F1*).
 
-| Model | Mean F1 clean pada pasangan | Mean F1 obfuscated | Mean absolute F1 drop | Mean F1 retention |
+| Model | Mean F1 clean pada pasangan | Mean F1 obfuscated | Mean F1 drop (signed ΔF1) | Mean F1 retention |
 |---|---:|---:|---:|---:|
 | Linear SVM | 0,9444 | 0,8876 | 0,0569 | 93,98% |
 | Char-CNN | 0,9800 | 0,9763 | **0,0037** | **99,62%** |
@@ -32,7 +32,7 @@ Definisi: `F1_drop = F1_normal_paired - F1_obfuscated_paired`. Retention adalah 
 
 ## T. Matriks berdasarkan keluarga obfuscation
 
-Angka adalah mean absolute ΔF1 dari kondisi MILD dan STRONG di dalam setiap keluarga. Nilai positif lebih besar berarti penurunan lebih besar; nilai negatif berarti F1 obfuscated sedikit melampaui F1 clean pada subset berpasangan tersebut.
+Angka adalah mean signed ΔF1 (F1 clean berpasangan dikurangi F1 obfuscated) dari kondisi MILD dan STRONG di dalam setiap keluarga. Nilai positif lebih besar berarti penurunan lebih besar; nilai negatif berarti F1 obfuscated sedikit melampaui F1 clean pada subset berpasangan tersebut.
 
 | Model | Character substitution (O1) | Insertion/deletion (O2) | Whitespace (O3) | Unicode/orthographic (O4) |
 |---|---:|---:|---:|---:|

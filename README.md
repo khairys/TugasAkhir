@@ -41,7 +41,7 @@ Evaluasi domain-shift bersifat sekunder dan inference-only. Contoh menjalankan m
 
 ## Temuan utama saat ini
 
-Pada clean test, F1 Promotion adalah 0,9428 untuk Linear SVM, 0,9786 untuk Char-CNN, dan 0,9605 untuk IndoBERT. Dari delapan kondisi obfuscation, rata-rata absolute F1 drop per pasangan adalah 0,0569 untuk Linear SVM, 0,0037 untuk Char-CNN, dan 0,0839 untuk IndoBERT. Dua konsep ini dilaporkan terpisah; tidak ada satu ranking gabungan.
+Pada clean test, F1 Promotion adalah 0,9428 untuk Linear SVM, 0,9786 untuk Char-CNN, dan 0,9605 untuk IndoBERT. Dari delapan kondisi obfuscation, rata-rata F1 drop (ΔF1 bertanda) pada pasangan adalah 0,0569 untuk Linear SVM, 0,0037 untuk Char-CNN, dan 0,0839 untuk IndoBERT. Dua konsep ini dilaporkan terpisah; tidak ada satu ranking gabungan.
 
 ## Batasan reproduksibilitas
 
