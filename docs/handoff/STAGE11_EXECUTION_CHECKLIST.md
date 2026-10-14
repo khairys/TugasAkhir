@@ -4,7 +4,7 @@
 
 - [ ] Pastikan prediction files Tahap 10 tersedia untuk tiga model × NORMAL dan delapan kondisi.
 - [ ] Jalankan `python scripts/analysis/stage11_robustness_analysis.py`.
-- [ ] Periksa `reports/stage11/primary/analysis_manifest.json` dan pastikan tiap input hash tercatat.
+- [ ] Periksa `reports/stage11/primary/analysis_snapshot_manifest.json` dan pastikan tiap input hash tercatat.
 - [ ] Verifikasi 3 baris absolute performance, 24 baris condition-level metrics, 12 baris severity analysis, dan CI bootstrap 95%.
 - [ ] Laporkan clean-test F1 terpisah dari mean paired F1 drop / retention; jangan buat skor gabungan atau ranking tunggal.
 - [ ] Review contoh error yang dipilih secara deterministik; isi kategori semantik, hipotesis representasi, catatan, dan status reviewer. Jangan menganggap antrean kandidat sebagai anotasi final.
