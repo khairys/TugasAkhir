@@ -26,6 +26,14 @@ def sha256_file(path: Path) -> str:
     return digest.hexdigest()
 
 
+def newline_variant_hashes(path: Path) -> set[str]:
+    """Hash raw text bytes under LF/CRLF variants without changing the file."""
+    data = path.read_bytes()
+    normalized = data.replace(b"\\r\\n", b"\\n").replace(b"\\r", b"\\n")
+    windows = normalized.replace(b"\\n", b"\\r\\n")
+    return {hashlib.sha256(normalized).hexdigest(), hashlib.sha256(windows).hexdigest()}
+
+
 def read_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as stream:
         return json.load(stream)
@@ -160,8 +168,13 @@ def validate_stage11_artifacts(root: Path = ROOT) -> dict[str, Any]:
             path = path_for(rel)
             if not path.exists():
                 errors.append(f"Missing analysis input listed in snapshot: {rel}")
-            elif sha256_file(path) != expected_hash:
-                errors.append(f"Input SHA-256 mismatch: {rel}")
+            else:
+                actual_hash = sha256_file(path)
+                if actual_hash != expected_hash:
+                    if expected_hash in newline_variant_hashes(path):
+                        warnings.append(f"Input SHA-256 differs only by LF/CRLF line endings from snapshot for {rel}; no content-level hash mismatch detected.")
+                    else:
+                        errors.append(f"Input SHA-256 mismatch for {rel}: expected {expected_hash}, got {actual_hash}; LF/CRLF variants also differ.")
 
     review = tables["reports/stage11/primary/error_review_candidates.csv"]
     review_headers = set(review[0]) if review else set()
@@ -221,7 +234,10 @@ def validate_stage11_artifacts(root: Path = ROOT) -> dict[str, Any]:
             expected = split.get("hashes_sha256", {}).get(key)
             current = path_for(f"data/splits/v1/{filename}")
             if expected and current.exists() and sha256_file(current) != expected:
-                warnings.append(f"{filename} hash differs from the official split manifest; end-to-end retraining reproducibility remains unresolved.")
+                if expected in newline_variant_hashes(current):
+                    warnings.append(f"{filename} differs from the official split hash only by LF/CRLF line endings on this checkout.")
+                else:
+                    warnings.append(f"{filename} content hash differs from the official split manifest; end-to-end retraining reproducibility remains unresolved.")
     else:
         warnings.append("Split manifest is missing; end-to-end retraining reproducibility was not checked.")
 
