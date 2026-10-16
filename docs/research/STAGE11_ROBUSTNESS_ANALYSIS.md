@@ -67,15 +67,15 @@ Pada 10 dari 12 pasangan model-keluarga, drop F1 lebih tinggi pada STRONG. Penge
 
 Prosedur yang digunakan untuk tiap kondisi adalah **stratified paired bootstrap** dengan 10.000 resamples, confidence level 95%, dan seed 42. Record ID yang sama pada normal dan obfuscated diperlakukan sebagai satu pasangan; resampling distratifikasi menurut label gold (0/1). Interval untuk ΔF1 dihitung dari distribusi `F1_normal_paired − F1_obfuscated_paired`.
 
-Contoh interval 95% dari artefak Tahap 10:
+Contoh interval 95% dari artefak Tahap 11 yang baru diregenerasi:
 
 | Model | Kondisi | ΔF1 | CI 95% |
 |---|---|---:|---:|
-| Linear SVM | O3 STRONG | 0,0940 | [0,0724; 0,1163] |
+| Linear SVM | O3 STRONG | 0,0940 | [0,0726; 0,1165] |
 | Char-CNN | O1 MILD | 0,0040 | [-0,0011; 0,0099] |
-| Char-CNN | O4 STRONG | 0,0010 | [-0,0021; 0,0042] |
-| IndoBERT | O4 MILD | 0,1727 | [0,1519; 0,1927] |
-| IndoBERT | O4 STRONG | 0,3282 | [0,3077; 0,3478] |
+| Char-CNN | O4 STRONG | 0,0010 | [-0,0021; 0,0050] |
+| IndoBERT | O4 MILD | 0,1727 | [0,1522; 0,1929] |
+| IndoBERT | O4 STRONG | 0,3282 | [0,3078; 0,3483] |
 
 CI Char-CNN yang mencakup nol konsisten dengan drop yang sangat kecil pada beberapa kondisi. CI IndoBERT O4 jauh dari nol dan menunjukkan degradasi besar pada subset uji ini. Interval di atas adalah ketidakpastian estimasi drop per model-kondisi; ini **bukan** pengujian statistik langsung bahwa satu model lebih baik daripada model lain. Belum ada uji perbedaan antar-model atau eksperimen multi-seed.
 
