@@ -29,11 +29,9 @@ def sha256_file(path: Path) -> str:
 def newline_variant_hashes(path: Path) -> set[str]:
     """Hash raw text bytes under LF/CRLF variants without changing the file."""
     data = path.read_bytes()
-    normalized = data.replace(b"\\r\\n", b"\\n").replace(b"\\r", b"\\n")
-    windows = normalized.replace(b"\\n", b"\\r\\n")
+    normalized = data.replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    windows = normalized.replace(b"\n", b"\r\n")
     return {hashlib.sha256(normalized).hexdigest(), hashlib.sha256(windows).hexdigest()}
-
-
 def read_json(path: Path) -> dict[str, Any]:
     with path.open("r", encoding="utf-8") as stream:
         return json.load(stream)
