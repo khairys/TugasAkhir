@@ -1,0 +1,32 @@
+name: Stage 11 artifact validation
+
+on:
+  push:
+    branches:
+      - stage11-robustness-analysis
+  pull_request:
+    branches:
+      - stage11-robustness-analysis
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-stage11:
+    name: Validate frozen Stage 11 outputs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install validation dependencies
+        run: python -m pip install --upgrade pip pytest numpy pandas scikit-learn
+      - name: Validate frozen Stage 11 artifacts
+        run: python scripts/validation/validate_stage11_artifacts.py
+      - name: Run Stage 11 unit tests
+        run: python -m pytest -q tests/stage11
