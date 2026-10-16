@@ -12,7 +12,7 @@ Experiment anchors:
 - Split manifest: `data/splits/v1/split_manifest_v1.json`.
 - Frozen test/obfuscation manifest: `data/experiments/frozen_experiment_manifest_v1.json` and `configs/evaluation/stage10_robustness.json`.
 
-**Release blocker:** train and validation CSV files currently tracked under `data/splits/v1/` do not match their official manifest hashes. Recover the original frozen split archive and validate it before making an end-to-end reproducibility claim. Do not adjust the expected hashes to match the current files.
+**Training reproducibility caveat:** train and validation CSV files currently tracked under `data/splits/v1/` do not match their official manifest hashes. Recover the original frozen split archive before claiming end-to-end training reproducibility. This mismatch is not, by itself, a reason to discard or change persisted Stage 11 prediction/metric artifacts. Do not adjust expected hashes to fit current files.
 
 ## 2. Dataset preparation lineage
 
@@ -63,12 +63,17 @@ Use `--mode preflight` before a full inference run. Preserve existing frozen rep
 
 ## 6. Selected IndoBERT weight handoff
 
-The expected `models/indobert/artifacts/final_model/model.safetensors` is not in Git because large model weights are excluded. Retrieve the approved artifact bundle and verify its SHA-256 against `configs/evaluation/stage10_robustness.json` before inference. Tokenizer/config files alone are not sufficient to reproduce the classifier.
+The expected `models/indobert/artifacts/final_model/model.safetensors` is intentionally not in Git because the model weights are very large. This is not a blocker for inspecting and validating saved Stage 11 predictions and metrics. Before fresh inference, retrieve the approved external artifact and verify its SHA-256 against `configs/evaluation/stage10_robustness.json`; tokenizer/config files alone are insufficient.
 
 ## 7. Pre-submission checklist
 
-- Recover and verify train/validation files against the frozen manifest.
-- Verify all model artifacts, especially the IndoBERT weights, against the configured hashes.
-- Run the official robustness input/output validation and relevant tests on the exact branch being handed over.
-- Record actual commands and outcomes; do not describe unexecuted checks as passing.
-- Keep the test conditions frozen and do not tune on the final test results.
+- For a future end-to-end retraining reproduction, recover and verify train/validation files against the frozen manifest.
+- For fresh IndoBERT inference only, supply the external weights and verify their configured hash.
+- Run the Stage 11 artifact validator and focused tests on the exact branch; record the actual workflow result.
+- Keep test conditions frozen and do not tune on final test results.
+- Preserve the DS5 candidate and resolve raw-source provenance before attempting a rebuild.
+
+
+## 8. Stage 11 saved-artifact validation
+
+Run `python scripts/validation/validate_stage11_artifacts.py` and `python -m pytest -q tests/stage11`. These checks validate the saved result package; they do not rerun training or inference. Warnings about the train/validation split and DS5 raw-source hashes are surfaced separately from Stage 11 artifact integrity failures. The absence of the large IndoBERT weight file is accepted for artifact-only validation, but fresh IndoBERT inference must verify the configured SHA-256.

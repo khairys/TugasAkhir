@@ -1,28 +1,39 @@
-# Checklist Eksekusi Tahap 11
+# Checklist Validasi dan Penutupan Tahap 11
+
+Tanggal pembaruan: 17 Oktober 2026  
+Branch sasaran: stage11-robustness-analysis
 
 ## A. Primary robustness analysis
 
-- [x] Pastikan prediction files Tahap 10 tersedia untuk tiga model × NORMAL dan delapan kondisi.
-- [x] Jalankan `python scripts/analysis/stage11_robustness_analysis.py`.
-- [x] Periksa `reports/stage11/primary/analysis_snapshot_manifest.json` dan pastikan tiap input hash tercatat.
-- [x] Verifikasi 3 baris absolute performance, 24 baris condition-level metrics, 12 baris severity analysis, dan CI bootstrap 95%.
-- [x] Laporkan clean-test F1 terpisah dari mean paired F1 drop / retention; jangan buat skor gabungan atau ranking tunggal.
-- [x] Review contoh error yang dipilih secara deterministik; isi kategori semantik, hipotesis representasi, catatan, dan status reviewer. Antrean kandidat (113 kandidat) telah tersedia di `reports/stage11/primary/error_review_candidates.csv`.
+- [x] Prediksi Tahap 10 yang tersimpan digunakan untuk tiga model dan delapan kondisi; tidak ada training ulang atau tuning terhadap frozen test.
+- [x] Artefak utama tersedia: absolute performance (3 model), condition-level metrics (24 pasangan), robustness summary (3 model), family matrix (3 model), severity analysis (12 pasangan), dan paired bootstrap intervals (24 pasangan).
+- [x] Review awal berbantuan AI terhadap 113 kandidat dilengkapi kategori semantik usulan, hipotesis representasi, catatan batas konteks, dan status AI_ASSISTED_REVIEWED.
+- [x] Skrip analisis mempertahankan kolom review ketika laporan numerik dibuat ulang.
+- [x] Gold label dan prediksi frozen tidak diubah oleh review.
 
 ## B. OOD / external-source evaluation
 
-- [x] Verifikasi SHA-256 dataset DS3 dan DS5 dengan `data/processed/stage11/manifest_v1.json`.
-- [x] DS3 OOD target: 2.689 baris, 2.653 Non-Promotion, 36 Promotion.
-- [x] DS5 external target: 3.999 baris, 1.167 Non-Promotion, 2.832 Promotion.
-- [x] Jangan rebuild DS5 dari raw input saat ini sebelum sumber resmi dipulihkan: hash file saat ini tidak sama dengan hash resmi dalam manifest.
-- [x] Jalankan SVM di local: `python scripts/evaluation/stage11_domain_shift.py --dataset both --models linear_svm --device cpu`.
-- [x] Jalankan Char-CNN di lingkungan yang artefaknya tersedia: `python scripts/evaluation/stage11_domain_shift.py --dataset both --models char_cnn --device cpu`.
-- [x] Pulihkan bobot IndoBERT, verifikasi SHA-256 yang dikunci di `configs/evaluation/stage10_robustness.json`, lalu jalankan `python scripts/evaluation/stage11_domain_shift.py --dataset both --models indobert --device cpu`.
-- [x] Periksa `reports/stage11/domain_shift/domain_shift_metrics.csv` dan `run_status.json`. File metrics menggabungkan hasil antar-run lokal/cloud berdasarkan dataset dan model (status: COMPLETE, 6/6 combinations).
-- [x] Pastikan DS3/DS5 hanya untuk inference/evaluasi: jangan training, fine-tune, memilih threshold, atau tuning pada dua set tersebut.
+- [x] Kandidat DS3 OOD dan DS5 external tetap frozen; hash, jumlah baris, dan distribusi label tercatat dalam manifest.
+- [x] Artefak prediksi/metrik tersimpan untuk seluruh enam kombinasi model-dataset (3 model × 2 dataset).
+- [x] Confusion-matrix counts, precision, recall, F1, dan hash kandidat diperiksa oleh validator.
+- [x] DS3/DS5 tetap evaluasi sekunder; tidak digunakan untuk training, fine-tuning, threshold selection, atau tuning.
+- [x] Perbedaan hash raw-source DS5 dengan hash resmi dicatat sebagai caveat provenance; kandidat frozen tidak boleh dibangun ulang atau ditimpa sebelum provenance direkonsiliasi.
 
-## C. Integritas dan pelaporan
+## C. Verifikasi artefak dan tes
 
-- [x] Jangan ubah hash manifest train/validation untuk menghilangkan mismatch. Pulihkan snapshot beku dahulu.
-- [x] Jalankan `python scripts/evaluation/robustness.py --mode preflight`, `python scripts/evaluation/validate_results.py`, dan `pytest tests/` di checkout terbaru.
-- [x] Tandai tahap selesai hanya saat output analisis, review manual, domain inference yang memang dikerjakan, integrity checks, dan status tes terdokumentasi. Seluruh inferensi 3 model telah selesai dan divalidasi.
+- [x] Ditambahkan scripts/validation/validate_stage11_artifacts.py untuk memeriksa hash kandidat, row count, distribusi label, unique IDs, metrik, prediction files, dan kolom review.
+- [x] Ditambahkan tests/stage11/test_stage11_artifacts_validator.py.
+- [x] Ditambahkan workflow GitHub Actions untuk menjalankan validator dan tes fokus pada branch Tahap 11.
+- [ ] Periksa hasil run GitHub Actions setelah commit ini; tandai tes lulus hanya jika run aktual berstatus sukses.
+- [ ] Jika validator menemukan error, perbaiki akar masalah pada artefak/skrip terkait; jangan melonggarkan hash atau assertion agar tes terlihat hijau.
+
+## D. Caveat yang dipertahankan secara eksplisit
+
+- Bobot IndoBERT sengaja tidak masuk Git karena ukuran file. Ini bukan blocker untuk memeriksa hasil prediksi/metrik tersimpan; inference baru membutuhkan artefak eksternal dengan SHA-256 sesuai konfigurasi.
+- Hash train/validation pada checkout belum sama dengan hash di split manifest resmi. Ini caveat reproduksibilitas training/validation Tahap 8–10, bukan bukti otomatis bahwa tabel hasil tersimpan salah. Pulihkan snapshot resmi sebelum mengklaim reproduksi training end-to-end.
+- Hash raw DS5 belum cocok dengan hash resmi. Validasi kandidat DS5 frozen terpisah dari validasi sumber mentah; jangan rebuild dataset dari sumber yang belum direkonsiliasi.
+- Review 113 kandidat adalah review awal berbantuan AI yang hanya menggunakan teks dalam file; bukan adjudikasi manusia independen atau bukti kausal. Konfirmasikan contoh yang dipakai dalam pembahasan skripsi dengan pedoman label dan konteks sumber jika tersedia.
+
+## Status penutupan
+
+Tahap 11 dapat dinyatakan selesai untuk **analisis dan pelaporan berbasis artefak tersimpan** setelah validator dan tes fokus pada branch ini sukses. Hal itu tidak menyatakan inference baru, training ulang, atau reproduksi end-to-end dari clone bersih telah dilakukan.

@@ -63,7 +63,7 @@ docs/handoff/
 
 The removal of the later model implementation does not change the official three-model Stage 10 result files. Its selection metrics remain summarized in `docs/research/MODEL_SELECTION_DECISION.md` so the decision is transparent. The original/main branch was not modified by this cleanup.
 
-## Data and model release blockers
+## Known reproducibility caveats (separate from validating saved Stage 11 results)
 
 ### 1. Frozen train/validation checksum mismatch
 
@@ -75,7 +75,7 @@ The evaluation configuration expects `models/indobert/artifacts/final_model/mode
 
 ### 3. Runtime verification
 
-This cleanup was checked statically against repository paths and configuration content. Full Stage 10 inference, the validator, and the complete test suite have not been run against the exact cleaned branch. The cleanup should not be described as runtime-tested until those checks are executed successfully.
+This audit reflects the repository state before the Stage 11 artifact-validation workflow was added. The focused validator checks saved Stage 11 results without training or inference. It does not claim full Stage 10 inference or a full repository test-suite rerun; use the actual workflow result for any pass/fail claim.
 
 ## Recommended thesis presentation order
 
@@ -84,3 +84,12 @@ This cleanup was checked statically against repository paths and configuration c
 3. Paired F1 and robustness retention over O1–O4, MILD and STRONG.
 4. Error analysis, especially IndoBERT false positives under Unicode homoglyphs.
 5. Limitations and release/reproducibility constraints.
+
+
+## Stage 11 artifact closure update — 2026-10-17
+
+The branch contains saved primary robustness tables, 10,000-resample paired-bootstrap intervals, frozen DS3/DS5 candidates, and six domain-shift prediction/metric combinations. The 113-row error queue now contains AI-assisted text-only first-pass annotations. It does not claim independent human adjudication, and gold labels remain unchanged.
+
+The focused validator at `scripts/validation/validate_stage11_artifacts.py` checks frozen candidate hashes/counts, primary table shapes, input hashes recorded in the analysis snapshot, six domain-shift prediction files and confusion-matrix metrics, and annotation completeness. GitHub Actions runs the validator and `tests/stage11`; the actual run status is the authority for pass/fail.
+
+Known caveats are retained: train/validation CSV hashes differ from the official split manifest; the DS5 raw-source hash differs from its official source hash although the evaluated frozen candidate hash is recorded; and large IndoBERT weights are intentionally external to Git. These limit clean-clone retraining/fresh-inference claims, but do not by themselves prevent validating and reporting saved Stage 11 metrics and predictions. Do not change frozen data or expected hashes to make checks pass.

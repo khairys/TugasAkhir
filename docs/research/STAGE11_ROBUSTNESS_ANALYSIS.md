@@ -79,11 +79,15 @@ Contoh interval 95% dari artefak Tahap 10:
 
 CI Char-CNN yang mencakup nol konsisten dengan drop yang sangat kecil pada beberapa kondisi. CI IndoBERT O4 jauh dari nol dan menunjukkan degradasi besar pada subset uji ini. Interval di atas adalah ketidakpastian estimasi drop per model-kondisi; ini **bukan** pengujian statistik langsung bahwa satu model lebih baik daripada model lain. Belum ada uji perbedaan antar-model atau eksperimen multi-seed.
 
-## W. Error analysis
+## W. Error analysis — AI-assisted text-only first pass
 
-Artefak `reports/stage10/paired_error_analysis.csv` mencatat record dan transisi kesalahan. Jalankan analisis Tahap 11 untuk menghasilkan `error_review_candidates.csv`: maksimal tiga kandidat per kombinasi model × keluarga × severity × tipe transisi untuk dua transisi: *evasion false negative* (promosi yang awalnya benar terprediksi menjadi non-promosi) dan *new false positive* (non-promosi yang berubah menjadi prediksi promosi).
+Artefak `reports/stage11/primary/error_review_candidates.csv` berisi 113 kandidat terpilih secara deterministik untuk dua transisi: *evasion false negative* dan *new false positive*. Semua kandidat kini memiliki `proposed_semantic_category`, `representation_failure_hypothesis`, `reviewer_notes`, dan status `AI_ASSISTED_REVIEWED`.
 
-Keluarga obfuscation bisa dipetakan otomatis ke O1 character substitution, O2 insertion/deletion atau spelling, O3 whitespace, dan O4 Unicode/orthographic manipulation. Label semantik yang membutuhkan pembacaan konteks—context-dependent promotion, testimonial, dan implicit promotion—tidak diisi otomatis. Reviewer harus mengisi kategori semantik, hipotesis kegagalan berdasarkan representasi, catatan, dan status review. Contoh yang belum ditinjau bukan bukti akar masalah final.
+Kategori membedakan klaim winnings/withdrawal, offer/CTA, testimoni layanan, endorsement brand, penyebutan brand yang masih kontekstual, dan komentar non-promosi seperti game/esports, tanggapan video, salam, anti-judi, atau komentar singkat. **Gold label tidak diubah.** 
+
+Ini adalah review awal berbantuan AI dan berbasis teks yang tersedia, bukan adjudikasi manusia independen: riwayat thread/video, pedoman anotasi per sumber, dan alasan label dataset asal tidak semuanya tersedia di antrean. Catatan setiap contoh menyatakan batas tersebut. Gunakan kategorisasi untuk memandu error analysis; konfirmasikan contoh penting terhadap pedoman pelabelan dan konteks sumber sebelum menggunakannya sebagai bukti semantik final pada skripsi.
+
+Hipotesis representasi diperlakukan sebagai hipotesis, bukan penyebab kausal yang terbukti. Untuk SVM, periksa fitur unigram/bigram dan pengaruh spasi/Unicode; untuk Char-CNN, periksa pola n-gram karakter dan truncation; untuk IndoBERT, periksa token IDs/subword segmentation serta prediksi pasangan asli-obfuscated. Skrip analisis sekarang mempertahankan anotasi review ketika laporan numerik dihasilkan ulang.
 
 Hipotesis yang sudah konsisten dengan pola agregat dan perlu diuji pada contoh nyata:
 - **Linear SVM + word-level TF-IDF:** pemisahan token dan perubahan ejaan dapat merusak pencocokan unigram/bigram penting; O3 STRONG memiliki drop tertinggi SVM (0,0940).
@@ -103,7 +107,7 @@ Angka tersebut adalah nilai dalam manifest kandidat; skrip inference akan memeri
 
 Ada blocker provenance penting: manifest mencatat SHA-256 DS5 raw saat ini `06de9f634fca8690a9dcca74b7ffe1b67abdccbc7b15cf4795a9750c07767d72`, sedangkan hash sumber DS5 resmi yang tersimpan di manifest adalah `8e31db1a338cfb7ac1df69b67149af0a28796908691718ca6e1b7ce581412529`. Karena tidak sama, skrip persiapan sekarang harus menghentikan rebuild sebelum menimpa kandidat. Pulihkan sumber resmi terlebih dahulu dan validasi kandidat CSV terhadap hash manifest.
 
-Evaluasi domain-shift menggunakan `scripts/evaluation/stage11_domain_shift.py` telah selesai dijalankan secara lengkap untuk ketiga model pada kedua dataset (DS3 OOD dan DS5 eksternal). Bobot `model.safetensors` IndoBERT telah dipulihkan dan diverifikasi hash-nya (SHA-256: `890dd84c...`).
+Artefak prediksi dan metrik domain-shift tersedia untuk ketiga model pada kedua dataset (DS3 OOD dan DS5 eksternal), dengan 6/6 kombinasi tercatat di `reports/stage11/domain_shift/`. Bobot `model.safetensors` IndoBERT sengaja tidak disimpan di Git karena ukurannya besar; bobot tersebut digunakan dari lingkungan eksekusi eksternal. SHA-256 konfigurasi tetap wajib diverifikasi sebelum inference baru. Validasi artefak tersimpan tidak mensyaratkan bobot model tersedia di clone.
 
 ### Hasil Evaluasi Domain-Shift Lengkap
 
@@ -132,4 +136,6 @@ Evaluasi domain-shift menggunakan `scripts/evaluation/stage11_domain_shift.py` t
    - Char-CNN memiliki presisi yang sangat konservatif/tinggi pada domain baru, namun mengalami penurunan recall yang tajam karena ketergantungan pada pola karakter in-domain.
 
 3. **Status Penyelesaian:**
-   - Seluruh rangkaian eksekusi Tahap 11 telah **SELESAI (COMPLETE)**: primary robustness analysis, stratified bootstrap 95% CI (10.000 resamples), antrean review error (113 kandidat), domain-shift inference 3 model × 2 dataset, serta validasi integritas preflight dan unit tests (95 passed, 0 failed) seluruhnya terverifikasi hijau.
+   - Output numerik primary robustness, paired bootstrap CI 95% (10.000 resamples), 113 anotasi awal error berbantuan AI, dan prediksi/metrik domain shift untuk 3 model × 2 dataset tersedia.
+- Validator artefak Tahap 11 dan tes fokus telah ditambahkan. Status pass/fail harus diambil dari hasil workflow aktual; laporan historis 95 test passed tidak dianggap sebagai rerun independen oleh perubahan ini.
+- Hash train/validation dan hash raw DS5 tetap menjadi caveat reproduksibilitas yang terdokumentasi; keduanya tidak boleh “diperbaiki” dengan mengganti hash atau menimpa data frozen. Bobot IndoBERT sengaja eksternal dan bukan blocker untuk validasi prediksi/metrik tersimpan.

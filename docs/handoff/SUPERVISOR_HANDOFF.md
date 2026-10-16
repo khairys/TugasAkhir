@@ -1,38 +1,52 @@
-# Research Handoff — Stage 10
+# Research Handoff — Stage 11 Robustness Analysis
 
-**Research:** *Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Penyamaran Teks pada Komentar YouTube*
+**Research title:** Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Penyamaran Teks pada Komentar YouTube  
+**Active branch:** stage11-robustness-analysis  
+**Prior head before validation work:** b68e1a04996337f3447cb2e9bf6e8331aae1f6c0
 
-The main comparison is locked to three models: **Linear SVM, Char-CNN, and IndoBERT** (the original fine-tuned baseline). The cleaned branch removes the unused later-IndoBERT implementation and its model-specific outputs while preserving the scientific rationale for selecting the original checkpoint.
+## Research scope
 
-## Start here
+The primary comparison is fixed to Linear SVM with word-level TF-IDF, Char-CNN, and the fine-tuned IndoBERT baseline. The task is binary classification of Indonesian YouTube comments (0 = Non-Promotion, 1 = Promotion). The primary metric is Promotion F1.
 
-1. [Canonical model-selection decision](../research/MODEL_SELECTION_DECISION.md) — the selected model lineup and rationale.
-2. [Final research results](../research/FINAL_RESULTS.md) — main results, research questions, and limitations.
-3. [Future analysis plan](../research/FUTURE_ANALYSIS_PLAN.md) — the default next analysis sequence and explicit out-of-scope items.
-4. [Repository audit](REPOSITORY_AUDIT.md) — project structure, what was retained/removed, and remaining issues.
-5. [Reproducibility guide](REPRODUCIBILITY_GUIDE.md) — input hashes, canonical artifacts, standard evaluation path, and checks.
-6. [Stage 10 closure checklist](STAGE10_CLOSURE_CHECKLIST.md) — remaining release blockers.
-7. [Formal obfuscation specification](../research/OBFUSCATION_SPECIFICATION_V1.md) — frozen O1–O4 transformation protocol.
-8. [Dataset audit report](../data/DATASET_AUDIT_REPORT.md) and [labeling guideline](../data/LABELING_GUIDELINE.md) — source and label provenance.
-9. [Stage 11 robustness analysis](../research/STAGE11_ROBUSTNESS_ANALYSIS.md) — absolute performance, paired robustness, obfuscation family matrix, severity, uncertainty, and domain-shift status.
-10. [Stage 11 execution checklist](STAGE11_EXECUTION_CHECKLIST.md) — exact commands and open release gates.
+Stage 11 analyzes saved Stage 10 predictions across eight O1–O4 obfuscation conditions and reports secondary OOD/external evaluation on DS3 and DS5. It does not train a new model or use DS3/DS5 for tuning.
 
-## Stage 11 execution status
+## Results package
 
-The Stage 11 branch now contains a primary-analysis script, an initial result snapshot based on the saved Stage 10 aggregate tables, and an inference-only DS3/DS5 runner. The snapshot is explicitly marked preliminary; running `scripts/analysis/stage11_robustness_analysis.py` from a clean local checkout regenerates the condition-level metrics and paired bootstrap intervals from individual prediction files.
+- Primary result tables and 95% paired-bootstrap intervals: reports/stage11/primary/
+- Domain-shift predictions and metrics for all six model-dataset combinations: reports/stage11/domain_shift/
+- Frozen candidate datasets and their manifest: data/processed/stage11/
+- AI-assisted text-only first-pass annotations for 113 error candidates: reports/stage11/primary/error_review_candidates.csv
+- Numerical analysis script: scripts/analysis/stage11_robustness_analysis.py
+- Artifact validator: scripts/validation/validate_stage11_artifacts.py
+- Focused tests: tests/stage11/
+- GitHub Actions workflow: .github/workflows/stage11-validation.yml
 
-The DS3 OOD and DS5 external candidate CSVs are prepared but have not been evaluated. The DS5 raw source hash currently differs from the official hash recorded in the manifest, so the preparation script blocks rebuilding those files until the audited source snapshot is restored. IndoBERT domain evaluation also remains blocked until the selected `model.safetensors` bundle is restored and its SHA-256 verified. Do not describe Stage 11 or the repository as fully reproducible until these checks and runtime tests pass.
+## Findings in the saved artifacts
 
-## Main findings
+- Char-CNN has the highest clean-test Promotion F1 (0.9786) and the smallest mean paired F1 drop across eight obfuscation conditions (0.0037; retention 99.62%).
+- Linear SVM has mean paired F1 drop 0.0569 (retention 93.98%); whitespace O3 is its largest-degradation family on average.
+- IndoBERT has mean paired F1 drop 0.0839 (retention 91.27%); Unicode/orthographic O4 is its clearest weakness.
+- Domain-shift ranking differs: saved IndoBERT results have the highest Promotion F1 on DS3 OOD (0.4643) and DS5 external (0.9547). This does not conflict with Char-CNN being strongest under controlled obfuscation; these are different evaluation dimensions.
 
-On the reported frozen test protocol, Char-CNN has the highest normal-test Promotion F1 (0.9786) and wins all eight paired obfuscation conditions. The canonical models' unweighted mean paired F1 values are 0.9763 for Char-CNN, 0.8876 for Linear SVM, and 0.8771 for IndoBERT. The largest IndoBERT failure occurs under Unicode homoglyph obfuscation (O4), with a paired F1 of 0.6323 under O4 strong.
+These findings are read from existing prediction/metric artifacts. The focused validation workflow checks artifact integrity and metric consistency; it does not independently retrain models or regenerate inference.
 
-The choice to retain the original IndoBERT baseline rather than a later training experiment is documented in the model-selection decision. The later experiment improved O4 modestly but did not improve robustness on average and is no longer part of the active repository.
+## Closure approach
 
-## Remaining release caveats
+Stage 11 saved-artifact analysis is treated as complete when the artifact validator and focused tests pass on this branch. The 113 rows have AI-assisted text-only first-pass annotations; they are not represented as independent human adjudication. The gold labels remain unchanged, and individual causal claims still require careful research interpretation.
 
-- The frozen train/validation CSVs do not currently match the SHA-256 values recorded in the split manifest. Recover and verify the original frozen split snapshot.
-- The selected IndoBERT model weights are not tracked in Git and must be supplied as a verified artifact bundle.
-- Full Stage 10 inference and the complete test suite have not been rerun after the repository cleanup. Do not claim runtime verification until those checks pass.
+The GitHub Actions run is the authority for whether focused validation/tests passed. Do not state that tests passed before checking the actual run.
 
-The main scientific comparison and the reproducible artifact handoff are separate: the results can be reported with their stated limitations, while the release checklist remains open until the blockers are resolved.
+## Known caveats
+
+1. Tracked train/validation CSVs do not match the official split-manifest hashes. Restore the original snapshot before claiming end-to-end training reproducibility; do not edit the manifest to fit different data.
+2. The raw DS5 hash differs from the official-source hash. The evaluated frozen DS5 candidate hash is recorded; do not rebuild or overwrite the candidate until provenance is reconciled.
+3. IndoBERT weights are intentionally excluded from Git because of file size. They are not needed to validate saved predictions/metrics, but fresh inference requires the external weight file to match SHA-256 890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd.
+4. AI-assisted semantic review is text-only and does not establish independent human adjudication or causal mechanisms.
+
+## Reviewer entry points
+
+- Analysis: docs/research/STAGE11_ROBUSTNESS_ANALYSIS.md
+- Checklist: docs/handoff/STAGE11_EXECUTION_CHECKLIST.md
+- Reproducibility guide: docs/handoff/REPRODUCIBILITY_GUIDE.md
+- Repository audit: docs/handoff/REPOSITORY_AUDIT.md
+- Validation report: docs/handoff/STAGE11_VALIDATION_REPORT.md
