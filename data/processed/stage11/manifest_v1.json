@@ -1,7 +1,7 @@
 {
   "manifest_version": "1.0.0",
   "stage": "stage11_domain_shift",
-  "status": "PREPARED_NOT_EVALUATED",
+  "status": "EVALUATED_RESULTS_AVAILABLE_WITH_DOCUMENTED_PROVENANCE_CAVEATS",
   "label_mapping": {
     "0": "Non-Promotion",
     "1": "Promotion"
@@ -59,5 +59,40 @@
     "tuning_on_domain_sets": false,
     "add_domain_sets_to_primary_training": false
   },
-  "important_caveat": "The candidate rows, counts, and candidate file hashes were reconstructed from repository source content and saved overlap exclusion IDs. The preparation script recomputes SHA-256 values from actual local file bytes when run. Domain predictions have not yet been generated. Complete IndoBERT evaluation requires restoration and SHA-256 verification of the selected model.safetensors artifact."
+  "important_caveat": "Stage 11 candidate datasets and saved evaluation outputs are present and can be validated against recorded hashes. The source DS5 raw hash still differs from the official source hash, so the frozen DS5 candidate must not be rebuilt. IndoBERT weights are intentionally excluded from Git because of their size; the configured SHA-256 remains mandatory for fresh inference. The train/validation split hash mismatch remains a separate end-to-end training reproducibility caveat.",
+  "evaluation_results": {
+    "status": "RECORDED_AND_VALIDATABLE",
+    "metrics_path": "reports/stage11/domain_shift/domain_shift_metrics.csv",
+    "run_status_path": "reports/stage11/domain_shift/run_status.json",
+    "model_dataset_combinations": 6,
+    "datasets": [
+      "ds3_ood",
+      "ds5_external"
+    ],
+    "models": [
+      "linear_svm",
+      "char_cnn",
+      "indobert"
+    ],
+    "interpretation": "Saved candidate datasets and prediction/metric artifacts are available for result reporting; this status does not claim full inference reproduction from a fresh clone."
+  },
+  "reproduction_caveats": {
+    "ds5_raw_source_hash_mismatch": {
+      "status": "UNRESOLVED_BUT_FROZEN_CANDIDATE_PRESERVED",
+      "current_raw_sha256": "06de9f634fca8690a9dcca74b7ffe1b67abdccbc7b15cf4795a9750c07767d72",
+      "official_raw_sha256": "8e31db1a338cfb7ac1df69b67149af0a28796908691718ca6e1b7ce581412529",
+      "frozen_candidate_sha256": "4abe85756c9573738c7430c203a60941787b8ee64445007b0ec5f4b7248638b3",
+      "action": "Do not rebuild or overwrite the frozen DS5 candidate until official source provenance is reconciled."
+    },
+    "indobert_weights": {
+      "status": "INTENTIONALLY_EXTERNAL_DUE_TO_FILE_SIZE",
+      "git_tracked": false,
+      "expected_sha256": "890dd84c8f25f2d0761959335c5bc00c76b396cf6065317d7589ee84d3ddafbd",
+      "impact": "Not a blocker for inspecting and validating saved Stage 11 predictions/metrics; required to reproduce fresh IndoBERT inference from a clean checkout."
+    },
+    "train_validation_split_hashes": {
+      "status": "LEGACY_STAGE_8_REPRODUCIBILITY_CAVEAT",
+      "impact": "Does not invalidate the existing prediction/metric files by itself, but limits the claim that training and validation can be reproduced end-to-end from this checkout."
+    }
+  }
 }

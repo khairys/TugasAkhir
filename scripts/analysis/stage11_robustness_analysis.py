@@ -215,7 +215,7 @@ def build_error_review_queue(max_per_stratum: int, seed: int) -> pd.DataFrame:
                     "obfuscation_family_hint": family_hints.get(str(family), "Needs review"),
                     "text_original": row["text_original"],
                     "text_obfuscated": row["text_obfuscated"],
-                    "human_semantic_category": "",
+                    "proposed_semantic_category": "",
                     "representation_failure_hypothesis": "",
                     "reviewer_notes": "",
                     "review_status": "UNREVIEWED",
@@ -224,10 +224,31 @@ def build_error_review_queue(max_per_stratum: int, seed: int) -> pd.DataFrame:
         "source_record_id", "model", "condition", "family", "severity",
         "error_transition", "canonical_label", "pred_normal", "pred_obfuscated",
         "obfuscation_family_hint", "text_original", "text_obfuscated",
-        "human_semantic_category", "representation_failure_hypothesis",
+        "proposed_semantic_category", "representation_failure_hypothesis",
         "reviewer_notes", "review_status",
     ]
-    return pd.DataFrame(selected, columns=columns)
+    queue = pd.DataFrame(selected, columns=columns)
+
+    # Preserve text-review annotations when numerical analysis is regenerated.
+    # Migrate the previous human_semantic_category field name transparently.
+    prior_path = OUT / "error_review_candidates.csv"
+    review_fields = ["proposed_semantic_category", "representation_failure_hypothesis", "reviewer_notes", "review_status"]
+    key_fields = ["source_record_id", "model", "condition", "error_transition"]
+    if prior_path.exists():
+        prior = pd.read_csv(prior_path, encoding="utf-8")
+        if "human_semantic_category" in prior.columns and "proposed_semantic_category" not in prior.columns:
+            prior = prior.rename(columns={"human_semantic_category": "proposed_semantic_category"})
+        if set(key_fields + review_fields).issubset(prior.columns):
+            prior = prior[key_fields + review_fields].drop_duplicates(key_fields, keep="last")
+            queue = queue.merge(prior, on=key_fields, how="left", suffixes=("", "_prior"), validate="one_to_one")
+            for field in review_fields:
+                prior_field = f"{field}_prior"
+                if prior_field in queue.columns:
+                    old_values = queue[prior_field]
+                    populated = old_values.notna() & old_values.astype(str).str.strip().ne("")
+                    queue.loc[populated, field] = old_values.loc[populated]
+                    queue = queue.drop(columns=[prior_field])
+    return queue[columns]
 
 
 def write_csv(df: pd.DataFrame, path: Path) -> None:
@@ -406,8 +427,11 @@ def run(n_resamples: int, seed: int, max_error_samples: int) -> dict[str, Any]:
         },
         "error_review": {
             "max_examples_per_model_family_severity_transition": max_error_samples,
+            "review_mode": "AI-assisted text-only first-pass using isolated candidate text",
             "semantic_categories_require_manual_review": True,
-            "initial_status": "UNREVIEWED",
+            "current_status": "AI_ASSISTED_REVIEWED",
+            "independent_human_adjudication_claimed": False,
+            "researcher_confirmation_recommended_before_final_thesis_interpretation": True,
         },
         "input_sha256": input_hashes,
         "outputs": [

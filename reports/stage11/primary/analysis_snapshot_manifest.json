@@ -30,7 +30,14 @@
   "error_review": {
     "max_examples_per_model_family_severity_transition": 3,
     "semantic_categories_require_manual_review": true,
-    "initial_status": "UNREVIEWED"
+    "initial_status": "UNREVIEWED",
+    "review_mode": "AI-assisted text-only first-pass; not independent human adjudication",
+    "current_status": "AI_ASSISTED_REVIEWED",
+    "candidate_rows": 113,
+    "unique_source_records": 94,
+    "all_candidates_annotated": true,
+    "independent_human_adjudication_claimed": false,
+    "researcher_confirmation_recommended_before_final_thesis_interpretation": true
   },
   "input_sha256": {
     "reports/stage10/predictions/svm/test_normal_predictions.csv": "a34b4b3c47f88424415d13c0702648890f2467bc9db8cd230fe0e5d0e34e707e",

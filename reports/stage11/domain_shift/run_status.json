@@ -17,5 +17,14 @@
     "ds5_external": true
   },
   "errors_or_blockers": [],
-  "guardrail": "Secondary inference only; do not train or tune on DS3/DS5."
+  "guardrail": "Secondary inference only; do not train or tune on DS3/DS5.",
+  "warnings": [
+    "DS5 raw-source SHA-256 differs from the official source SHA-256 in the manifest. The frozen candidate CSV hash is validated; do not rebuild/overwrite it until provenance is reconciled.",
+    "IndoBERT model weights are intentionally excluded from Git because of file size. Recorded prediction/metric artifacts can be validated without them; fresh inference requires the external file matching the configured SHA-256."
+  ],
+  "validation_scope": {
+    "recorded_artifacts": "Aggregate predictions and metrics are available for 6/6 dataset-model combinations.",
+    "fresh_inference_reproduced_by_this_commit": false,
+    "weight_exclusion_is_intentional": true
+  }
 }
