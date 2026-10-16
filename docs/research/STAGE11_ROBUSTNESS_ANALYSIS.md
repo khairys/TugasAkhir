@@ -139,3 +139,8 @@ Artefak prediksi dan metrik domain-shift tersedia untuk ketiga model pada kedua 
    - Output numerik primary robustness, paired bootstrap CI 95% (10.000 resamples), 113 anotasi awal error berbantuan AI, dan prediksi/metrik domain shift untuk 3 model × 2 dataset tersedia.
 - Validator artefak Tahap 11 dan tes fokus telah ditambahkan. Status pass/fail harus diambil dari hasil workflow aktual; laporan historis 95 test passed tidak dianggap sebagai rerun independen oleh perubahan ini.
 - Hash train/validation dan hash raw DS5 tetap menjadi caveat reproduksibilitas yang terdokumentasi; keduanya tidak boleh “diperbaiki” dengan mengganti hash atau menimpa data frozen. Bobot IndoBERT sengaja eksternal dan bukan blocker untuk validasi prediksi/metrik tersimpan.
+
+
+### Automated validation record (17 October 2026)
+
+The primary tables were regenerated from the committed Stage 10 prediction files using seed 42 and 10,000 paired-bootstrap resamples. GitHub Actions run [#38949243961](https://github.com/khairys/TugasAkhir/actions/runs/38949243961) completed successfully: the artifact validator returned `PASSED` with 0 errors, and all four tests in `tests/stage11` passed. This run validates saved Stage 11 artifacts; it does not represent fresh model inference, full-repository `pytest tests/`, or complete retraining reproducibility from a clean clone. DS5 source provenance and train/validation split hashes remain explicitly documented caveats.

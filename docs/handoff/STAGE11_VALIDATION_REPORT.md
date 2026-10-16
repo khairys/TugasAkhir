@@ -20,8 +20,13 @@ The error queue now has proposed semantic categories, representation-failure hyp
 - Train/validation hashes differ from the official split manifest. This is an unresolved end-to-end retraining reproducibility issue; the validator surfaces it as a warning.
 - DS5 raw source hash differs from the official source hash. The frozen DS5 candidate hash remains the one used by the existing predictions; do not overwrite it while resolving provenance.
 - IndoBERT weights are intentionally stored outside Git due to file size. Artifact validation accepts their absence; fresh inference needs the approved external bundle matching its configured SHA-256.
-- The validator does not run inference, train models, tune thresholds, or modify frozen datasets.
+- The validator/workflow does not run fresh model inference, train models, tune thresholds, or modify frozen prediction inputs or DS3/DS5 candidate datasets. The primary metric tables are regenerated from the committed Stage 10 per-record predictions.
 
 ## Interpretation rule
 
 A successful focused run means the persisted Stage 11 package passes implemented structural, hash, row-count and metric-consistency checks. It does not establish clean-clone training reproducibility, fresh IndoBERT inference reproducibility, human inter-annotator agreement, or causal explanation of individual model errors.
+
+
+## Exact scope of the successful run
+
+The successful workflow validates the generated primary tables, snapshot input hashes, DS3/DS5 candidate SHA-256/row counts/labels, six persisted domain-shift prediction files and their metrics, and the 113-row review queue. It runs the four tests in `tests/stage11`; it does not run the entire repository test suite. It leaves the split-manifest and raw DS5 hash discrepancies as visible warnings and accepts intentionally external IndoBERT weights for saved-artifact validation.

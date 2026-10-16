@@ -34,7 +34,7 @@ These findings are read from existing prediction/metric artifacts. The focused v
 
 Stage 11 saved-artifact analysis is treated as complete when the artifact validator and focused tests pass on this branch. The 113 rows have AI-assisted text-only first-pass annotations; they are not represented as independent human adjudication. The gold labels remain unchanged, and individual causal claims still require careful research interpretation.
 
-The GitHub Actions run is the authority for whether focused validation/tests passed. Do not state that tests passed before checking the actual run.
+The successful GitHub Actions run [#38949243961](https://github.com/khairys/TugasAkhir/actions/runs/38949243961) completed on 17 October 2026: the artifact validator returned PASSED with 0 errors, and `tests/stage11` returned 4 passed. This applies to saved-artifact validation and the focused Stage 11 tests, not to fresh inference or the full repository test suite.
 
 ## Known caveats
 

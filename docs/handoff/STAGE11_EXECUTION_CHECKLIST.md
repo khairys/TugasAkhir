@@ -24,8 +24,8 @@ Branch sasaran: stage11-robustness-analysis
 - [x] Ditambahkan scripts/validation/validate_stage11_artifacts.py untuk memeriksa hash kandidat, row count, distribusi label, unique IDs, metrik, prediction files, dan kolom review.
 - [x] Ditambahkan tests/stage11/test_stage11_artifacts_validator.py.
 - [x] Ditambahkan workflow GitHub Actions untuk menjalankan validator dan tes fokus pada branch Tahap 11.
-- [ ] Periksa hasil run GitHub Actions setelah commit ini; tandai tes lulus hanya jika run aktual berstatus sukses.
-- [ ] Jika validator menemukan error, perbaiki akar masalah pada artefak/skrip terkait; jangan melonggarkan hash atau assertion agar tes terlihat hijau.
+- [x] GitHub Actions run [#38949243961](https://github.com/khairys/TugasAkhir/actions/runs/38949243961) sukses: analysis regeneration passed, artifact validator PASSED dengan 0 errors, dan tes fokus `tests/stage11` lulus (4 passed).
+- [x] Ketidakcocokan hash snapshot prediksi lama ditangani dengan menghitung ulang laporan turunan dari file prediksi yang benar-benar ada di branch; file prediksi sumber dan data frozen tidak diubah. Validator hash mempertahankan pengecekan ketat.
 
 ## D. Caveat yang dipertahankan secara eksplisit
 
@@ -37,3 +37,13 @@ Branch sasaran: stage11-robustness-analysis
 ## Status penutupan
 
 Tahap 11 dapat dinyatakan selesai untuk **analisis dan pelaporan berbasis artefak tersimpan** setelah validator dan tes fokus pada branch ini sukses. Hal itu tidak menyatakan inference baru, training ulang, atau reproduksi end-to-end dari clone bersih telah dilakukan.
+
+
+### Bukti eksekusi CI
+
+- Commit yang divalidasi run #38949243961: `f77665d99cd35f2cc205a0b7c8e70278e0a62931`.
+- Run berstatus `completed / success`.
+- Artifact validator: `PASSED`, 0 errors; warning tetap dicatat untuk provenance DS5 dan hash train/validation.
+- Unit tests `tests/stage11`: 4 passed in 1.21s.
+- Workflow mengompilasi ulang tabel primer dari prediksi Tahap 10 yang sudah tersimpan, lalu menyimpan hasil derivatif pada commit `ae68c1fc957640495b5327f2706604418d51df12`.
+- Ini bukan full `pytest tests/`, bukan fresh inference, dan bukan clean-clone training reproduction.
