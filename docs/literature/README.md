@@ -32,7 +32,6 @@ Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperka
 | 19 | [Revisiting SMS Spam Detection: The Impact of Feature Representation on Classical Machine Learning Models](extracted/19_sms_spam_detection_feature_representation.md) | Applied Sciences Editorial Research Team | 2026 | `Feature Representations in Spam` | 29 |
 | 20 | [Spam Detection for YouTube Video Comments Using Machine Learning Approaches](extracted/20_spam_detection_youtube_ml_approaches.md) | Andrew S. Xiao, Qilian Liang | 2024 | `YouTube Spam Detection` | 9 |
 | 21 | [Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md) | Satriadi Putra Santika et al. | 2025 | `Online Gambling (Judol) Detection` | 10 |
-| 21 | [Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md) | Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono | 2025 | `Online Gambling (Judol) Detection` | 10 |
 
 ---
 
