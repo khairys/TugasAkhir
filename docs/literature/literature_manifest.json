@@ -418,5 +418,29 @@
     "words": 3820,
     "filename": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification.pdf",
     "md_file": "extracted/21_online_gambling_youtube_semisupervised_indobert.md"
+  },
+  {
+    "slug": "21_online_gambling_youtube_semisupervised_indobert",
+    "title": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification",
+    "authors": "Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono",
+    "year": 2025,
+    "venue": "Procedia Computer Science 269 (2025), 1269–1278 (Elsevier; ICCSCI 2025)",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "online-gambling",
+      "judol",
+      "youtube-comments",
+      "indobert",
+      "semi-supervised-learning",
+      "pseudo-labeling",
+      "svm",
+      "cnn",
+      "text-classification"
+    ],
+    "relevance": "Direct domain study on Promotion/Non-Promotion classification in Indonesian YouTube comments. Compares TF-IDF+SVM, CNN, and IndoBERT and studies pseudo-labeling. Useful for domain context and clean-data baselines, but not a paired obfuscation-robustness study: preprocessing normalizes some textual variations and no controlled clean-versus-obfuscated test conditions are reported.",
+    "pages": 10,
+    "words": 3820,
+    "filename": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification.pdf",
+    "md_file": "extracted/21_online_gambling_youtube_semisupervised_indobert.md"
   }
 ]
