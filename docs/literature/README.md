@@ -5,6 +5,10 @@
 
 Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperkaya dengan *YAML frontmatter*, tinjauan bibliografi, *executive takeaways*, dan penanda halaman, sehingga **ramah dibaca (*agentic-ready*) oleh AI agent, LLM, RAG, dan sistem pencarian repositori**.
 
+
+
+**Knowledge pack audit:** [Audit Mendalam 21 Publikasi](extracted/Audit_21_Publikasi_Knowledge_Pack.md) — berisi audit individual, sintesis lintas publikasi, evidence bank Bab I, dan penilaian kebutuhan referensi tambahan.
+
 ---
 
 ## 1. Master Literature Catalog (21 Papers)
