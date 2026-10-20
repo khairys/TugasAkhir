@@ -1,9 +1,9 @@
 # AUDIT MENDALAM 21 PUBLIKASI UNTUK SKRIPSI
 ## Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Penyamaran Teks pada Komentar YouTube
 
-**Versi dokumen:** Audit Literatur v2.0 — korpus 21 publikasi  
+**Versi dokumen:** Audit Literatur v2.1 — korpus 21 publikasi  
 **Tanggal audit:** 20 Oktober 2026  
-**Bahan utama:** 20 PDF awal yang diberikan pengguna, ditambah publikasi ke-21 yang diekstrak ke Markdown pada branch `literature-extraction`. Semua PDF berhasil diekstrak menjadi teks yang dapat ditelusuri; audit membaca naskah lengkap, bukan abstrak saja, dengan perhatian pada pendahuluan, data dan definisi label, metode, pembagian data, hasil/tabel, diskusi, kesimpulan, keterbatasan yang dinyatakan, serta daftar pustaka. Halaman yang memuat tabel atau gambar utama juga diperiksa lewat render halaman. Metadata dan laman penerbit/arsip akademik diperiksa ulang secara daring ketika tersedia. Bila ada klaim yang teks lengkapnya ambigu, berbeda antarbagian, atau memiliki masalah bibliografi, dokumen menandainya sebagai temuan audit alih-alih merapikannya diam-diam.
+**Bahan utama:** 20 PDF awal dari pengguna dan 1 publikasi tambahan (#21) yang teks lengkapnya telah diekstrak dan ditelaah melalui `docs/literature/extracted/21_online_gambling_youtube_semisupervised_indobert.md` pada branch `literature-extraction`. Semua PDF berhasil diekstrak menjadi teks yang dapat ditelusuri; audit membaca naskah lengkap, bukan abstrak saja, dengan perhatian pada pendahuluan, data dan definisi label, metode, pembagian data, hasil/tabel, diskusi, kesimpulan, keterbatasan yang dinyatakan, serta daftar pustaka. Halaman yang memuat tabel atau gambar utama juga diperiksa lewat render halaman. Metadata dan laman penerbit/arsip akademik diperiksa ulang secara daring ketika tersedia. Bila ada klaim yang teks lengkapnya ambigu, berbeda antarbagian, atau memiliki masalah bibliografi, dokumen menandainya sebagai temuan audit alih-alih merapikannya diam-diam.
 
 > **Cara menggunakan dokumen ini.** Ini adalah *knowledge pack* penelitian, bukan naskah Bab I siap tempel tanpa penyuntingan. Gunakan ringkasan bukti untuk membangun argumentasi, kemudian kutip publikasi asli dengan gaya referensi UNDIP. Parafrasa dalam dokumen ini sengaja tidak berupa kutipan panjang verbatim. Angka dan temuan ditulis sejauh dapat ditelusuri dari naskah yang diaudit. “Interpretasi audit” dibedakan dari “temuan yang dilaporkan penulis”.
 
@@ -25,15 +25,15 @@
 
 ## A1. Kesimpulan utama
 
-Kumpulan 20 publikasi ini merupakan **fondasi awal yang kuat dan cukup untuk mulai membangun peta literatur**, tetapi **belum cukup untuk mengunci seluruh argumentasi Bab I tanpa pencarian tambahan terarah**. Kumpulan tersebut sudah mencakup tiga domain penting: (1) deteksi promosi/judi/spam pada komentar atau media sosial, (2) robustness dan perturbasi teks NLP, serta (3) mutu dataset, anotasi, deduplikasi, dan evaluasi berpasangan.
+Kumpulan 21 publikasi ini merupakan **fondasi yang memadai untuk menyusun peta literatur dan mulai merancang argumentasi Bab I**, tetapi **belum cukup untuk mengunci seluruh research gap tanpa perbandingan metode yang eksplisit dan pencarian tambahan yang terarah**. Korpus mencakup empat kebutuhan: (1) deteksi promosi/judi/spam pada komentar atau media sosial, (2) robustness dan perturbasi teks NLP, (3) mutu dataset, anotasi dan deduplikasi, serta (4) evaluasi berpasangan.
 
 Kesenjangan yang masih perlu ditutup bukan sekadar “kurang jumlah jurnal”. Masalah utama adalah bahwa bukti untuk sejumlah klaim Bab I masih tidak langsung atau belum cukup spesifik. Contohnya, paper spam YouTube tidak otomatis membuktikan karakteristik promosi judi; paper judi yang membedakan “gambling-related” dari “non-gambling” tidak otomatis mendukung definisi “promotion/non-promotion”; normalisasi obfuscation tidak sama dengan mengukur ketahanan model terhadap teks mentah yang diobfuscate; dan paper evaluasi berpasangan pada level sistem tidak otomatis membenarkan semua rumus atau prosedur bootstrap yang digunakan dalam eksperimen Anda.
 
-**Rekomendasi:** jangan menambah puluhan sumber secara acak. Pertahankan publikasi berdasarkan relevansi, bukan demi jumlah; publikasi ke-21 ditambahkan sebagai kandidat yang telah diaudit, auditkan penggunaannya per klaim, lalu cari sumber tambahan hanya untuk kebutuhan bukti yang belum terisi—terutama konteks resmi Indonesia, studi obfuscation berbahasa alami yang benar-benar melakukan evaluasi sebelum/sesudah transformasi, definisi label promosi, dan justifikasi statistik untuk metrik perubahan F1.
+**Rekomendasi:** jangan menambah puluhan sumber secara acak. Pertahankan publikasi berdasarkan relevansi, bukan demi jumlah; gunakan hasil audit 21 publikasi untuk menilai klaim per klaim, lalu cari sumber tambahan hanya untuk kebutuhan bukti yang belum terisi—terutama konteks resmi Indonesia, studi obfuscation berbahasa alami yang benar-benar melakukan evaluasi sebelum/sesudah transformasi, definisi label promosi, dan justifikasi statistik untuk metrik perubahan F1.
 
 ## A2. Pemetaan tingkat relevansi
 
-- **Studi domain langsung tentang judi, promosi, atau spam pada YouTube/media sosial Indonesia — publikasi 2–8 dan 18.** Ini kelompok prioritas untuk membahas penelitian terdahulu. Setiap paper tetap harus dibandingkan berdasarkan definisi label, platform, langkah normalisasi, pembagian data, dan cara mengevaluasi penyamaran.
+- **Studi domain langsung tentang judi, promosi, atau spam pada YouTube/media sosial Indonesia — publikasi #2–8, #18, dan #21.** Ini kelompok prioritas untuk membahas penelitian terdahulu. Setiap paper tetap harus dibandingkan berdasarkan definisi label, platform, langkah normalisasi, pembagian data, dan cara mengevaluasi penyamaran.
 - **Teori dan metodologi robustness/perturbasi — publikasi 11–14 dan 17.** Kelompok utama untuk mendefinisikan robustness, menjelaskan input perturbation, dan mendukung rancangan pengujian.
 - **Kualitas data dan anotasi — publikasi 15 dan 16.** Utamanya dipakai di Bab III untuk deduplikasi, pencegahan kebocoran, serta kualitas label.
 - **Serangan teks dan evaluasi input berubah — publikasi 9, 12, 13, dan 17.** #9 memberi konteks adversarial attacks; #12 dan #13 lebih dekat pada perturbasi yang dapat diterapkan/diuji; #17 membahas evaluasi berpasangan, tetapi tidak identik dengan paired bootstrap CI untuk F1.
@@ -50,7 +50,7 @@ Kesenjangan yang masih perlu ditutup bukan sekadar “kurang jumlah jurnal”. M
 
 ## A4. Prioritas sebelum Bab I ditulis
 
-- **Prioritas 1 — harus diverifikasi:** isi lengkap dan protokol Angelo et al. (2025), Hidayat et al. (2026), Ariyanto et al. (2026), Pariamalinya et al. (2026), serta Nugraha et al. (2026).
+- **Prioritas 1 — perbandingan metode lintas studi:** bandingkan protokol Angelo et al. (2025), Hidayat et al. (2026), Ariyanto et al. (2026), Pariamalinya et al. (2026), Nugraha et al. (2026), dan Santika et al. (2025). Jurnal #21 sudah diaudit lengkap; tugas berikutnya adalah menyandingkan metode dan batas klaimnya, bukan mengaudit abstraknya lagi.
 - **Prioritas 2 — harus disintesis:** Moradi & Samwald (2021), Wang et al. (2022), Khan et al. (2025), dan NL-Augmenter (Dhole et al., 2023).
 - **Prioritas 3 — cukup untuk desain metode:** Mu et al. (2024), Klie et al. (2024), dan Peyrard et al. (2021), dengan catatan bahwa referensi paired evaluation belum tentu mendukung bootstrap F1 secara spesifik.
 - **Tambahan terarah yang masih dibutuhkan:** statistik/laporan resmi Indonesia; sumber yang membedakan promosi dari sekadar konten terkait judi; studi robustness pada teks sosial Indonesia atau teks promosi yang menguji sampel sebelum/sesudah transformasi; dan sumber statistik evaluasi berpasangan/interval kepercayaan F1.
@@ -455,6 +455,52 @@ Kesenjangan yang masih perlu ditutup bukan sekadar “kurang jumlah jurnal”. M
 
 ---
 
+## 21. Santika et al. (2025) — *Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification*
+
+**Status audit:** Kandidat relevan; dipertahankan sebagai studi domain inti, tetapi bukan sebagai bukti langsung evaluasi robustness.
+
+**Identitas bibliografi.** Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, dan Derwin Suhartono. *Procedia Computer Science*, 269 (2025), 1269–1278. Prosiding ICCSCI 2025 yang diterbitkan Elsevier. DOI: https://doi.org/10.1016/j.procs.2025.09.068. Naskah 10 halaman; artikel menyatakan lisensi open access CC BY-NC-ND. Dataset disebut tersedia melalui Zenodo: https://doi.org/10.5281/zenodo.15424844.
+
+**Pertanyaan dan tujuan penelitian.** Penulis mengembangkan deteksi komentar promosi judi online berbahasa Indonesia pada YouTube melalui pembelajaran semi-supervised berbasis IndoBERT. Motivasi utamanya adalah keterbatasan anotasi manual. Studi berfokus pada peningkatan klasifikasi dengan pseudo-labeling; bukan pada eksperimen perturbasi teks atau pengukuran penurunan performa akibat obfuscation.
+
+**Data dan proses pelabelan.** Penulis mengumpulkan 10.101 komentar YouTube berbahasa Indonesia dari 10 video kategori gaming yang dipilih pada 5 Mei 2025 menggunakan YouTube Data API v3. Sekitar 10% data dilabeli manual sebagai Promotion atau Non-Promotion. Pada tabel hasil, 1.010 komentar disebut sebagai bagian berlabel; setelah preprocessing dataset yang disebut tersisa adalah 9.880 data. Naskah menjelaskan beberapa indikator promosi: nama situs judi, ajakan seperti “main”, “coba”, dan istilah terkait seperti “jepe”, “nagih”, atau “slot”. Prosedur label pada metode menyebut pelabelan dilakukan oleh penulis pertama; ada keterangan pemeriksaan ulang oleh annotator, tetapi tidak ditemukan pelaporan nilai inter-annotator agreement yang terukur. Oleh karena itu, jangan menganggap reliabilitas labelnya setara dengan studi yang melaporkan Cohen’s kappa.
+
+**Preprocessing.** Tahap prapemrosesan meliputi konversi/normalisasi karakter Unicode, penghapusan emoji, URL, karakter asing dan simbol, penggabungan keyword promosi yang terpisah spasi, lowercasing, tokenisasi, stemming, normalisasi slang, serta penghapusan stopword. Pembagian data dilaporkan menggunakan rasio 7:1,5:1,5. Langkah penggabungan keyword dan normalisasi secara langsung dapat memperbaiki pola obfuscation tertentu sebelum klasifikasi; karena itu studi ini tidak dapat digunakan untuk menyimpulkan bagaimana model yang menerima teks tersamarkan mentah akan bertahan.
+
+**Metode dan pembanding.** Penelitian membandingkan TF-IDF+SVM, Logistic Regression, XGBoost, Random Forest, RNN, LSTM, CNN, dan IndoBERT. IndoBERT dilatih terlebih dahulu dengan subset berlabel, lalu model digunakan untuk menghasilkan pseudo-label bagi data yang belum berlabel. Data berlabel dan pseudo-label digabungkan untuk proses pelatihan ulang semi-supervised. Tidak ada pengujian yang dilaporkan dengan protokol pasangan sampel normal-versus-obfuscated yang ditransformasi secara terkontrol.
+
+**Hasil yang dilaporkan.** Pada skenario awal dengan 10% data berlabel, tabel menunjukkan TF-IDF+SVM sebagai model dengan F1 tertinggi, 0,972; IndoBERT memperoleh F1 0,961. Setelah pseudo-labeling dan pelatihan ulang, IndoBERT memperoleh Accuracy 0,986, Precision 0,991, Recall 0,980, dan F1 0,985 pada tabel utama. Angka-angka ini menggambarkan hasil dalam split dan preprocessing penelitian tersebut, bukan ukuran robustness dan bukan angka yang bisa dibandingkan langsung dengan hasil repositori Anda tanpa memperhatikan perbedaan dataset, preprocessing, split, dan protokol evaluasi.
+
+**Kekuatan.**
+- Sangat dekat dengan domain dan target label penelitian ini: komentar YouTube Indonesia, promosi/non-promosi, dan evaluasi model IndoBERT serta SVM.
+- Menjadi bukti bahwa deteksi promosi dengan label biner sudah pernah dilakukan pada konteks YouTube Indonesia.
+- Menyediakan pembanding baseline SVM dan IndoBERT serta membahas keterbatasan adaptasi terhadap bahasa yang terus berkembang.
+- Memiliki DOI penerbit dan kanal data publik, sehingga dapat ditelusuri lebih lanjut.
+
+**Keterbatasan dan catatan audit.**
+- Tujuan utama adalah semi-supervised learning/pseudo-labeling; bukan robustness evaluation.
+- Preprocessing menghapus atau menormalkan beberapa variasi tekstual dan menggabungkan kata kunci terpisah spasi, sehingga variasi masukan yang menjadi objek penelitian Anda tidak dipertahankan sebagai kondisi uji mentah.
+- Keterangan hasil menggunakan jumlah yang tidak seluruhnya konsisten: abstrak menyebut 10.101 data, 10% diberi label; bagian hasil menyebut 1.010 data manual, 9.880 data setelah preprocessing, dan matriks konfusi final 1.482 sampel. Tabel metrik semi-supervised tidak menjelaskan secara rinci pada tempat yang sama mengapa ukuran uji berbeda dari matriks konfusi. Angka perlu dirujuk bersama penjelasan section-specific dan tidak disatukan seolah berasal dari satu evaluasi yang identik.
+- Klaim “generalize well on noisy, informal text” tidak sama dengan ketahanan terhadap transformasi obfuscation yang terkontrol; studi tidak melaporkan eksperimen paired clean-vs-obfuscated.
+- Daftar pustaka memuat banyak referensi lintas topik; beberapa mendukung klaim latar belakang/metode, tetapi tidak semuanya menjadi bukti langsung untuk robustness.
+- Kesimpulan penulis menyatakan belum ada mekanisme untuk menyesuaikan diri terhadap bahasa yang berkembang guna menghindari moderasi. Ini adalah keterbatasan yang dinyatakan penulis, tetapi tidak boleh diperluas menjadi klaim bahwa studi tersebut tidak pernah memproses variasi teks apa pun: metode mereka justru menormalisasi variasi tertentu.
+
+**Keputusan penggunaan:** **Pertahankan sebagai kandidat inti untuk konteks domain dan pembanding deteksi promosi**, serta sebagai sumber yang menunjukkan bahwa evasion bahasa berkembang disebut sebagai keterbatasan di masa depan. **Jangan** gunakan sebagai bukti bahwa belum ada studi obfuscation yang diuji secara eksplisit, atau bahwa model IndoBERT/SVM penelitian tersebut rentan/tahan terhadap keluarga O1–O4.
+
+**Bukti yang dapat diekstrak untuk Bab I.**
+1. Studi deteksi *Promotion/Non-Promotion* pada komentar YouTube Indonesia sudah dilakukan dengan beberapa model, termasuk SVM, CNN, dan IndoBERT.
+2. SVM menghasilkan F1 0,972 pada skenario awal yang dilaporkan, sedangkan IndoBERT mencapai F1 0,961; setelah pseudo-labeling, IndoBERT mencapai F1 0,985.
+3. Penulis menyatakan sebagai keterbatasan bahwa model belum mengakomodasi pola bahasa yang berkembang untuk menghindari moderasi.
+4. Studi tidak menjalankan protokol evaluasi pasangan normal-versus-obfuscated yang setara dengan eksperimen penelitian Anda.
+
+**Bukti untuk Bab II–III.** Klasifikasi promosi/non-promosi pada komentar YouTube; pseudo-labeling; contoh fitur/indikator label; preprocessing yang mencakup penggabungan token ber-spasi; dan perbandingan model klasik dengan model neural. Tidak cocok dijadikan justifikasi langsung bagi empat keluarga obfuscation penelitian Anda, karena transformasi tersebut tidak dievaluasi sebagai set kondisi paired test.
+
+**Lokator dalam artikel:** bagian Introduction (cakupan studi sebelumnya), Method (data collecting, data preprocessing, model/training, evaluation), Results and Discussion (dataset summary, tabel hasil supervised dan semi-supervised), dan Conclusion and Future Works.
+
+---
+
+---
+
 # BAGIAN C. SINTESIS LINTAS-PUBLIKASI
 
 ## C1. Apa yang sudah mapan dalam literatur?
@@ -510,11 +556,11 @@ Rumusan gap berikut **masih bersifat sementara hingga perbandingan metode paper 
 
 ---
 
-# BAGIAN D. APAKAH 20 PUBLIKASI SUDAH CUKUP?
+# BAGIAN D. APAKAH 21 PUBLIKASI SUDAH CUKUP?
 
 ## D1. Jawaban singkat berbasis audit
 
-**Cukup untuk memulai menyusun argumentasi dan kerangka Bab I; belum cukup untuk mengunci research gap dan seluruh bukti empiris Bab I.** Kita tidak perlu membuang seluruh daftar atau mencari banyak paper baru. Kebutuhan tambahan bersifat terarah.
+**Korpus 21 publikasi cukup untuk menyusun argumentasi awal Bab I, tetapi belum otomatis cukup untuk mengunci research gap dan semua bukti empirisnya.** Publikasi #21 memperkuat bukti bahwa deteksi promosi biner pada komentar YouTube Indonesia sudah diteliti, sekaligus menyebut adaptasi terhadap bahasa yang digunakan untuk menghindari moderasi sebagai keterbatasan. Namun, paper itu tidak mengukur paired robustness sebagaimana protokol utama penelitian Anda. Kebutuhan tambahan masih bersifat terarah: sumber resmi untuk konteks, sumber statistik paired F1/CI, dan studi robustness teks yang protokolnya sangat dekat.
 
 ## D2. Peta kekurangan bukti dan pencarian lanjutan
 
@@ -583,34 +629,11 @@ Kata kunci: `automated content moderation false positives fairness text classifi
 
 Secara realistis, 6–12 sumber tambahan berkualitas mungkin sudah cukup untuk menutup gap utama; angka ini adalah target kerja, bukan kuota wajib. Satu sumber primer yang tepat dapat lebih bernilai daripada beberapa artikel umum yang tidak mendukung klaim Bab I.
 
-## D4. Kandidat tambahan yang ditemukan saat audit daring (di luar 20 PDF)
+## D4. Status korpus setelah revisi
 
-Sumber berikut **tidak termasuk dalam audit penuh 20 PDF di Bagian B**. Metadata/abstrak/halaman repositori telah ditinjau untuk mengetahui relevansinya; naskah lengkapnya masih perlu dikumpulkan dan diaudit sebelum dipakai sebagai landasan research gap final.
+Publikasi #21, *Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification* (Santika et al., 2025), telah dimasukkan ke Bagian B sebagai audit publikasi ke-21 dan ke daftar pustaka ringkas. Penelaahan mencakup bagian pendahuluan, pengumpulan data, pelabelan, preprocessing, metode, tabel hasil supervised dan semi-supervised, kesimpulan, serta daftar pustaka.
 
-### Kandidat 21 — *Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification* (2025)
-
-- **Lokator:** https://doi.org/10.1016/j.procs.2025.09.068 dan https://www.sciencedirect.com/science/article/pii/S1877050925027358
-- **Mengapa penting:** sama-sama membahas promosi/non-promosi pada komentar YouTube Indonesia; dari kandidat tambahan yang ditemukan, ini salah satu yang paling dekat untuk membandingkan target label, pendekatan IndoBERT, data, dan hasil.
-- **Informasi awal yang tersedia:** naskah melaporkan 10.101 komentar, 10% dilabeli manual, dan pendekatan semi-supervised IndoBERT dengan pseudo-labeling. Abstrak melaporkan F1 sekitar 0,961 pada baseline IndoBERT berlabel awal, lalu sekitar 0,985 setelah semi-supervised training.
-- **Yang belum dapat diputuskan hanya dari abstrak:** apakah penulis memiliki prosedur paired raw-obfuscated evaluation, transformasi apa yang diuji, apakah model tetap beku saat pengujian, dan bagaimana label serta data test dijaga independen. Baca bagian metode dan hasil lengkap sebelum memakai paper ini untuk menyatakan research gap.
-
-### Kandidat non-jurnal — skripsi UNEJ tentang klasifikasi promosi judi online menggunakan DistilBERT (2026)
-
-- **Lokator:** https://repository.unej.ac.id/items/4b007f35-8576-4b68-92ff-4c01137eaabd/full
-- **Mengapa penting:** halaman repositori menyebut komentar promosi judi online di YouTube, variasi teks/Unicode, preprocessing normalisasi, dan DistilBERT. Repository menyediakan berkas terpisah untuk bagian depan serta Bab I–IV.
-- **Status bukti:** ini karya akademik/skripsi, bukan artikel jurnal peer-reviewed. Metadata dan abstraknya telah dilihat, tetapi naskah lengkap belum termasuk audit 20 publikasi. Kita perlu mengunduh serta memeriksa Bab II–IV untuk melihat apakah obfuscation hanya dinormalisasi atau benar-benar diuji sebagai perturbasi berpasangan.
-- **Implikasi:** relevan sebagai pembanding penelitian lokal dan sebagai petunjuk pencarian literatur; bobotnya dalam klaim kebaruan harus dibedakan dari artikel jurnal/konferensi yang peer-reviewed.
-
-### Sumber primer untuk konteks Bab I
-
-- **Komdigi:** https://www.komdigi.go.id/berita/siaran-pers/detail/dua-tahun-komdigi-meutya-hafid-perang-judi-online-tak-cukup-hapus-konten. Kementerian melaporkan 2.087.109 konten perjudian ditangani sepanjang 2025 dan 43.475 konten berasal dari layanan Google dan YouTube. Angka tersebut adalah jumlah konten yang ditangani dalam cakupan pelaporan, bukan jumlah komentar promosi YouTube atau prevalensi komentar judi.
-- **PPATK:** https://www.ppatk.go.id/siaran_pers/read/1594/catatan-capaian-strategis-ppatk-tahun-2025-menjaga-kedaulatan-dan-integritas-ekonomi-bangsa-jakarta-28-januari-2026-b001hm0531i2026-.html. Sumber ini memberi konteks resmi mengenai transaksi/perputaran dana judi online, tetapi tidak membuktikan prevalensi komentar atau kinerja model deteksi. Gunakan hanya jika angka ekonomi/finansial memang diperlukan untuk membangun urgensi dan jelaskan batas interpretasinya.
-
-### Rekomendasi sesudah temuan tambahan ini
-
-Prioritas pengumpulan naskah selanjutnya berubah: (1) ambil dan audit teks lengkap Kandidat 21; (2) unduh serta periksa skripsi UNEJ sebagai grey literature pembanding; (3) baru sesudah itu putuskan apakah perlu tambahan artikel domain lain. Di luar itu, celah yang paling nyata tetap sumber statistik paired bootstrap/CI F1 dan validitas transformasi karakter pada teks Indonesia.
-
----
+Kandidat tambahan #22–#24 yang pernah disebut di percakapan sebelumnya **tidak dimasukkan ke korpus audit ini** sesuai keputusan pengguna: satu kandidat dengan akses naskah yang tidak cukup jelas ditolak, sedangkan kandidat lainnya bukan artikel jurnal yang ingin dihitung sebagai anggota korpus. Dokumen ini tidak memperlakukan skripsi atau statistik pemerintah sebagai “jurnal”. Bila sumber resmi non-jurnal digunakan nantinya untuk memberikan konteks Bab I, sumber tersebut harus dicatat terpisah dari 21 publikasi yang diaudit.
 
 # BAGIAN E. PEMETAAN SUMBER KE BAB SKRIPSI
 
@@ -633,6 +656,8 @@ Fokus kelompok ini adalah konteks, penelitian terdahulu yang paling dekat, dan p
 **#11 — Wang et al. (2022), #12 — Moradi & Samwald (2021), dan #14 — Khan et al. (2025).** Landasan konsep robustness, perturbasi masukan, dan variasi teks.
 
 **#18 — Hidayat et al. (2026).** Pembanding sangat dekat untuk obfuscation pada komentar YouTube dan pendekatan hybrid.
+
+**#21 — Santika et al. (2025).** Studi langsung pada label Promotion/Non-Promotion di komentar YouTube Indonesia yang membandingkan SVM, CNN, dan IndoBERT dengan pseudo-labeling. Relevan untuk konteks domain, tetapi tidak melakukan paired clean-versus-obfuscated evaluation.
 
 ## E2. Prioritas tinggi untuk Bab II
 
@@ -678,7 +703,7 @@ Di bawah ini adalah **parafrasa bukti yang aman dijadikan catatan penulisan**. B
 
 ## F2. Definisi promosi
 
-- **Sumber yang cocok:** Situmorang et al. (2025) dan Perdana et al. (2024); Angelo et al. (2025) sebagai studi YouTube yang targetnya promosi.
+- **Sumber yang cocok:** Situmorang et al. (2025), Perdana et al. (2024), Angelo et al. (2025), dan Santika et al. (2025). Santika et al. secara eksplisit menggunakan label Promotion/Non-Promotion pada komentar YouTube Indonesia.
 - **Bukti dari korpus:** studi promosi menyebut indikator seperti ajakan untuk bermain, bonus, situs/link, kode promosi, kata domain, dan ekspresi persuasif; namun definisi antarstudi tidak seragam.
 - **Batas inferensi:** kata seperti “judi”, “slot”, atau “togel” sendiri belum otomatis membuat komentar termasuk promosi. Penggunaan istilah yang berkaitan dengan judi harus ditafsirkan menurut fungsi komunikasi komentar dan aturan label penelitian.
 
@@ -696,7 +721,7 @@ Di bawah ini adalah **parafrasa bukti yang aman dijadikan catatan penulisan**. B
 
 ## F5. Penelitian terdahulu dan gap
 
-- **Sumber yang cocok:** Angelo et al. (2025), Hidayat et al. (2026), Ariyanto et al. (2026), Situmorang et al. (2025), Nugraha et al. (2026), Moradi & Samwald (2021).
+- **Sumber yang cocok:** Angelo et al. (2025), Hidayat et al. (2026), Ariyanto et al. (2026), Situmorang et al. (2025), Nugraha et al. (2026), Santika et al. (2025), dan Moradi & Samwald (2021).
 - **Bukti dari korpus:** deteksi promosi/judi pada media sosial Indonesia dan penanganan teks tersamarkan sudah diteliti. Beberapa studi mengandalkan normalisasi sebelum klasifikasi; paper hybrid Hidayat menggabungkan input normalisasi untuk IndoBERT dan Unicode mentah untuk fitur karakter.
 - **Batas inferensi:** jangan menyatakan tidak ada penelitian obfuscation. Gap harus didasarkan pada perbedaan yang spesifik setelah metode tiap paper disejajarkan: model beku atau dilatih ulang, paired samples atau bukan, keluarga/severity perturbasi, evaluasi raw text atau normalized pipeline, label, platform, dan metrik.
 
@@ -723,9 +748,9 @@ Repositori `https://github.com/khairys/TugasAkhir` memuat laporan Stage 8 experi
 
 # BAGIAN H. KEPUTUSAN AKHIR DAN CHECKLIST
 
-## H1. Keputusan terhadap 20 publikasi
+## H1. Keputusan terhadap 21 publikasi
 
-- **Pertahankan sebagai referensi utama:** #2, #5, #6, #7, #11, #12, #14, #18.
+- **Pertahankan sebagai referensi utama:** #2, #5, #6, #7, #11, #12, #14, #18, dan #21.
 - **Pertahankan sebagai pembanding langsung dengan caveat label/metode:** #3, #4, #8.
 - **Pertahankan untuk metodologi kualitas/evaluasi:** #13, #15, #16, #17.
 - **Pertahankan sebagai pendukung terbatas/analogi:** #1, #9, #10, #19, #20.
@@ -756,7 +781,7 @@ Tidak ada alasan untuk menghapus sebuah paper hanya karena domainnya berbeda. Na
 
 ---
 
-# DAFTAR PUSTAKA RINGKAS (20 PUBLIKASI YANG DIAUDIT)
+# DAFTAR PUSTAKA RINGKAS (21 PUBLIKASI YANG DIAUDIT)
 
 1. Oh, H. (2021). A YouTube Spam Comments Detection Scheme Using Cascaded Ensemble Machine Learning Model. *IEEE Access, 9*, 144121–144128. https://doi.org/10.1109/ACCESS.2021.3121508
 2. Situmorang, G. F., Manurung, J. D., Lubis, R., Sikana, N., & Lionggo, K. (2025). An Intelligent System for Detecting Online Gambling Promotion on Social Media Based on BERT and Adaptive Browser Extension. *JANAPATI, 14*(3), 679–691. https://doi.org/10.23887/janapati.v14i3.103511
@@ -778,57 +803,6 @@ Tidak ada alasan untuk menghapus sebuah paper hanya karena domainnya berbeda. Na
 18. Hidayat, D. B., Chamid, A. A., & Jazuli, A. (2026). Implementasi Model Hybrid IndoBERT–LinearSVC untuk Deteksi Spam Judol Obfuscated pada Komentar YouTube. *Progresif: Jurnal Ilmiah Komputer, 22*(3), 820–833. https://doi.org/10.35889/progresif.v22i3.3914
 19. Soysaldı Şahin, M., Şahin, D. Ö., & Salah, A. F. (2026). Revisiting SMS Spam Detection: The Impact of Feature Representation on Classical Machine Learning Models. *Electronics, 15*(4), 894. https://doi.org/10.3390/electronics15040894
 20. Ishida, M., Kaneko, N., & Sumi, K. (2023). MOJI: Character-level Convolutional Neural Networks for Malicious Obfuscated JavaScript Inspection. *Applied Soft Computing, 137*, 110138. https://doi.org/10.1016/j.asoc.2023.110138
-
-
----
-
-## 21. Santika et al. (2025) — *Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification*
-
-**Status audit:** Kandidat relevan; dipertahankan sebagai studi domain inti, tetapi bukan sebagai bukti langsung evaluasi robustness.
-
-**Identitas bibliografi.** Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, dan Derwin Suhartono. *Procedia Computer Science*, 269 (2025), 1269–1278. Prosiding ICCSCI 2025 yang diterbitkan Elsevier. DOI: https://doi.org/10.1016/j.procs.2025.09.068. Naskah 10 halaman; artikel menyatakan lisensi open access CC BY-NC-ND. Dataset disebut tersedia melalui Zenodo: https://doi.org/10.5281/zenodo.15424844.
-
-**Pertanyaan dan tujuan penelitian.** Penulis mengembangkan deteksi komentar promosi judi online berbahasa Indonesia pada YouTube melalui pembelajaran semi-supervised berbasis IndoBERT. Motivasi utamanya adalah keterbatasan anotasi manual. Studi berfokus pada peningkatan klasifikasi dengan pseudo-labeling; bukan pada eksperimen perturbasi teks atau pengukuran penurunan performa akibat obfuscation.
-
-**Data dan proses pelabelan.** Penulis mengumpulkan 10.101 komentar YouTube berbahasa Indonesia dari 10 video kategori gaming yang dipilih pada 5 Mei 2025 menggunakan YouTube Data API v3. Sekitar 10% data dilabeli manual sebagai Promotion atau Non-Promotion. Pada tabel hasil, 1.010 komentar disebut sebagai bagian berlabel; setelah preprocessing dataset yang disebut tersisa adalah 9.880 data. Naskah menjelaskan beberapa indikator promosi: nama situs judi, ajakan seperti “main”, “coba”, dan istilah terkait seperti “jepe”, “nagih”, atau “slot”. Prosedur label pada metode menyebut pelabelan dilakukan oleh penulis pertama; ada keterangan pemeriksaan ulang oleh annotator, tetapi tidak ditemukan pelaporan nilai inter-annotator agreement yang terukur. Oleh karena itu, jangan menganggap reliabilitas labelnya setara dengan studi yang melaporkan Cohen’s kappa.
-
-**Preprocessing.** Tahap prapemrosesan meliputi konversi/normalisasi karakter Unicode, penghapusan emoji, URL, karakter asing dan simbol, penggabungan keyword promosi yang terpisah spasi, lowercasing, tokenisasi, stemming, normalisasi slang, serta penghapusan stopword. Pembagian data dilaporkan menggunakan rasio 7:1,5:1,5. Langkah penggabungan keyword dan normalisasi secara langsung dapat memperbaiki pola obfuscation tertentu sebelum klasifikasi; karena itu studi ini tidak dapat digunakan untuk menyimpulkan bagaimana model yang menerima teks tersamarkan mentah akan bertahan.
-
-**Metode dan pembanding.** Penelitian membandingkan TF-IDF+SVM, Logistic Regression, XGBoost, Random Forest, RNN, LSTM, CNN, dan IndoBERT. IndoBERT dilatih terlebih dahulu dengan subset berlabel, lalu model digunakan untuk menghasilkan pseudo-label bagi data yang belum berlabel. Data berlabel dan pseudo-label digabungkan untuk proses pelatihan ulang semi-supervised. Tidak ada pengujian yang dilaporkan dengan protokol pasangan sampel normal-versus-obfuscated yang ditransformasi secara terkontrol.
-
-**Hasil yang dilaporkan.** Pada skenario awal dengan 10% data berlabel, tabel menunjukkan TF-IDF+SVM sebagai model dengan F1 tertinggi, 0,972; IndoBERT memperoleh F1 0,961. Setelah pseudo-labeling dan pelatihan ulang, IndoBERT memperoleh Accuracy 0,986, Precision 0,991, Recall 0,980, dan F1 0,985 pada tabel utama. Angka-angka ini menggambarkan hasil dalam split dan preprocessing penelitian tersebut, bukan ukuran robustness dan bukan angka yang bisa dibandingkan langsung dengan hasil repositori Anda tanpa memperhatikan perbedaan dataset, preprocessing, split, dan protokol evaluasi.
-
-**Kekuatan.**
-- Sangat dekat dengan domain dan target label penelitian ini: komentar YouTube Indonesia, promosi/non-promosi, dan evaluasi model IndoBERT serta SVM.
-- Menjadi bukti bahwa deteksi promosi dengan label biner sudah pernah dilakukan pada konteks YouTube Indonesia.
-- Menyediakan pembanding baseline SVM dan IndoBERT serta membahas keterbatasan adaptasi terhadap bahasa yang terus berkembang.
-- Memiliki DOI penerbit dan kanal data publik, sehingga dapat ditelusuri lebih lanjut.
-
-**Keterbatasan dan catatan audit.**
-- Tujuan utama adalah semi-supervised learning/pseudo-labeling; bukan robustness evaluation.
-- Preprocessing menghapus atau menormalkan beberapa variasi tekstual dan menggabungkan kata kunci terpisah spasi, sehingga variasi masukan yang menjadi objek penelitian Anda tidak dipertahankan sebagai kondisi uji mentah.
-- Keterangan hasil menggunakan jumlah yang tidak seluruhnya konsisten: abstrak menyebut 10.101 data, 10% diberi label; bagian hasil menyebut 1.010 data manual, 9.880 data setelah preprocessing, dan matriks konfusi final 1.482 sampel. Tabel metrik semi-supervised tidak menjelaskan secara rinci pada tempat yang sama mengapa ukuran uji berbeda dari matriks konfusi. Angka perlu dirujuk bersama penjelasan section-specific dan tidak disatukan seolah berasal dari satu evaluasi yang identik.
-- Klaim “generalize well on noisy, informal text” tidak sama dengan ketahanan terhadap transformasi obfuscation yang terkontrol; studi tidak melaporkan eksperimen paired clean-vs-obfuscated.
-- Daftar pustaka memuat banyak referensi lintas topik; beberapa mendukung klaim latar belakang/metode, tetapi tidak semuanya menjadi bukti langsung untuk robustness.
-- Kesimpulan penulis menyatakan belum ada mekanisme untuk menyesuaikan diri terhadap bahasa yang berkembang guna menghindari moderasi. Ini adalah keterbatasan yang dinyatakan penulis, tetapi tidak boleh diperluas menjadi klaim bahwa studi tersebut tidak pernah memproses variasi teks apa pun: metode mereka justru menormalisasi variasi tertentu.
-
-**Keputusan penggunaan:** **Pertahankan sebagai kandidat inti untuk konteks domain dan pembanding deteksi promosi**, serta sebagai sumber yang menunjukkan bahwa evasion bahasa berkembang disebut sebagai keterbatasan di masa depan. **Jangan** gunakan sebagai bukti bahwa belum ada studi obfuscation yang diuji secara eksplisit, atau bahwa model IndoBERT/SVM penelitian tersebut rentan/tahan terhadap keluarga O1–O4.
-
-**Bukti yang dapat diekstrak untuk Bab I.**
-1. Studi deteksi *Promotion/Non-Promotion* pada komentar YouTube Indonesia sudah dilakukan dengan beberapa model, termasuk SVM, CNN, dan IndoBERT.
-2. SVM menghasilkan F1 0,972 pada skenario awal yang dilaporkan, sedangkan IndoBERT mencapai F1 0,961; setelah pseudo-labeling, IndoBERT mencapai F1 0,985.
-3. Penulis menyatakan sebagai keterbatasan bahwa model belum mengakomodasi pola bahasa yang berkembang untuk menghindari moderasi.
-4. Studi tidak menjalankan protokol evaluasi pasangan normal-versus-obfuscated yang setara dengan eksperimen penelitian Anda.
-
-**Bukti untuk Bab II–III.** Klasifikasi promosi/non-promosi pada komentar YouTube; pseudo-labeling; contoh fitur/indikator label; preprocessing yang mencakup penggabungan token ber-spasi; dan perbandingan model klasik dengan model neural. Tidak cocok dijadikan justifikasi langsung bagi empat keluarga obfuscation penelitian Anda, karena transformasi tersebut tidak dievaluasi sebagai set kondisi paired test.
-
-**Lokator dalam artikel:** bagian Introduction (cakupan studi sebelumnya), Method (data collecting, data preprocessing, model/training, evaluation), Results and Discussion (dataset summary, tabel hasil supervised dan semi-supervised), dan Conclusion and Future Works.
-
+21. Santika, S. P., Saputra, M. A., Zahra, A., & Suhartono, D. (2025). Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification. *Procedia Computer Science, 269*, 1269–1278. https://doi.org/10.1016/j.procs.2025.09.068
 
 ---
-
-
-
-## CATATAN PEMBARUAN V2.0
-
-Publikasi ke-21 ditambahkan setelah membaca teks lengkap hasil ekstraksi pada `docs/literature/extracted/21_online_gambling_youtube_semisupervised_indobert.md`. Publikasi ini relevan dan dipertahankan sebagai referensi domain inti, tetapi tidak diperlakukan sebagai bukti langsung paired robustness evaluation. Dua kandidat tambahan yang sebelumnya disarankan di luar korpus dan kemudian ditolak pengguna tidak dimasukkan ke daftar audit 21 publikasi; skripsi non-jurnal juga tidak dimasukkan sebagai artikel jurnal. Korpus ditentukan oleh relevansi dan mutu bukti, bukan target jumlah.
