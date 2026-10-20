@@ -1,13 +1,13 @@
 # Repository Literature & Reference Corpus
 
-**Corpus Overview:** Ekstraksi lengkap 20 dokumen jurnal dan publikasi ilmiah rujukan (*reference papers*) untuk penelitian:  
+**Corpus Overview:** Ekstraksi lengkap 21 dokumen jurnal dan publikasi ilmiah rujukan (*reference papers*) untuk penelitian:  
 *Evaluasi Ketahanan Model Deteksi Promosi Judi Online terhadap Penyamaran Teks pada Komentar YouTube*.
 
 Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperkaya dengan *YAML frontmatter*, tinjauan bibliografi, *executive takeaways*, dan penanda halaman, sehingga **ramah dibaca (*agentic-ready*) oleh AI agent, LLM, RAG, dan sistem pencarian repositori**.
 
 ---
 
-## 1. Master Literature Catalog (20 Papers)
+## 1. Master Literature Catalog (21 Papers)
 
 | No | Paper Title | Authors | Year | Category | Pages |
 |:--:|:---|:---|:---:|:---|:---:|
