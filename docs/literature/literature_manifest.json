@@ -1,0 +1,396 @@
+[
+  {
+    "slug": "01_textual_variations_social_media",
+    "title": "Textual Variations in Social Media Text Processing Applications: Challenges, Solutions, and Trends",
+    "authors": "Jebran Khan, Kashif Ahmad, Senthil Kumar Jagatheesaperumal, Kyung-Ah Sohn",
+    "year": 2025,
+    "venue": "Artificial Intelligence Review (Springer), Vol. 58, Issue 1",
+    "category": "Obfuscation & Text Variations",
+    "tags": [
+      "social-media-text",
+      "textual-variations",
+      "obfuscation",
+      "slang",
+      "leetspeak",
+      "nlp-noise"
+    ],
+    "relevance": "Provides a comprehensive survey on informal text variations in social media (substitutions, phonetic spelling, character repetitions, word splitting). Serves as theoretical grounding for the four obfuscation families (O1 Character Substitution, O2 Insertion/Deletion, O3 Whitespace, O4 Unicode Homoglyphs).",
+    "pages": 48,
+    "words": 23399,
+    "filename": "Textual variations in social media text processing applications challenges, solutions, and trends.pdf",
+    "md_file": "extracted/01_textual_variations_social_media.md"
+  },
+  {
+    "slug": "02_youtube_spam_comments_detection_ensemble",
+    "title": "A YouTube Spam Comments Detection Scheme Using Cascaded Ensemble Machine Learning Model",
+    "authors": "Hayoung Oh",
+    "year": 2021,
+    "venue": "IEEE Access, Vol. 9, pp. 143152-143164",
+    "category": "YouTube Spam Detection",
+    "tags": [
+      "youtube-spam",
+      "ensemble-learning",
+      "text-classification",
+      "cascaded-models"
+    ],
+    "relevance": "Examines spam comment patterns specifically within YouTube video environments. Validates feature extraction and ensemble classification strategies for noisy user-generated comments.",
+    "pages": 8,
+    "words": 6430,
+    "filename": "A YouTube Spam Comments Detection.pdf",
+    "md_file": "extracted/02_youtube_spam_comments_detection_ensemble.md"
+  },
+  {
+    "slug": "03_online_gambling_detection_bert_extension",
+    "title": "An Intelligent System for Detecting Online Gambling Promotion on Social Media Based on BERT and Adaptive Browser Extension",
+    "authors": "Gilbert F. Situmorang, et al.",
+    "year": 2025,
+    "venue": "Jurnal RESTI (Rekayasa Sistem dan Teknologi Informasi), Vol. 14, No. 3, pp. 679-691",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "online-gambling",
+      "judol",
+      "indonesian-social-media",
+      "bert",
+      "browser-extension"
+    ],
+    "relevance": "Direct state-of-the-art prior work focusing on Indonesian online gambling (judol) promotion on social media using BERT. Demonstrates real-world deployment challenges and the need for high inference precision.",
+    "pages": 13,
+    "words": 6756,
+    "filename": "AN INTELLIGENT SYSTEM FOR DETECTING ONLINE GAMBLING PROMOTION ON SOCIAL MEDIA BASED ON BERT AND ADAPTIVE BROWSER EXTENSION.pdf",
+    "md_file": "extracted/03_online_gambling_detection_bert_extension.md"
+  },
+  {
+    "slug": "04_analyzing_dataset_annotation_quality",
+    "title": "Analyzing Dataset Annotation: Quality Management in the Wild",
+    "authors": "Jan-Christoph Klie, Richard Eckart de Castilho, Iryna Gurevych",
+    "year": 2023,
+    "venue": "Computational Linguistics / Technical University of Darmstadt",
+    "category": "Dataset Quality & Annotation",
+    "tags": [
+      "data-quality",
+      "annotation-errors",
+      "label-noise",
+      "inter-annotator-agreement"
+    ],
+    "relevance": "Provides formal methodologies for managing annotation noise, resolving labeling conflicts, and measuring dataset reliability. Justifies the multi-annotator adjudication and audit procedures in Stage 1-7 of this repository.",
+    "pages": 50,
+    "words": 23574,
+    "filename": "Analyzing Dataset Annotation.pdf",
+    "md_file": "extracted/04_analyzing_dataset_annotation_quality.md"
+  },
+  {
+    "slug": "05_paired_evaluation_nlp_systems",
+    "title": "Better than Average: Paired Evaluation of NLP Systems",
+    "authors": "Maxime Peyrard, Wei Zhao, Steffen Eger, Robert West",
+    "year": 2021,
+    "venue": "Proceedings of the 59th Annual Meeting of the Association for Computational Linguistics (ACL-IJCNLP 2021), pp. 2301–2315",
+    "category": "Evaluation Methodology",
+    "tags": [
+      "paired-evaluation",
+      "statistical-significance",
+      "bootstrap-ci",
+      "evaluation-metrics"
+    ],
+    "relevance": "Foundational methodology for paired evaluation in NLP. Direct scientific basis for computing paired F1 drop on identical records (changed == True) and stratified bootstrap confidence intervals (Stage 8-11).",
+    "pages": 15,
+    "words": 10652,
+    "filename": "Better than Average Paired Evaluation of NLP Systems.pdf",
+    "md_file": "extracted/05_paired_evaluation_nlp_systems.md"
+  },
+  {
+    "slug": "06_classification_gambling_youtube_svm",
+    "title": "Classification of Online Gambling Spam Comments on YouTube Using Support Vector Machine",
+    "authors": "Umbu Anaagung Pariamalinya, Josua Josen A. Limbong, Julius Panda Putra Naibaho",
+    "year": 2026,
+    "venue": "Indonesian Journal of Artificial Intelligence and Data Mining (IJAIDM), Vol. 9, No. 1, pp. 153–163",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "online-gambling",
+      "youtube-comments",
+      "support-vector-machine",
+      "linear-svm",
+      "tf-idf"
+    ],
+    "relevance": "Direct baseline benchmark using SVM + TF-IDF on YouTube online gambling comments in Indonesian. Establishes the performance and limitations of classical bag-of-words classifiers.",
+    "pages": 11,
+    "words": 5203,
+    "filename": "Classification of Online Gambling Spam Comments on YouTube Using Support Vector Machine.pdf",
+    "md_file": "extracted/06_classification_gambling_youtube_svm.md"
+  },
+  {
+    "slug": "07_comparative_analysis_indobert_mbert_gambling",
+    "title": "Comparative Analysis of IndoBERT and mBERT for Online Gambling Comment Detection in Indonesian Social Media",
+    "authors": "Satria Adi Nugraha, Citra Lestari, Karyna Budi Sanjaya, Rafi Abhista Naya, Jocelyn Jolie",
+    "year": 2026,
+    "venue": "Jurnal Teknik Informatika (JUTIF), Vol. 7, No. 2, pp. 1931-1943",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "indobert",
+      "mbert",
+      "online-gambling",
+      "transformer",
+      "indonesian-social-media"
+    ],
+    "relevance": "Directly compares IndoBERT vs Multilingual BERT for Indonesian gambling comment detection. Confirms IndoBERT's superior in-domain language modeling capability on standard, clean Indonesian comments.",
+    "pages": 13,
+    "words": 6332,
+    "filename": "Comparative Analysis of IndoBERT and mBERT for Online Gambling Comment Detection in Indonesian Social Media.pdf",
+    "md_file": "extracted/07_comparative_analysis_indobert_mbert_gambling.md"
+  },
+  {
+    "slug": "08_comparative_ml_gambling_youtube",
+    "title": "Comparative Performance of Machine Learning Algorithms for Detecting Online Gambling Promotional Comments on Youtube",
+    "authors": "JTMI Research Team",
+    "year": 2025,
+    "venue": "Jurnal Teknologi dan Manajemen Informatika (JTMI), Vol. 11, No. 2, pp. 132-142",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "machine-learning",
+      "online-gambling",
+      "youtube-comments",
+      "comparative-study"
+    ],
+    "relevance": "Evaluates classical machine learning algorithms on YouTube gambling promotions, demonstrating baseline precision/recall tradeoffs across various traditional feature extractors.",
+    "pages": 11,
+    "words": 4833,
+    "filename": "Comparative Performance of Machine Learning Algorithms for Detecting Online Gambling Promotional Comments on Youtube.pdf",
+    "md_file": "extracted/08_comparative_ml_gambling_youtube.md"
+  },
+  {
+    "slug": "09_detecting_gambling_twitter_text_mining",
+    "title": "Detecting Online Gambling Promotions on Indonesian Twitter Using Text Mining Algorithm",
+    "authors": "IJACSA Research Team",
+    "year": 2024,
+    "venue": "International Journal of Advanced Computer Science and Applications (IJACSA), Vol. 15, No. 8, pp. 942-950",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "twitter-mining",
+      "online-gambling",
+      "indonesian-nlp",
+      "text-mining"
+    ],
+    "relevance": "Explores Indonesian social media text mining for gambling promotion detection on Twitter (X), providing insights into promotional phraseology and keyword obfuscation techniques.",
+    "pages": 8,
+    "words": 6376,
+    "filename": "Detecting Online Gambling Promotions on Indonesian Twitter Using Text Mining Algorithm.pdf",
+    "md_file": "extracted/09_detecting_gambling_twitter_text_mining.md"
+  },
+  {
+    "slug": "10_enhancing_data_quality_deduplication",
+    "title": "Enhancing Data Quality through Simple De-duplication: Navigating the Overfitting-Generalization Trade-Off",
+    "authors": "EMNLP Research Community",
+    "year": 2024,
+    "venue": "Proceedings of the 2024 Conference on Empirical Methods in Natural Language Processing (EMNLP 2024), pp. 12477–12492",
+    "category": "Dataset Quality & Deduplication",
+    "tags": [
+      "deduplication",
+      "data-leakage",
+      "generalization",
+      "data-quality",
+      "train-test-contamination"
+    ],
+    "relevance": "Critical theoretical foundation for Stage 8 deduplication and leakage-safe pool construction. Proves that near-duplicates and exact duplicates across splits lead to severe overfitting and artificial metric inflation.",
+    "pages": 16,
+    "words": 8978,
+    "filename": "Enhancing Data Quality through Simple De-duplication Navigating.pdf",
+    "md_file": "extracted/10_enhancing_data_quality_deduplication.md"
+  },
+  {
+    "slug": "11_robustness_neural_lm_input_perturbations",
+    "title": "Evaluating the Robustness of Neural Language Models to Input Perturbations",
+    "authors": "EMNLP 2021 Research Team",
+    "year": 2021,
+    "venue": "Proceedings of the 2021 Conference on Empirical Methods in Natural Language Processing (EMNLP 2021), pp. 1558–1570",
+    "category": "Robustness & Perturbations",
+    "tags": [
+      "adversarial-robustness",
+      "input-perturbations",
+      "transformers",
+      "bert",
+      "noise-evaluation"
+    ],
+    "relevance": "Provides empirical methodologies for assessing pretrained language model vulnerabilities under character, word, and syntactic perturbations. Foundational to Stage 10/11 robustness testing protocol.",
+    "pages": 13,
+    "words": 7629,
+    "filename": "Evaluating the Robustness of Neural Language Models to Input Perturbations.pdf",
+    "md_file": "extracted/11_robustness_neural_lm_input_perturbations.md"
+  },
+  {
+    "slug": "12_finetuning_indobert_gambling_social_media",
+    "title": "Fine-Tuning IndoBERT for Detecting Online Gambling Promotion in Indonesian-Language Social Media Comments",
+    "authors": "IJECSA Research Team",
+    "year": 2026,
+    "venue": "International Journal of Engineering and Computer Science Applications (IJECSA), Vol. 5, No. 2, pp. 107–116",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "indobert",
+      "fine-tuning",
+      "online-gambling",
+      "social-media-comments",
+      "hyperparameters"
+    ],
+    "relevance": "Direct guidance for fine-tuning IndoBERT on Indonesian online gambling comments. Validates the training hyperparameters and classification head configuration used in Stage 9 IndoBERT baseline.",
+    "pages": 10,
+    "words": 4614,
+    "filename": "Fine-Tuning IndoBERT for Detecting Online Gambling Promotion in Indonesian-Language Social Media Comments.pdf",
+    "md_file": "extracted/12_finetuning_indobert_gambling_social_media.md"
+  },
+  {
+    "slug": "13_gambling_youtube_boosting_lstm_gru",
+    "title": "Gambling Comments Detection on YouTube: A Comparative Study of Tree Based Boosting, LSTM and GRU Models",
+    "authors": "JUTI Research Team",
+    "year": 2025,
+    "venue": "JUTI: Jurnal Ilmiah Teknologi Informasi, Vol. 23, No. 2, pp. 144–160",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "youtube-comments",
+      "lstm",
+      "gru",
+      "gradient-boosting",
+      "online-gambling"
+    ],
+    "relevance": "Compares recurrent neural architectures (LSTM, GRU) against tree-based boosting on YouTube gambling comments, emphasizing sequential representation learning.",
+    "pages": 17,
+    "words": 9131,
+    "filename": "Gambling Comments Detection on YouTube A Comparative Study of Tree Based Boosting, LSTM and GRU Models.pdf",
+    "md_file": "extracted/13_gambling_youtube_boosting_lstm_gru.md"
+  },
+  {
+    "slug": "14_parallel_pso_adversarial_text_attacks",
+    "title": "Generation-Based Parallel Particle Swarm Optimization for Adversarial Text Attacks",
+    "authors": "Xinghao Yang, Yupeng Qi, Honglong Chen, Baodi Liu, Weifeng Liu",
+    "year": 2023,
+    "venue": "Information Sciences (Elsevier), Vol. 644, Art. 119237",
+    "category": "Adversarial NLP & Attacks",
+    "tags": [
+      "adversarial-attacks",
+      "particle-swarm-optimization",
+      "text-perturbation",
+      "black-box-attacks"
+    ],
+    "relevance": "Theoretical analysis of automated adversarial text generation algorithms. Illustrates how targeted heuristic and metaheuristic attacks systematically exploit classifier decision boundaries.",
+    "pages": 14,
+    "words": 8952,
+    "filename": "Generation-based parallel particle swarm optimization for.pdf",
+    "md_file": "extracted/14_parallel_pso_adversarial_text_attacks.md"
+  },
+  {
+    "slug": "15_hybrid_indobert_linearsvc",
+    "title": "Implementasi Model Hybrid IndoBERT - LinearSVC untuk Deteksi Spam Judol Obfuscated pada Komentar YouTube",
+    "authors": "Danang Budiman Hidayat",
+    "year": 2025,
+    "venue": "Progresif: Jurnal Ilmiah Komputer, Vol. 21, No. 2, pp. 820-832",
+    "category": "Hybrid Models & Obfuscated Judol",
+    "tags": [
+      "hybrid-model",
+      "indobert",
+      "linearsvc",
+      "obfuscated-spam",
+      "youtube-comments"
+    ],
+    "relevance": "Direct Indonesian prior art addressing obfuscated online gambling spam on YouTube comments using hybrid IndoBERT and LinearSVC. Supports your comparative thesis setup.",
+    "pages": 14,
+    "words": 5989,
+    "filename": "Implementasi Model Hybrid IndoBERT - LinearSVC.pdf",
+    "md_file": "extracted/15_hybrid_indobert_linearsvc.md"
+  },
+  {
+    "slug": "16_measure_improve_robustness_nlp_survey",
+    "title": "Measure and Improve Robustness in NLP Models: A Survey",
+    "authors": "Xuezhi Wang, Haohan Wang",
+    "year": 2022,
+    "venue": "Proceedings of NAACL-HLT 2022, pp. 4569–4586",
+    "category": "Robustness & Perturbations",
+    "tags": [
+      "robustness-survey",
+      "distribution-shift",
+      "adversarial-nlp",
+      "out-of-domain",
+      "evaluation-metrics"
+    ],
+    "relevance": "Definitive survey categorizing NLP robustness into perturbation robustness, distribution shift, and out-of-domain evaluation. Directly maps to Stage 10 (perturbation) and Stage 11 (domain shift).",
+    "pages": 18,
+    "words": 12455,
+    "filename": "Measure and Improve Robustness in NLP Models A Survey.pdf",
+    "md_file": "extracted/16_measure_improve_robustness_nlp_survey.md"
+  },
+  {
+    "slug": "17_moji_character_level_cnn_obfuscation",
+    "title": "MOJI: Character-Level Convolutional Neural Networks for Malicious Obfuscated JavaScript Inspection",
+    "authors": "Minato Ishida, Naoshi Kaneko, Kazuhiko Sumi",
+    "year": 2023,
+    "venue": "Applied Soft Computing (Elsevier), Vol. 137, Art. 110138",
+    "category": "Character-Level CNN & Obfuscation",
+    "tags": [
+      "character-cnn",
+      "obfuscation-resilience",
+      "deep-learning",
+      "n-grams",
+      "feature-extraction"
+    ],
+    "relevance": "Primary architectural justification for Char-CNN's resilience against obfuscation. Explains why character n-gram kernels preserve structural signals even when word token boundaries and subwords are corrupted.",
+    "pages": 12,
+    "words": 3709,
+    "filename": "MOJI Character-level convolutional neural networks for Malicious.pdf",
+    "md_file": "extracted/17_moji_character_level_cnn_obfuscation.md"
+  },
+  {
+    "slug": "18_nl_augmenter_framework",
+    "title": "NL-Augmenter: A Framework for Task-Sensitive Natural Language Augmentation",
+    "authors": "Kaustubh D. Dhole, Varun Gangal, Sebastian Gehrmann, et al.",
+    "year": 2021,
+    "venue": "arXiv preprint arXiv:2112.02721 / ACL Community Evaluation",
+    "category": "Data Augmentation & Transformation",
+    "tags": [
+      "nl-augmenter",
+      "text-augmentation",
+      "transformations",
+      "robustness-benchmarking",
+      "linguistic-noise"
+    ],
+    "relevance": "Authoritative open-source framework standardizing natural language transformations. Inspires the modular rule-based design of your O1-O4 obfuscation engine in `src/obfuscation/`.",
+    "pages": 41,
+    "words": 25554,
+    "filename": "NL-Augmenter A Framework for Task-Sensitive Natural Language Augmentation.pdf",
+    "md_file": "extracted/18_nl_augmenter_framework.md"
+  },
+  {
+    "slug": "19_sms_spam_detection_feature_representation",
+    "title": "Revisiting SMS Spam Detection: The Impact of Feature Representation on Classical Machine Learning Models",
+    "authors": "Applied Sciences Editorial Research Team",
+    "year": 2026,
+    "venue": "Applied Sciences (MDPI), Vol. 16, Issue 4",
+    "category": "Feature Representations in Spam",
+    "tags": [
+      "feature-representation",
+      "sms-spam",
+      "bag-of-words",
+      "character-ngrams",
+      "svm"
+    ],
+    "relevance": "Demonstrates how feature representations (word TF-IDF vs character n-grams) dictate model susceptibility to intentional and unintentional spelling variations in short spam texts.",
+    "pages": 29,
+    "words": 14230,
+    "filename": "Revisiting SMS Spam Detection The Impact of Feature Representation on Classical Machine Learning Models.pdf",
+    "md_file": "extracted/19_sms_spam_detection_feature_representation.md"
+  },
+  {
+    "slug": "20_spam_detection_youtube_ml_approaches",
+    "title": "Spam Detection for YouTube Video Comments Using Machine Learning Approaches",
+    "authors": "Andrew S. Xiao, Qilian Liang",
+    "year": 2024,
+    "venue": "Machine Learning with Applications (Elsevier), Vol. 16, Art. 100550",
+    "category": "YouTube Spam Detection",
+    "tags": [
+      "youtube-comments",
+      "spam-classification",
+      "machine-learning",
+      "text-features"
+    ],
+    "relevance": "Benchmarks multiple machine learning approaches for YouTube comment spam. Discusses class imbalance handling and feature extraction in social video environments.",
+    "pages": 9,
+    "words": 6815,
+    "filename": "Spam Detection for YouTube Video Comments Using Machine Learning Approaches.pdf",
+    "md_file": "extracted/20_spam_detection_youtube_ml_approaches.md"
+  }
+]
