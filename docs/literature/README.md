@@ -31,6 +31,7 @@ Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperka
 | 18 | [NL-Augmenter: A Framework for Task-Sensitive Natural Language Augmentation](extracted/18_nl_augmenter_framework.md) | Kaustubh D. Dhole, Varun Gangal, Sebastian Gehrmann, et al. | 2021 | `Data Augmentation & Transformation` | 41 |
 | 19 | [Revisiting SMS Spam Detection: The Impact of Feature Representation on Classical Machine Learning Models](extracted/19_sms_spam_detection_feature_representation.md) | Applied Sciences Editorial Research Team | 2026 | `Feature Representations in Spam` | 29 |
 | 20 | [Spam Detection for YouTube Video Comments Using Machine Learning Approaches](extracted/20_spam_detection_youtube_ml_approaches.md) | Andrew S. Xiao, Qilian Liang | 2024 | `YouTube Spam Detection` | 9 |
+| 21 | [Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md) | Satriadi Putra Santika et al. | 2025 | `Online Gambling (Judol) Detection` | 10 |
 | 21 | [Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md) | Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono | 2025 | `Online Gambling (Judol) Detection` | 10 |
 
 ---
@@ -158,4 +159,4 @@ Bagi AI Agent yang membaca repositori ini:
 2. **Pencarian Semantik / Keyword:** Gunakan kata kunci seperti `obfuscation`, `IndoBERT`, `Char-CNN`, `SVM`, `YouTube spam`, `paired evaluation`, `homoglyph` untuk melakukan grep terarah pada folder ini.
 3. **Reproducibility:** Seluruh file diekstraksi secara deterministik menggunakan skrip [`scripts/tools/extract_literature.py`](../../scripts/tools/extract_literature.py).
 
-*Terakhir diperbarui:* `2026-10-20 16:00:32`
+*Terakhir diperbarui:* `2026-10-20 16:18:00`
