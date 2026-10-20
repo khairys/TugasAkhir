@@ -241,6 +241,17 @@ PAPERS_METADATA = {
         "category": "YouTube Spam Detection",
         "tags": ["youtube-comments", "spam-classification", "machine-learning", "text-features"],
         "relevance": "Benchmarks multiple machine learning approaches for YouTube comment spam. Discusses class imbalance handling and feature extraction in social video environments."
+    },
+    "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification.pdf": {
+        "slug": "21_online_gambling_youtube_semisupervised_indobert",
+        "title": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification",
+        "authors": "Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono",
+        "year": 2025,
+        "venue": "Procedia Computer Science 269 (2025) 1269–1278 (Elsevier) / ICCSCI 2025",
+        "doi": "10.1016/j.procs.2025.09.068",
+        "category": "Online Gambling (Judol) Detection",
+        "tags": ["online-gambling", "judol", "youtube-comments", "indobert", "semi-supervised-learning", "pseudo-labeling", "svm", "cnn", "procedia-computer-science"],
+        "relevance": "Evaluates IndoBERT against SVM, CNN, and LSTM on 10,101 YouTube gaming comments. Shows SVM outperformed IndoBERT in low-resource supervised training (F1 0.972 vs 0.961), but semi-supervised IndoBERT reached F1 0.985. Explicitly notes the limitation of not handling evasion / obfuscation, directly motivating your thesis."
     }
 }
 

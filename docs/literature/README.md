@@ -31,6 +31,7 @@ Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperka
 | 18 | [NL-Augmenter: A Framework for Task-Sensitive Natural Language Augmentation](extracted/18_nl_augmenter_framework.md) | Kaustubh D. Dhole, Varun Gangal, Sebastian Gehrmann, et al. | 2021 | `Data Augmentation & Transformation` | 41 |
 | 19 | [Revisiting SMS Spam Detection: The Impact of Feature Representation on Classical Machine Learning Models](extracted/19_sms_spam_detection_feature_representation.md) | Applied Sciences Editorial Research Team | 2026 | `Feature Representations in Spam` | 29 |
 | 20 | [Spam Detection for YouTube Video Comments Using Machine Learning Approaches](extracted/20_spam_detection_youtube_ml_approaches.md) | Andrew S. Xiao, Qilian Liang | 2024 | `YouTube Spam Detection` | 9 |
+| 21 | [Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md) | Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono | 2025 | `Online Gambling (Judol) Detection` | 10 |
 
 ---
 
@@ -74,6 +75,9 @@ Semua file telah diekstraksi ke format **Markdown (`.md`)** terstruktur, diperka
 - **[Gambling Comments Detection on YouTube: A Comparative Study of Tree Based Boosting, LSTM and GRU Models](extracted/13_gambling_youtube_boosting_lstm_gru.md)** (2025)  
   *Authors:* JUTI Research Team  
   *Relevance:* Compares recurrent neural architectures (LSTM, GRU) against tree-based boosting on YouTube gambling comments, emphasizing sequential representation learning.
+- **[Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification](extracted/21_online_gambling_youtube_semisupervised_indobert.md)** (2025)  
+  *Authors:* Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono  
+  *Relevance:* Evaluates IndoBERT, SVM, CNN, and LSTM on 10,101 Indonesian YouTube comments. Demonstrates that while SVM was stronger on limited labeled data (F1 0.972 vs 0.961), semi-supervised IndoBERT reached F1 0.985. Explicitly identifies the lack of mechanisms against moderation evasion / obfuscated language as a primary research gap.
 
 ### Dataset Quality & Annotation
 
@@ -154,4 +158,4 @@ Bagi AI Agent yang membaca repositori ini:
 2. **Pencarian Semantik / Keyword:** Gunakan kata kunci seperti `obfuscation`, `IndoBERT`, `Char-CNN`, `SVM`, `YouTube spam`, `paired evaluation`, `homoglyph` untuk melakukan grep terarah pada folder ini.
 3. **Reproducibility:** Seluruh file diekstraksi secara deterministik menggunakan skrip [`scripts/tools/extract_literature.py`](../../scripts/tools/extract_literature.py).
 
-*Terakhir diperbarui:* `2026-10-20 15:11:34`
+*Terakhir diperbarui:* `2026-10-20 16:00:32`

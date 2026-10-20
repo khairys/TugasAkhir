@@ -392,5 +392,31 @@
     "words": 6815,
     "filename": "Spam Detection for YouTube Video Comments Using Machine Learning Approaches.pdf",
     "md_file": "extracted/20_spam_detection_youtube_ml_approaches.md"
+  },
+  {
+    "slug": "21_online_gambling_youtube_semisupervised_indobert",
+    "title": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification",
+    "authors": "Satriadi Putra Santika, Muhammad Alfhi Saputra, Amalia Zahra, Derwin Suhartono",
+    "year": 2025,
+    "venue": "Procedia Computer Science 269 (2025) 1269–1278 (Elsevier) / ICCSCI 2025",
+    "doi": "10.1016/j.procs.2025.09.068",
+    "category": "Online Gambling (Judol) Detection",
+    "tags": [
+      "online-gambling",
+      "judol",
+      "youtube-comments",
+      "indobert",
+      "semi-supervised-learning",
+      "pseudo-labeling",
+      "svm",
+      "cnn",
+      "text-classification",
+      "procedia-computer-science"
+    ],
+    "relevance": "Evaluates IndoBERT, SVM, CNN, and LSTM on 10,101 Indonesian YouTube comments. Demonstrates that while SVM was stronger on limited labeled data (F1 0.972 vs 0.961), semi-supervised IndoBERT reached F1 0.985. Explicitly identifies the lack of mechanisms against moderation evasion / obfuscated language as a primary research gap.",
+    "pages": 10,
+    "words": 3820,
+    "filename": "Online Gambling Promotion Detection in Indonesian YouTube Comments Using Semi-Supervised IndoBERT Classification.pdf",
+    "md_file": "extracted/21_online_gambling_youtube_semisupervised_indobert.md"
   }
 ]
